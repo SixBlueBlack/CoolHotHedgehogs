@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     private float VerticalMove;
     private Rigidbody2D rigidBodyComponent;
     public Animator animator;
+    public static bool IsDead;
     private bool IsRight = true;
 
     private int lastPose;
