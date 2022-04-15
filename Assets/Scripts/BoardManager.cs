@@ -7,6 +7,167 @@ namespace Completed
 {
     public class BoardManager : MonoBehaviour
     {
+        public class OuterWall
+        {
+            public enum Orientations
+            {
+                Horizontal,
+                Vertical
+            }
+            public int Length { get; }
+            public Orientations Orientation { get; }
+            public GameObject[] Tiles { get; }
+            public bool HasPath { get; }
+
+            public OuterWall(int length, Orientations orientation, bool hasPath, GameObject[] tiles)
+            {
+                Length = length;
+                HasPath = hasPath;
+                Orientation = orientation;
+                Tiles = tiles;
+            }
+
+            public void Generate(Vector3 offset)
+            {
+                for (var i = 0; i < Length; i++)
+                    if (!HasPath || (i != 4 && i != 5))
+                        if (Orientation == Orientations.Horizontal)
+                            Instantiate(Tiles[Random.Range(0, Tiles.Length)],
+                                new Vector3(i, 0, 0f) + offset, Quaternion.identity);
+                        else
+                            Instantiate(Tiles[Random.Range(0, Tiles.Length)],
+                                new Vector3(0, i, 0f) + offset, Quaternion.identity);
+            }
+        }
+
+        public class Board
+        {
+            public Room[,] Field { get; }
+            public GameObject[] FloorTiles { get; }
+            public GameObject[] OuterWallTiles { get; }
+            public GameObject[] WallTiles { get; }
+            public int Rows { get; }
+            public int Columns { get; }
+            public int RoomRows { get; }
+            public int RoomColumns { get; }
+
+            public Board(int rows, int columns, int roomRows, int roomColumns,
+                GameObject[] floorTiles, GameObject[] outerWallTiles, GameObject[] wallTiles)
+            {
+                Rows = rows;
+                Columns = columns;
+                RoomRows = roomRows;
+                RoomColumns = roomColumns;
+                FloorTiles = floorTiles;
+                OuterWallTiles = outerWallTiles;
+                WallTiles = wallTiles;
+
+                Field = new Room[rows, columns];
+                var possiblePathsNumber = new int[rows, columns];
+
+                for (var i = 0; i < rows; i++)
+                    for (var j = 0; j < columns; j++)
+                    {
+                        var paths = 4;
+                        if (j == 0 || j == rows - 1)
+                            paths--;
+                        if (i == 0 || i == columns - 1)
+                            paths--;
+                        possiblePathsNumber[i, j] = paths;
+                    }
+
+                for (var i = 0; i < rows; i++)
+                {
+                    for (var j = 0; j < columns; j++)
+                    {
+                        var upperWall = new OuterWall(roomColumns, OuterWall.Orientations.Horizontal,
+                            RandomizePath(i, j, i + 1, j, possiblePathsNumber), OuterWallTiles);
+                        var rightWall = new OuterWall(roomColumns, OuterWall.Orientations.Vertical,
+                            RandomizePath(i, j, i, j + 1, possiblePathsNumber), OuterWallTiles);
+                        OuterWall bottomWall;
+                        if (i != 0)
+                            bottomWall = Field[i - 1, j].UpperWall;
+                        else
+                            bottomWall = new OuterWall(roomColumns, OuterWall.Orientations.Horizontal,
+                                RandomizePath(i, j, i - 1, j, possiblePathsNumber), OuterWallTiles);
+                        OuterWall leftWall;
+                        if (j != 0)
+                            leftWall = Field[i, j - 1].RightWall;
+                        else
+                            leftWall = new OuterWall(roomColumns, OuterWall.Orientations.Vertical,
+                            RandomizePath(i, j, i, j - 1, possiblePathsNumber), OuterWallTiles);
+
+                        Field[i, j] = new Room(roomRows, roomColumns, floorTiles, outerWallTiles,
+                            bottomWall, upperWall, rightWall, leftWall);
+                    }
+                }
+            }
+
+            private bool RandomizePath(int iFrom, int jFrom, int iTo, int jTo, int[,] possiblePathsNumber)
+            {
+                if (iTo >= Rows || jTo >= Columns || iTo < 0 || jTo < 0)
+                    return false;
+
+                var randomCoef = 1.0 / Math.Min(possiblePathsNumber[iTo, jTo], possiblePathsNumber[iFrom, jFrom]);
+                if (Math.Abs(1 - randomCoef) > 1e-5)
+                    randomCoef *= 0.5;
+                var hasPath = Random.value <= randomCoef;
+
+                possiblePathsNumber[iTo, jTo]--;
+                possiblePathsNumber[iFrom, jFrom]--;
+
+                return hasPath;
+            }
+
+            public void Generate()
+            {
+                for (var i = 0; i < Rows; i++)
+                    for (var j = 0; j < Columns; j++)
+                        Field[i, j].Generate(new Vector3(j * RoomColumns, i * RoomRows, 0f));
+            }
+        }
+
+        public class Room
+        {
+            public OuterWall BottomWall { get; }
+            public OuterWall UpperWall { get; }
+            public OuterWall RightWall { get; }
+            public OuterWall LeftWall { get; }
+
+            public int Rows { get; }
+            public int Columns { get; }
+            GameObject[] FloorTiles { get; }
+            GameObject[] WallTiles { get; }
+
+            public Room(int rows, int columns, GameObject[] floorTiles, GameObject[] wallTiles,
+                OuterWall bottomWall, OuterWall upperWall, OuterWall rightWall, OuterWall leftWall)
+            {
+                FloorTiles = floorTiles;
+                WallTiles = wallTiles;
+
+                BottomWall = bottomWall;
+                UpperWall = upperWall;
+                RightWall = rightWall;
+                LeftWall = leftWall;
+
+                Rows = rows;
+                Columns = columns;
+            }
+
+            public void Generate(Vector3 offset)
+            {
+                BottomWall.Generate(offset);
+                LeftWall.Generate(offset + new Vector3(0, 1, 0));
+                RightWall.Generate(offset + new Vector3(Columns, 0, 0));
+                UpperWall.Generate(offset + new Vector3(1, Rows, 0));
+
+                for (var x = 0; x < Columns; x++)
+                    for (var y = 0; y < Rows; y++)
+                        Instantiate(FloorTiles[Random.Range(0, FloorTiles.Length)],
+                            new Vector3(x, y, 0f) + offset, Quaternion.identity);
+            }
+        }
+
         // Using Serializable allows us to embed a class with sub properties in the inspector.
         [Serializable]
         public class Count
@@ -15,7 +176,6 @@ namespace Completed
             public int maximum;
 
 
-            //Assignment constructor.
             public Count(int min, int max)
             {
                 minimum = min;
@@ -31,109 +191,38 @@ namespace Completed
         public GameObject[] wallTiles;      //Array of wall prefabs.
         public GameObject[] outerWallTiles; //Array of outer tile prefabs.
 
-        //A variable to store a reference to the transform of our Board object.
-        private Transform boardHolder;
         //A list of possible locations to place tiles.
         private List<Vector3> gridPositions = new List<Vector3>();
 
 
-        //Clears our list gridPositions and prepares it to generate a new board.
-        void InitialiseList()
-        {
-            //Clear our list gridPositions.
-            gridPositions.Clear();
-
-            //Loop through x axis (columns).
-            for (int x = 1; x < columns - 1; x++)
-            {
-                //Within each column, loop through y axis (rows).
-                for (int y = 1; y < rows - 1; y++)
-                {
-                    //At each index add a new Vector3 to our list with the x and y coordinates of that position.
-                    gridPositions.Add(new Vector3(x, y, 0f));
-                }
-            }
-        }
-
-
-        //Sets up the outer walls and floor (background) of the game board.
-        void BoardSetup()
-        {
-            //Instantiate Board and set boardHolder to its transform.
-            boardHolder = new GameObject("Board").transform;
-
-            //Loop along x axis, starting from -1 (to fill corner) with floor or outerwall edge tiles.
-            for (int x = -1; x < columns + 1; x++)
-            {
-                //Loop along y axis, starting from -1 to place floor or outerwall tiles.
-                for (int y = -1; y < rows + 1; y++)
-                {
-                    //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-                    GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
-
-                    //Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
-                    if (x == -1 || x == columns || y == -1 || y == rows)
-                        toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
-
-                    //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
-
-                    //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
-                    instance.transform.SetParent(boardHolder);
-                }
-            }
-        }
-
-
-        //RandomPosition returns a random position from our list gridPositions.
         Vector3 RandomPosition()
         {
-            //Declare an integer randomIndex, set it's value to a random number between 0 and the count of items in our List gridPositions.
             int randomIndex = Random.Range(0, gridPositions.Count);
-
-            //Declare a variable of type Vector3 called randomPosition, set it's value to the entry at randomIndex from our List gridPositions.
-            Vector3 randomPosition = gridPositions[randomIndex];
-
-            //Remove the entry at randomIndex from the list so that it can't be re-used.
+            var randomPosition = gridPositions[randomIndex];
             gridPositions.RemoveAt(randomIndex);
 
-            //Return the randomly selected Vector3 position.
             return randomPosition;
         }
 
 
-        //LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
         void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
         {
-            //Choose a random number of objects to instantiate within the minimum and maximum limits
             int objectCount = Random.Range(minimum, maximum + 1);
 
-            //Instantiate objects until the randomly chosen limit objectCount is reached
             for (int i = 0; i < objectCount; i++)
             {
-                //Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
-                Vector3 randomPosition = RandomPosition();
-
-                //Choose a random tile from tileArray and assign it to tileChoice
-                GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-
-                //Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
+                var randomPosition = RandomPosition();
+                var tileChoice = tileArray[Random.Range(0, tileArray.Length)];
                 Instantiate(tileChoice, randomPosition, Quaternion.identity);
             }
         }
 
 
-        //SetupScene initializes our level and calls the previous functions to lay out the game board
         public void SetupScene()
         {
-            //Creates the outer walls and floor.
-            BoardSetup();
-
-            //Reset our list of gridpositions.
-            InitialiseList();
-
-            //Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-            LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
+            var board = new Board(rows, columns, 8, 8, floorTiles, outerWallTiles, wallTiles);
+            board.Generate();
+            // LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         }
     }
 }
