@@ -8,9 +8,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 2
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4126586264834396307}
   m_Solo: 0
@@ -33,9 +36,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -58,9 +67,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -901879652192308781}
   m_Solo: 0
@@ -114,12 +126,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -171,9 +186,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -901879652192308781}
   m_Solo: 0
@@ -196,22 +214,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -224,12 +245,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -252,9 +276,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3079111356055805073}
   m_Solo: 0
@@ -277,9 +304,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
@@ -428,9 +461,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
@@ -453,12 +492,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 2
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4126586264834396307}
   m_Solo: 0
@@ -481,9 +520,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7978058809023719842}
   m_Solo: 0
@@ -506,9 +551,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6692026325292521011}
   m_Solo: 0
@@ -556,22 +607,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -584,9 +638,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7978058809023719842}
   m_Solo: 0
@@ -610,8 +670,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3079111356055805073}
   m_Solo: 0
@@ -664,9 +724,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3079111356055805073}
   m_Solo: 0
@@ -711,9 +774,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: Direction
-    m_EventTreshold: 2
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -761,25 +830,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -801,7 +870,7 @@ AnimatorStateMachine:
     m_Position: {x: 410, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4126586264834396307}
-    m_Position: {x: 360, y: 360, z: 0}
+    m_Position: {x: 440, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4586267119422216995}
     m_Position: {x: 160, y: 90, z: 0}
@@ -823,12 +892,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 2
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4126586264834396307}
   m_Solo: 0
@@ -851,12 +920,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8336913005235547928}
   m_Solo: 0
@@ -976,9 +1045,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8336913005235547928}
   m_Solo: 0
@@ -1001,19 +1073,22 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -901879652192308781}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1082,12 +1157,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 2
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4126586264834396307}
   m_Solo: 0
@@ -1110,19 +1185,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1160,22 +1241,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7978058809023719842}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1188,9 +1272,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
@@ -1236,24 +1326,18 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: MoveHorizontally
+  - m_Name: Angle
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: MoveUp
-    m_Type: 1
+    m_Controller: {fileID: 0}
+  - m_Name: IsMoving
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Direction
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1275,9 +1359,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
@@ -1300,9 +1390,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
@@ -1325,9 +1421,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6692026325292521011}
   m_Solo: 0
@@ -1387,12 +1489,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8336913005235547928}
   m_Solo: 0
@@ -1415,9 +1517,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3079111356055805073}
   m_Solo: 0
@@ -1440,19 +1545,22 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3079111356055805073}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1487,9 +1595,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -901879652192308781}
   m_Solo: 0
@@ -1513,8 +1624,11 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
@@ -1593,9 +1707,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8336913005235547928}
   m_Solo: 0
@@ -1618,22 +1735,25 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   - m_ConditionMode: 4
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4586267119422216995}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1646,9 +1766,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -901879652192308781}
   m_Solo: 0
@@ -1725,12 +1848,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 4
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -1803,12 +1929,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveUp
-    m_EventTreshold: -0.01
-  - m_ConditionMode: 6
-    m_ConditionEvent: Direction
-    m_EventTreshold: 1
+    m_ConditionEvent: Angle
+    m_EventTreshold: 67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8336913005235547928}
   m_Solo: 0
@@ -1863,9 +1989,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: Direction
-    m_EventTreshold: 3
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
+  - m_ConditionMode: 3
+    m_ConditionEvent: Angle
+    m_EventTreshold: -67.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6830454950430768524}
   m_Solo: 0
@@ -1913,9 +2045,15 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsMoving
+    m_EventTreshold: 0
   - m_ConditionMode: 3
-    m_ConditionEvent: MoveHorizontally
-    m_EventTreshold: 0.01
+    m_ConditionEvent: Angle
+    m_EventTreshold: -22.5
+  - m_ConditionMode: 4
+    m_ConditionEvent: Angle
+    m_EventTreshold: 22.5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7986712642847438618}
   m_Solo: 0
