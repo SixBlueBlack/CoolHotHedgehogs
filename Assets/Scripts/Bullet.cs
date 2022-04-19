@@ -16,13 +16,14 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnTriggerEnter2D(Collider2D hitIfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Debug.Log(hitIfo.name);
-        Destroy(gameObject);
+        Debug.Log(hitInfo.name);
+        if (hitInfo.name == "Wall(Clone)")
+            Destroy(gameObject);
     }
 
 }
