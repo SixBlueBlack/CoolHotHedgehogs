@@ -26,5 +26,11 @@ public class Bullet : MonoBehaviour
         Debug.Log(hitInfo.name);
         if (hitInfo.name == "Wall(Clone)")
             Destroy(gameObject);
+        else if (hitInfo.name == "Enemy")
+        {
+            var enemy = hitInfo.GetComponent<EnemyScript>();
+            enemy.TakeDamage(BulletModel.Damage);
+            Destroy(gameObject);
+        }
     }
 }

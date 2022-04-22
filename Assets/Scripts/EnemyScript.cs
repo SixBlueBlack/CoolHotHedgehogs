@@ -4,84 +4,81 @@ using UnityEngine;
 using System;
 
 
-public class Enemy
+public class EnemyModel
 {
-    public float health;
-    public GameObject deathEffect;
-    public Transform player;
-    public Enemy(float hp, Transform player)
+    public WeaponModel WeaponModel { get; }
+
+    public float Health { get; set; }
+
+    public float Damage { get; }
+    public float Speed { get; }
+
+    //public GameObject DeathEffect { get; }
+
+    public EnemyModel(WeaponModel weaponModel, float hp, float damage, float speed)
     {
-        this.health = hp;
-        this.player = player;
-    }
-
-    //public void TakeDamage(float damage)
-    //{
-    //    health = Math.Max(damage, 0);
-
-    //    if (health == 0) Die();
-    //}
-
-    //public void Die()
-    //{
-    //    Instantiate(deathEffect, transform.position, Quaternion.identity);
-    //    Destroy(gameObject);
-    //}
-}
-
-public class StalkerEnemy : Enemy
-{
-    public float speed;
-    public Transform q;
-
-    public StalkerEnemy(float enemysSpeed, float hp, Transform player):base(hp, player)
-    { 
-        this.speed = enemysSpeed;
-
-    }
-
-    public void ShowAgression(Vector3 playerPos, Vector3 enemyPos)
-    {
-        float xVelocity = 0;
-        float yVelocity = 0;
-
-        if (playerPos.x < enemyPos.x) xVelocity = -speed;
-        else if (playerPos.x > enemyPos.x) xVelocity = speed;
-
-        if (playerPos.y < enemyPos.y) yVelocity = -speed;
-        else if (playerPos.y > enemyPos.y) yVelocity = speed;
-
-        EnemyScript.physic.velocity = new Vector2(xVelocity, yVelocity);
-    }
-
-    public void LoseInterest()
-    {
-        EnemyScript.physic.velocity = new Vector2(0, 0);
+        Health = hp;
+        WeaponModel = weaponModel;
+        Damage = damage;
+        Speed = speed;
     }
 }
 
 public class EnemyScript : MonoBehaviour
 {
-    public static Rigidbody2D physic;
-    public Transform player;
-    public float speed;
-    public float distanceForAgr;
-    public float hp;
-    public StalkerEnemy stalkerEnemy;
+    public static Rigidbody2D Physic;
+    public Transform Player;
+    public float DistanceForAgr = 5;
+    public EnemyModel[] Enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        physic = GetComponent<Rigidbody2D>();
-        stalkerEnemy = new StalkerEnemy(speed, hp, player);
+        Enemies = new[]
+        {
+            new EnemyModel(null, 100, 20, 1.5f) ,
+            new EnemyModel(null, 100, 5, 1.5f)
+        };
+        Physic = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var distToPlayer = Vector2.Distance(transform.position, player.position);
+        var distToPlayer = Vector2.Distance(transform.position, Player.position);
 
-        if (distToPlayer < distanceForAgr) stalkerEnemy.ShowAgression(player.position, transform.position);
-        else stalkerEnemy.LoseInterest();
+        if (distToPlayer < DistanceForAgr) ShowAggression(Player.position, transform.position);
+        else LoseInterest();
+    }
+
+    public void ShowAggression(Vector3 playerPos, Vector3 enemyPos)
+    {
+        float xVelocity = 0;
+        float yVelocity = 0;
+
+        if (playerPos.x < enemyPos.x) xVelocity = -Enemies[0].Speed;
+        else if (playerPos.x > enemyPos.x) xVelocity = Enemies[0].Speed;
+
+        if (playerPos.y < enemyPos.y) yVelocity = -Enemies[0].Speed;
+        else if (playerPos.y > enemyPos.y) yVelocity = Enemies[0].Speed;
+
+        Physic.velocity = new Vector2(xVelocity, yVelocity);
+    }
+
+    public void LoseInterest()
+    {
+        Physic.velocity = new Vector2(0, 0);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Enemies[0].Health -= Math.Max(damage, 0);
+        if (Enemies[0].Health == 0) Die();
+    }
+
+    public void Die()
+    {
+        //Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }
