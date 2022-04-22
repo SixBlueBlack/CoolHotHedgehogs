@@ -31,9 +31,9 @@ namespace Completed
                 {
                     var v = vertices[(i, j)];
                     var upperWall = new OuterWall(roomColumns, OuterWall.Orientations.Horizontal,
-                        v.UpperEdge != null && v.UpperEdge.Actual);
+                        v.UpperEdge is {Actual: true});
                     var rightWall = new OuterWall(roomRows, OuterWall.Orientations.Vertical, 
-                        v.RightEdge != null && v.RightEdge.Actual);
+                        v.RightEdge is {Actual: true});
                     Field[i, j] = new Room(roomRows, roomColumns,
                         i == 0 ? null : Field[i - 1, j].UpperWall,
                         i == Rows - 1 ? null : upperWall,

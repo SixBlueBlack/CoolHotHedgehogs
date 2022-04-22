@@ -10,11 +10,11 @@ namespace Completed
     {
         private static Vertex FindMinWeightVertex(HashSet<Vertex> vertices)
         {
-            var minWeight = vertices.Min(vertice => vertice.Weight);
-            return vertices.Where(vertice => vertice.Weight == minWeight).First();
+            var minWeight = vertices.Min(vertex => vertex.Weight);
+            return vertices.First(vertex => vertex.Weight == minWeight);
         }
 
-        public static Dictionary<(int, int), Vertex>  InitSquareGraph(int rows, int columns)
+        public static Dictionary<(int, int), Vertex> InitSquareGraph(int rows, int columns)
         {
             var notAdded = new HashSet<Vertex>();
             var vertices = new Dictionary<(int, int), Vertex>();
@@ -58,11 +58,9 @@ namespace Completed
                     if (edge == null)
                         continue;
                     var vertex2 = edge.GetIncident(vertex);
-                    if (notAdded.Contains(vertex2) && edge.Cost < vertex2.Weight)
-                    {
-                        vertex2.Weight = edge.Cost;
-                        vertex2.CheapestConnection = edge;
-                    }
+                    if (!notAdded.Contains(vertex2) || !(edge.Cost < vertex2.Weight)) continue;
+                    vertex2.Weight = edge.Cost;
+                    vertex2.CheapestConnection = edge;
                 }
             }
         }
