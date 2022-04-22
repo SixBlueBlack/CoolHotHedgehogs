@@ -13,8 +13,8 @@ public class PlayerWeaponScript : MonoBehaviour
     {
         Weapons = new[]
         {
-            new WeaponModel(new BulletModel(5, 5), 0.3f, 20f),
-            new WeaponModel(new BulletModel(3, 20), 0.5f, 20f)
+            new WeaponModel(new BulletModel(5, 20), 0.3f, 20f),
+            new WeaponModel(new BulletModel(3, 50), 0.5f, 20f)
         };
         CurrentWeaponIndex = 0;
     }
