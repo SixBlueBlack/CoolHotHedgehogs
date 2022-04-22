@@ -2489,8 +2489,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1764294084
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,4 +2635,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1130662045}
   DistanceForAgr: 5
->>>>>>> Stashed changes
