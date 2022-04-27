@@ -11,8 +11,10 @@ namespace Completed
     {
         public enum Orientations
         {
-            Horizontal,
-            Vertical
+            Upper,
+            Bottom,
+            Right,
+            Left
         }
         public int Length { get; }
         public Orientations Orientation { get; }

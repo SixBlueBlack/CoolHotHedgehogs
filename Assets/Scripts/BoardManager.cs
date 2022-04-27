@@ -27,8 +27,10 @@ namespace Completed
         public int roomRows = 8;
         public int roomColumns = 8;
         public GameObject floorTile;     //Array of floor prefabs.
-        public GameObject horizontalWallTile;
+        public GameObject upperWallTile;
+        public GameObject bottomWallTile;
         public GameObject verticalWallTIle;
+        public GameObject CornerTile;
 
         //A list of possible locations to place tiles.
         //private List<Vector3> gridPositions = new List<Vector3>();
@@ -56,29 +58,43 @@ namespace Completed
         //    }
         //}
 
+        private void GenerateCorners(Room room, Vector3 offset)
+        {
+            Instantiate(CornerTile, offset, Quaternion.identity);
+            Instantiate(CornerTile, new Vector3(0, room.Rows - 1, 0) + offset, Quaternion.Euler(0, 0, 270));
+            Instantiate(CornerTile, new Vector3(room.Columns, room.Rows - 1, 0) + offset, Quaternion.Euler(0, 0, 270));
+            Instantiate(CornerTile, new Vector3(room.Columns, 0, 0) + offset, Quaternion.Euler(0, 0, 0));
+        }
+
+        private void GenerateFloor(Room room, Vector3 offset)
+        {
+            for (var x = 0; x < room.Columns; x++)
+                for (var y = 0; y < room.Rows; y++)
+                    Instantiate(floorTile, new Vector3(x, y, 0f) + offset, Quaternion.identity);
+        }
+
         private void GenerateOuterWall(OuterWall wall, Vector3 offset)
         {
             for (var i = 0; i < wall.Length; i++)
-                if (!wall.HasPath || (i != 4))
-                    if (wall.Orientation == OuterWall.Orientations.Horizontal)
-                        Instantiate(horizontalWallTile,
-                            new Vector3(i, 0, 0f) + offset, Quaternion.identity);
+                if (!wall.HasPath || (i != wall.Length / 2))
+                    if (wall.Orientation == OuterWall.Orientations.Bottom)
+                        Instantiate(bottomWallTile, new Vector3(i, 0, 0f) + offset, Quaternion.identity);
+                    else if (wall.Orientation == OuterWall.Orientations.Upper)
+                        Instantiate(upperWallTile, new Vector3(i, 0, 0f) + offset, Quaternion.identity);
                     else
-                        Instantiate(verticalWallTIle,
-                            new Vector3(0, i, 0f) + offset, Quaternion.identity);
+                        Instantiate(verticalWallTIle, new Vector3(0, i, 0f) + offset, Quaternion.identity);
         }
 
         private void GenerateRoom(Room room, Vector3 offset)
         {
-            GenerateOuterWall(room.BottomWall, offset);
-            GenerateOuterWall(room.LeftWall, offset);
-            GenerateOuterWall(room.RightWall, offset + new Vector3(room.Columns, 0, 0));
-            GenerateOuterWall(room.UpperWall, offset + new Vector3(0, room.Rows, 0));
+            GenerateCorners(room, offset);
 
-            for (var x = 0; x < room.Columns; x++)
-                for (var y = 0; y < room.Rows; y++)
-                    Instantiate(floorTile,
-                        new Vector3(x, y, 0f) + offset, Quaternion.identity);
+            GenerateOuterWall(room.BottomWall, offset);
+            GenerateOuterWall(room.LeftWall, offset + new Vector3(0, 0, 0));
+            GenerateOuterWall(room.RightWall, offset + new Vector3(room.Columns, 0, 0));
+            GenerateOuterWall(room.UpperWall, offset + new Vector3(0, room.Rows - 1, 0));
+
+            GenerateFloor(room, offset);
         }
 
         private void GenerateBoard(Board board)

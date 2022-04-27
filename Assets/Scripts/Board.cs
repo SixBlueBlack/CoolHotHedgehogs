@@ -30,15 +30,11 @@ namespace Completed
                 for (var j = 0; j < Columns; j++)
                 {
                     var v = vertices[(i, j)];
-                    var upperWall = new OuterWall(roomColumns, OuterWall.Orientations.Horizontal,
-                        v.UpperEdge is {Actual: true});
-                    var rightWall = new OuterWall(roomRows, OuterWall.Orientations.Vertical, 
-                        v.RightEdge is {Actual: true});
                     Field[i, j] = new Room(roomRows, roomColumns,
-                        i == 0 ? null : Field[i - 1, j].UpperWall,
-                        i == Rows - 1 ? null : upperWall,
-                        j == Columns - 1 ? null : rightWall,
-                        j == 0 ? null : Field[i, j - 1].RightWall);
+                        i == 0 ? null : new OuterWall(roomColumns, OuterWall.Orientations.Bottom, v.BottomEdge is { Actual: true }),
+                        i == Rows - 1 ? null : new OuterWall(roomColumns, OuterWall.Orientations.Upper, v.UpperEdge is { Actual: true }),
+                        j == Columns - 1 ? null : new OuterWall(roomRows, OuterWall.Orientations.Right, v.RightEdge is { Actual: true }),
+                        j == 0 ? null : new OuterWall(roomRows, OuterWall.Orientations.Left, v.LeftEdge is { Actual: true }));
                 }
         }
     }
