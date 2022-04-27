@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public BulletModel BulletModel;
-
+    public SpriteRenderer SpriteRenderer;
     public Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
     {
         BulletModel = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].BulletModel;
         rb.velocity = transform.right * BulletModel.Speed;
+        transform.localScale = BulletModel.Size;
+        //SpriteRenderer.sprite = Resources.Load<Sprite>("Assets/sprites/Bullets/8x8_red_border_bullet.png");
+        //SpriteRenderer.sortingLayerName = "Bullet";
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class Bullet : MonoBehaviour
         Debug.Log(hitInfo.name);
         if (hitInfo.name == "Wall(Clone)")
             Destroy(gameObject);
-        else if (hitInfo.name == "Enemy")
+        if (hitInfo.name == "Enemy")
         {
             var enemy = hitInfo.GetComponent<EnemyScript>();
             enemy.TakeDamage(BulletModel.Damage);
