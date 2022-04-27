@@ -23,7 +23,6 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Debug.Log(hitInfo.name);
         if (hitInfo.name == "HorizontalWall(Clone)" || hitInfo.name == "VerticalWall(Clone)")
             Destroy(gameObject);
         if (hitInfo.name == "Enemy")
