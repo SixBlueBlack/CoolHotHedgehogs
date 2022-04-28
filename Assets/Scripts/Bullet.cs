@@ -8,17 +8,15 @@ public class Bullet : MonoBehaviour
     public SpriteRenderer SpriteRenderer;
     public Rigidbody2D rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         BulletModel = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].BulletModel;
         rb.velocity = transform.right * BulletModel.Speed;
         transform.localScale = BulletModel.Size;
-        //SpriteRenderer.sprite = Resources.Load<Sprite>("Assets/sprites/Bullets/8x8_red_border_bullet.png");
-        //SpriteRenderer.sortingLayerName = "Bullet";
+
+        SpriteRenderer.sprite = BulletModel.Sprite;
     }
 
-    // Update is called once per frame
     void Update()
     {
 

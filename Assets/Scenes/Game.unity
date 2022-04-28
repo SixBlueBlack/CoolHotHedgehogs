@@ -1682,7 +1682,7 @@ GameObject:
   - component: {fileID: 1067942646}
   - component: {fileID: 1067942647}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1715,6 +1715,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 4599694050290111377, guid: 8470ca97f824f0b40a491b7e93f49d86, type: 3}
+  BulletSprites:
+  - {fileID: 21300000, guid: efec39be510e5474dafed73f757d234a, type: 3}
+  - {fileID: 21300000, guid: 651e53a67017e4d4b8785e7bf53b3bcd, type: 3}
 --- !u!1 &1130662042
 GameObject:
   m_ObjectHideFlags: 0
