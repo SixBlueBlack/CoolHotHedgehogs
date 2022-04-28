@@ -1718,6 +1718,9 @@ MonoBehaviour:
   BulletSprites:
   - {fileID: 21300000, guid: efec39be510e5474dafed73f757d234a, type: 3}
   - {fileID: 21300000, guid: 651e53a67017e4d4b8785e7bf53b3bcd, type: 3}
+  WeaponsSprites:
+  - {fileID: 21300000, guid: 1b915c43f731351479f72421474057f8, type: 3}
+  - {fileID: 21300000, guid: af83d2a0326c0b949a95de36dbce0f87, type: 3}
 --- !u!1 &1130662042
 GameObject:
   m_ObjectHideFlags: 0

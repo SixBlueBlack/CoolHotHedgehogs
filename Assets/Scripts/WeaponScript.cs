@@ -9,13 +9,14 @@ public class PlayerWeaponScript : MonoBehaviour
     public static WeaponModel[] Weapons;
     public static int CurrentWeaponIndex;
     public Sprite[] BulletSprites;
+    public Sprite[] WeaponsSprites;
 
     void Start()
     {
         Weapons = new[]
         {
-            new WeaponModel(new BulletModel(5, 20, new Vector2(1.4f, 1.4f), BulletSprites[0]), 0.3f, 20f),
-            new WeaponModel(new BulletModel(3, 50, new Vector2(1.7f, 1.7f), BulletSprites[1]), 0.5f, 20f)
+            new WeaponModel(new BulletModel(5, 20, new Vector2(1.4f, 1.4f), BulletSprites[0]), 0.3f, 20f, WeaponsSprites[0]),
+            new WeaponModel(new BulletModel(3, 50, new Vector2(1.7f, 1.7f), BulletSprites[1]), 0.5f, 20f, WeaponsSprites[1])
         };
         CurrentWeaponIndex = 0;
     }
