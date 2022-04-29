@@ -20,7 +20,6 @@ public class WeaponPanelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(KeyCode.Alpha2.ToString());
         if (LastWeaponIndex != PlayerWeaponScript.CurrentWeaponIndex)
             IconImage.sprite = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].Sprite;
         LastWeaponIndex = PlayerWeaponScript.CurrentWeaponIndex;
