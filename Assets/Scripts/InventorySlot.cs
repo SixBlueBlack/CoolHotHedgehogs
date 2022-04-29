@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Sprite sprite;
+    public Sprite Sprite;
 
-    public Image icon;
+    public Image Icon;
+
+
 
     public void UpdateSlot(bool active)
     {
-        icon.sprite = active ? sprite : null;
+        Icon.sprite = active ? Sprite : null;
     }
 }

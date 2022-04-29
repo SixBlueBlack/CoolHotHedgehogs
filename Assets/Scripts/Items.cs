@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
-    public static bool[] hasItems = new bool[] { false, false, false, false, false, false };
+    public static ItemModel[] ItemModels = new ItemModel[6];
 
-    private int currItem = 0;
-    public int defence = 0;
+    public static bool[] HasItems = new bool[] { false, false, false, false, false, false };
 
-    public Sprite[] sprites;
-
-
-    public void AddItem(int index)
+    public void AddItem(int index, ItemModel itemModel)
     {
-        hasItems[index] = true;
+        ItemModels[index] = itemModel;
+        HasItems[index] = true;
     }
 }

@@ -6,36 +6,34 @@ public class Inventory : MonoBehaviour
 {
     public GameObject InventoryPanel;
     public bool IsInventoryOpened;
-    public GameObject player;
+    public GameObject DescriptionPanel;
 
 
-    public Transform inventorySlots;
+    public Transform InventorySlots;
 
-    private InventorySlot[] slots;
+    private InventorySlot[] Slots;
 
     void Start()
     {
-        slots = inventorySlots.GetComponentsInChildren<InventorySlot>();
+        Slots = InventorySlots.GetComponentsInChildren<InventorySlot>();
     }
 
     void Update()
     {
         if (!Input.GetKeyDown(KeyCode.I) || PlayerScript.IsDead || PauseScript.IsPaused) return;
-        UpdateUI();
-        if (!IsInventoryOpened)
-            InventoryPanel.SetActive(true);
-        else
-            InventoryPanel.SetActive(false);
+        UpdateUi();
+        InventoryPanel.SetActive(!IsInventoryOpened);
+        DescriptionPanel.SetActive(false);
         IsInventoryOpened = !IsInventoryOpened;
         //Time.timeScale = 0;
     }
-    void UpdateUI()
+    void UpdateUi()
     {
-        for (var i = 0; i < slots.Length; i++) //Проверка всех предметов
+        for (var i = 0; i < Slots.Length; i++)
         {
-            var active = Items.hasItems[i];
+            var active = Items.HasItems[i];
 
-            slots[i].UpdateSlot(active);
+            Slots[i].UpdateSlot(active);
         }
     }
 }
