@@ -47,14 +47,17 @@ TagManager:
   - name: Wall
     uniqueID: 4023213051
     locked: 0
-  - name: Corner
-    uniqueID: 4047322859
-    locked: 0
   - name: Enemy
     uniqueID: 3758944313
     locked: 0
   - name: Player
     uniqueID: 2858505819
+    locked: 0
+  - name: BottomWall
+    uniqueID: 956974959
+    locked: 0
+  - name: Corner
+    uniqueID: 4047322859
     locked: 0
   - name: Bullet
     uniqueID: 2607914973

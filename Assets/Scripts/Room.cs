@@ -17,14 +17,21 @@ namespace Completed
         public int Rows { get; }
         public int Columns { get; }
 
-        public Room(int rows, int columns,
-            OuterWall bottomWall=null, OuterWall upperWall=null, OuterWall rightWall=null, OuterWall leftWall=null)
-        {
-            BottomWall = bottomWall ?? new OuterWall(columns, OuterWall.Orientations.Bottom, false);
-            UpperWall = upperWall ?? new OuterWall(columns, OuterWall.Orientations.Upper, false);
-            RightWall = rightWall ?? new OuterWall(rows, OuterWall.Orientations.Right, false);
-            LeftWall = leftWall ?? new OuterWall(rows, OuterWall.Orientations.Left, false);
+        public Vector3 Offset { get; set; }
 
+        public Room(int rows, int columns, Vector3 offset,
+            OuterWall bottomWall, OuterWall upperWall, OuterWall rightWall, OuterWall leftWall)
+        {
+            BottomWall = bottomWall;
+            BottomWall.AttachedTo = this;
+            UpperWall = upperWall;
+            UpperWall.AttachedTo = this;
+            RightWall = rightWall;
+            RightWall.AttachedTo = this;
+            LeftWall = leftWall;
+            LeftWall.AttachedTo = this;
+
+            Offset = offset;
             Rows = rows;
             Columns = columns;
         }
