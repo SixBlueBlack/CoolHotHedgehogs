@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public GameObject InventoryPanel;
-    public bool IsInventoryOpened;
-    public GameObject DescriptionPanel;
 
+    public bool IsInventoryOpened;
+
+    public GameObject DescriptionPanel;
 
     public Transform InventorySlots;
 

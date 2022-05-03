@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayerWeaponScript : MonoBehaviour
 {
     public GameObject Bullet;
+
     public Coroutine FireFrequency;
-    public static WeaponModel[] Weapons;
+
+    public static List<WeaponModel> Weapons;
+
     public static int CurrentWeaponIndex;
+
     public Sprite[] BulletSprites;
+
     public Sprite[] WeaponsSprites;
 
     void Start()
     {
-        Weapons = new[]
+        Weapons = new List<WeaponModel>
         {
             new WeaponModel(new BulletModel(5, 20, new Vector2(1.4f, 1.4f), BulletSprites[0]), 0.3f, 20f, WeaponsSprites[0]),
             new WeaponModel(new BulletModel(3, 50, new Vector2(1.7f, 1.7f), BulletSprites[1]), 0.5f, 20f, WeaponsSprites[1])
@@ -29,11 +34,11 @@ public class PlayerWeaponScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
             CurrentWeaponIndex = 1;
         var mw = Input.GetAxis("Mouse ScrollWheel");
-        if (mw > 0 && CurrentWeaponIndex < Weapons.Length - 1) CurrentWeaponIndex += 1;
+        if (mw > 0 && CurrentWeaponIndex < Weapons.Count - 1) CurrentWeaponIndex += 1;
         else if (mw > 0) CurrentWeaponIndex = 0;
 
         if (mw < 0 && CurrentWeaponIndex > 0) CurrentWeaponIndex -= 1;
-        else if (mw < 0) CurrentWeaponIndex = Weapons.Length - 1;
+        else if (mw < 0) CurrentWeaponIndex = Weapons.Count - 1;
 
         if (Input.GetButtonDown("Fire1"))
             FireFrequency = StartCoroutine(FireDelay());

@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class WeaponItem : MonoBehaviour
 {
-    public int Index;
+    private WeaponModel weaponModel;
 
-    private static ItemModel itemModel;
+    public Sprite BulletSprite;
 
-    public Sprite Sprite;
+    public Sprite WeaponsSprite;
 
     private bool isCollided;
 
-    public GameObject Player;
-
     private OutlineScript outlineScript;
 
+    // Start is called before the first frame update
     void Start()
     {
-        itemModel = new ItemModel("Health Potion", "Just heal yourself", Sprite);
+        weaponModel = new WeaponModel(new BulletModel(7, 35, new Vector2(0.05f, 0.05f), BulletSprite), 1f, 20f, WeaponsSprite);
         outlineScript = transform.GetComponent<OutlineScript>();
     }
 
     void Update()
     {
         if (!isCollided || !Input.GetKeyDown(KeyCode.E)) return;
-        Player.GetComponent<Items>().AddItem(Index, itemModel);
+        PlayerWeaponScript.Weapons.Add(weaponModel);
         Destroy(gameObject);
     }
 

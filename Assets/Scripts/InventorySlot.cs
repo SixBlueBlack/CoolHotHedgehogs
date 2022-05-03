@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,8 +6,6 @@ public class InventorySlot : MonoBehaviour
     public Sprite Sprite;
 
     public Image Icon;
-
-
 
     public void UpdateSlot(bool active)
     {
