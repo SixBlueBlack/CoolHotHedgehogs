@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Random = UnityEngine.Random;
-
 namespace Completed
 {
     public class Passage
@@ -17,11 +15,11 @@ namespace Completed
 
         public int Length { get; }
 
-        public Passage(OuterWall startWall, Orientation.Direction direction, Count passageLength)
+        public Passage(OuterWall startWall, Orientation.Direction direction, Range passageLength)
         {
             StartWall = startWall;
             Direction = direction;
-            Length = Random.Range(passageLength.minimum, passageLength.maximum);
+            Length = passageLength.Random;
         }
 
         public OuterWall GetAnotherWall(OuterWall wall)

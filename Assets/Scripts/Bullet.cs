@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         if (hitInfo.name == "Enemy")
         {
-            var enemy = hitInfo.GetComponent<EnemyScript>();
+            var enemy = hitInfo.GetComponent<Enemy>();
             enemy.TakeDamage(BulletModel.Damage);
             Destroy(gameObject);
         }

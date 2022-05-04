@@ -1,18 +1,18 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using Random = UnityEngine.Random;
+using RandomGenerator = UnityEngine.Random;
 
 namespace Completed
 {
     [Serializable]
-    public class Count
+    public class Range
     {
         public int minimum;
         public int maximum;
+        public int Random { get => RandomGenerator.Range(minimum, maximum); }
 
-
-        public Count(int min, int max)
+        public Range(int min, int max)
         {
             minimum = min;
             maximum = max;
@@ -21,11 +21,10 @@ namespace Completed
 
     public class BoardManager : MonoBehaviour
     {
-        public Count passageLength;
-        public int columns = 8;
-        public int rows = 8;
-        public int roomRows = 8;
-        public int roomColumns = 8;
+        public Range passageLength;
+        public Range roomWallRange;
+        public Range boardSizeRange;
+
         public GameObject floorTile;
         public GameObject upperWallTile;
         public GameObject bottomWallTile;
@@ -140,7 +139,7 @@ namespace Completed
 
         public void SetupScene()
         {
-            GenerateBoard(new Board(rows, columns, roomRows, roomColumns, passageLength));
+            GenerateBoard(new Board(boardSizeRange, roomWallRange, passageLength));
             // LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
         }
     }

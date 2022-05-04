@@ -11,6 +11,7 @@ public class EnemyModel
     public float Health { get; set; }
 
     public float Damage { get; }
+
     public float Speed { get; }
 
     //public GameObject DeathEffect { get; }
@@ -24,7 +25,7 @@ public class EnemyModel
     }
 }
 
-public class EnemyScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public static Rigidbody2D Physic;
     public Transform Player;

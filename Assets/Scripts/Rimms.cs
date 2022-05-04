@@ -14,7 +14,7 @@ namespace Completed
             return vertices.First(vertex => vertex.Weight == minWeight);
         }
 
-        public static Dictionary<(int, int), Vertex> InitSquareGraph(int rows, int columns)
+        public static Dictionary<(int, int), Vertex> InitGraph(int rows, int columns)
         {
             var notAdded = new HashSet<Vertex>();
             var vertices = new Dictionary<(int, int), Vertex>();

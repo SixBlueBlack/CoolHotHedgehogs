@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using RandomGenerator = UnityEngine.Random;
+
 
 namespace Completed
 {
@@ -12,20 +14,16 @@ namespace Completed
         public Room[,] Field { get; }
         public int Rows { get; }
         public int Columns { get; }
-        public int RoomRows { get; }
-        public int RoomColumns { get; }
-        public Count PassageLength { get; }
+        public Range PassageLength { get; }
 
-        public Board(int rows, int columns, int roomRows, int roomColumns, Count passageLength)
+        public Board(Range boardSizeRange, Range roomWallRange, Range passageLength)
         {
-            Rows = rows;
-            Columns = columns;
-            RoomRows = roomRows;
-            RoomColumns = roomColumns;
+            Rows = boardSizeRange.Random;
+            Columns = boardSizeRange.Random;
             PassageLength = passageLength;
 
-            Field = new Room[rows, columns];
-            var vertices = RimmsGeneration.InitSquareGraph(rows, columns);
+            Field = new Room[Rows, Columns];
+            var vertices = RimmsGeneration.InitGraph(Rows, Columns);
             RimmsGeneration.ConnectRandomSpanningTree(vertices.Values.ToArray());
 
             var offset = new Vector3(0, 0, 0);
@@ -35,17 +33,19 @@ namespace Completed
                 for (var j = 0; j < Columns; j++)
                 {
                     offset = UpdateOffset(offset, i, j);
+                    var roomRows = roomWallRange.Random;
+                    var roomColumns = roomWallRange.Random;
 
                     var v = vertices[(i, j)];
 
                     var leftWall = j == 0 ?
-                        GetWall(RoomRows, Orientation.Position.Left, v.LeftEdge, null): 
-                        GetWall(RoomRows, Orientation.Position.Left, v.LeftEdge, Field[i, j - 1].RightWall.Corridor);
+                        GetWall(roomRows, Orientation.Position.Left, v.LeftEdge, null): 
+                        GetWall(roomRows, Orientation.Position.Left, v.LeftEdge, Field[i, j - 1].RightWall.Corridor);
                     var bottomWall = i == 0 ?
                         GetWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, null): 
-                        GetWall(RoomColumns, Orientation.Position.Bottom, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
-                    var upperWall = GetWall(RoomColumns, Orientation.Position.Upper, v.UpperEdge, null);
-                    var rightWall = GetWall(RoomRows, Orientation.Position.Right, v.RightEdge, null);
+                        GetWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
+                    var upperWall = GetWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
+                    var rightWall = GetWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
                     var room = new Room(roomRows, roomColumns, offset, 
                         bottomWall, upperWall, rightWall, leftWall);

@@ -15,7 +15,7 @@ namespace Completed
         public Passage Corridor { get; }
         public Room AttachedTo { get; set; }
 
-        public OuterWall(int length, Orientation.Position position, bool hasPath, Count passageLength)
+        public OuterWall(int length, Orientation.Position position, bool hasPath, Range passageLength)
         {
             Length = length;
             HasPath = hasPath;
