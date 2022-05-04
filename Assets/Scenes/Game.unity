@@ -688,7 +688,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.661275
+  orthographic size: 26.656322
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1235,10 +1235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be25ce5afa5f294429a1036adecb5ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 4
+  passageLength:
+    minimum: 4
+    maximum: 8
+  columns: 8
   rows: 4
-  roomRows: 8
-  roomColumns: 8
+  roomRows: 10
+  roomColumns: 15
   floorTile: {fileID: 3590507212743726467, guid: 46e07dc78d8c58b479fa98d028002825, type: 3}
   upperWallTile: {fileID: 7322489105562290379, guid: 288f19ef742ee984a89e4d821ad41243, type: 3}
   bottomWallTile: {fileID: 4959904400377370409, guid: 4595cc594bf246240ac03f34eb903313, type: 3}
