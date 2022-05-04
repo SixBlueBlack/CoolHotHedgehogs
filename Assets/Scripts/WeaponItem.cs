@@ -30,12 +30,12 @@ public class WeaponItem : MonoBehaviour
     {
         if (!hitInfo.CompareTag("Player")) return;
         isCollided = true;
-        outlineScript.OutlineSize = 1;
+        outlineScript.IsOutlined = true;
     }
 
     void OnTriggerExit2D(Collider2D hitInfo)
     {
         isCollided = false;
-        outlineScript.OutlineSize = 0;
+        outlineScript.IsOutlined = false;
     }
 }

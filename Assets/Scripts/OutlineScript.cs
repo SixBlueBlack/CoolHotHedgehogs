@@ -5,9 +5,11 @@ public class OutlineScript : MonoBehaviour
     public Color Color = Color.white;
 
     [Range(0, 16)]
-    public int OutlineSize = 0;
+    public int OutlineSize = 2;
 
     private SpriteRenderer spriteRenderer;
+
+    public bool IsOutlined;
 
     void OnEnable()
     {
@@ -22,7 +24,7 @@ public class OutlineScript : MonoBehaviour
 
     void Update()
     {
-        UpdateOutline(true);
+        UpdateOutline(IsOutlined);
     }
 
     void UpdateOutline(bool outline)

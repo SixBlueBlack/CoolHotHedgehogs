@@ -2107,7 +2107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Color: {r: 1, g: 1, b: 1, a: 1}
-  OutlineSize: 0
+  OutlineSize: 2
+  IsOutlined: 0
 --- !u!114 &937913266 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8824747166736109810, guid: 78357dbb878fc5b46af1838f8422708c, type: 3}
@@ -4266,7 +4267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Color: {r: 1, g: 1, b: 1, a: 1}
-  OutlineSize: 0
+  OutlineSize: 2
+  IsOutlined: 0
 --- !u!1001 &1876830479
 PrefabInstance:
   m_ObjectHideFlags: 0

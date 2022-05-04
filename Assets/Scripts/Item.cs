@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -33,12 +31,12 @@ public class Item : MonoBehaviour
     {
         if (!hitInfo.CompareTag("Player")) return;
         isCollided = true;
-        outlineScript.OutlineSize = 1;
+        outlineScript.IsOutlined = true;
     }
 
     void OnTriggerExit2D(Collider2D hitInfo)
     {
         isCollided = false;
-        outlineScript.OutlineSize = 0;
+        outlineScript.IsOutlined = false;
     }
 }
