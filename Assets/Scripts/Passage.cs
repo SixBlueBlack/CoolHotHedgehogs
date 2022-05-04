@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Completed
+namespace Assets.Scripts
 {
     public class Passage
     {

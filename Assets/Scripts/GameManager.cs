@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;        //Allows us to use Lists. 
-using Completed;
+using Assets.Scripts;
 
 public class GameManager : MonoBehaviour
 {

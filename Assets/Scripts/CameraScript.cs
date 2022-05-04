@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraScript : MonoBehaviour
+namespace Assets.Scripts
 {
-
-    private Transform player;
-    void Start()
+    public class CameraScript : MonoBehaviour
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        var temp = transform.position;
-        temp.x = player.position.x;
-        temp.y = player.position.y;
-        transform.position = temp;
+        private Transform player;
+        void Start()
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            var temp = transform.position;
+            temp.x = player.position.x;
+            temp.y = player.position.y;
+            transform.position = temp;
+        }
     }
 }

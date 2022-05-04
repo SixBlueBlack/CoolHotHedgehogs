@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class WeaponModel
+namespace Assets.Scripts
 {
-    public BulletModel BulletModel;
-
-    public float BulletForce { get; }
-
-    public float FireDelay { get; }
-
-    public Sprite Sprite { get; }
-
-    public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Sprite sprite)
+    public class WeaponModel
     {
-        BulletModel = bulletModel;
-        FireDelay = fireDelay;
-        BulletForce = bulletForce;
-        Sprite = sprite;
+        public BulletModel BulletModel;
+
+        public float BulletForce { get; }
+
+        public float FireDelay { get; }
+
+        public Sprite Sprite { get; }
+
+        public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Sprite sprite)
+        {
+            BulletModel = bulletModel;
+            FireDelay = fireDelay;
+            BulletForce = bulletForce;
+            Sprite = sprite;
+        }
     }
 }

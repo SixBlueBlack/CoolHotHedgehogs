@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using RandomGenerator = UnityEngine.Random;
 
-namespace Completed
+namespace Assets.Scripts
 {
     [Serializable]
     public class Range
@@ -31,31 +31,7 @@ namespace Completed
         public GameObject verticalWallTIle;
         public GameObject CornerTile;
 
-        //A list of possible locations to place tiles.
-        //private List<Vector3> gridPositions = new List<Vector3>();
-
-
-        //Vector3 RandomPosition()
-        //{
-        //    int randomIndex = Random.Range(0, gridPositions.Count);
-        //    var randomPosition = gridPositions[randomIndex];
-        //    gridPositions.RemoveAt(randomIndex);
-
-        //    return randomPosition;
-        //}
-
-
-        //void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum)
-        //{
-        //    int objectCount = Random.Range(minimum, maximum + 1);
-
-        //    for (int i = 0; i < objectCount; i++)
-        //    {
-        //        var randomPosition = RandomPosition();
-        //        var tileChoice = tileArray[Random.Range(0, tileArray.Length)];
-        //        Instantiate(tileChoice, randomPosition, Quaternion.identity);
-        //    }
-        //}
+        public GameObject EnemyPrefab;
 
         private void GenerateCorners(Room room)
         {
@@ -118,6 +94,16 @@ namespace Completed
             }
         }
 
+        private void SpawnEnemies(EnemyModel[] enemies, Vector3 offset)
+        {
+            foreach (var enemyModel in enemies)
+            {
+                var inst = Instantiate(EnemyPrefab, 
+                    offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
+                inst.GetComponent<Enemy>().EnemyModel = enemyModel;
+            }
+        }
+
         private void GenerateRoom(Room room)
         {
             GenerateCorners(room);
@@ -128,6 +114,8 @@ namespace Completed
             GenerateOuterWall(room.UpperWall, room.Offset + new Vector3(0, room.Rows - 1, 0));
 
             GenerateRoomFloor(room);
+
+            SpawnEnemies(room.Enemies, room.Offset);
         }
 
         private void GenerateBoard(Board board)

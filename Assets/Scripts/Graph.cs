@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Random = UnityEngine.Random;
 
-namespace Completed
+namespace Assets.Scripts
 {
     public class Vertex
     {

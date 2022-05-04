@@ -4,82 +4,59 @@ using UnityEngine;
 using System;
 
 
-public class EnemyModel
+namespace Assets.Scripts
 {
-    public WeaponModel WeaponModel { get; }
-
-    public float Health { get; set; }
-
-    public float Damage { get; }
-
-    public float Speed { get; }
-
-    //public GameObject DeathEffect { get; }
-
-    public EnemyModel(WeaponModel weaponModel, float hp, float damage, float speed)
+    public class Enemy : MonoBehaviour
     {
-        Health = hp;
-        WeaponModel = weaponModel;
-        Damage = damage;
-        Speed = speed;
-    }
-}
+        public Rigidbody2D Physic;
+        public Transform Player;
+        public EnemyModel EnemyModel { get; set; }
 
-public class Enemy : MonoBehaviour
-{
-    public static Rigidbody2D Physic;
-    public Transform Player;
-    public float DistanceForAgr = 5;
-    public EnemyModel[] Enemies;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Enemies = new[]
+        // Start is called before the first frame update
+        void Start()
         {
-            new EnemyModel(null, 100, 20, 1.5f) ,
-            new EnemyModel(null, 100, 5, 1.5f)
-        };
-        Physic = GetComponent<Rigidbody2D>();
-    }
+            Physic = GetComponent<Rigidbody2D>();
+            Player = GameObject.Find("Player").transform;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        var distToPlayer = Vector2.Distance(transform.position, Player.position);
+        // Update is called once per frame
+        void Update()
+        {
+            var distToPlayer = Vector2.Distance(transform.position, Player.position);
 
-        if (distToPlayer < DistanceForAgr) ShowAggression(Player.position, transform.position);
-        else LoseInterest();
-    }
+            if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(Player.position, transform.position);
+            else LoseInterest();
+        }
 
-    public void ShowAggression(Vector3 playerPos, Vector3 enemyPos)
-    {
-        float xVelocity = 0;
-        float yVelocity = 0;
+        public void ShowAggression(Vector3 playerPos, Vector3 enemyPos)
+        {
+            float xVelocity = 0;
+            float yVelocity = 0;
 
-        if (playerPos.x < enemyPos.x) xVelocity = -Enemies[0].Speed;
-        else if (playerPos.x > enemyPos.x) xVelocity = Enemies[0].Speed;
+            if (playerPos.x < enemyPos.x) xVelocity = -EnemyModel.Speed;
+            else if (playerPos.x > enemyPos.x) xVelocity = EnemyModel.Speed;
 
-        if (playerPos.y < enemyPos.y) yVelocity = -Enemies[0].Speed;
-        else if (playerPos.y > enemyPos.y) yVelocity = Enemies[0].Speed;
+            if (playerPos.y < enemyPos.y) yVelocity = -EnemyModel.Speed;
+            else if (playerPos.y > enemyPos.y) yVelocity = EnemyModel.Speed;
 
-        Physic.velocity = new Vector2(xVelocity, yVelocity);
-    }
+            Physic.velocity = new Vector2(xVelocity, yVelocity);
+        }
 
-    public void LoseInterest()
-    {
-        Physic.velocity = new Vector2(0, 0);
-    }
+        public void LoseInterest()
+        {
+            Physic.velocity = new Vector2(0, 0);
+        }
 
-    public void TakeDamage(float damage)
-    {
-        Enemies[0].Health -= Math.Max(damage, 0);
-        if (Enemies[0].Health == 0) Die();
-    }
+        public void TakeDamage(float damage)
+        {
+            EnemyModel.Health -= Math.Max(damage, 0);
+            if (EnemyModel.Health == 0) Die();
+        }
 
-    public void Die()
-    {
-        //Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        public void Die()
+        {
+            //Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

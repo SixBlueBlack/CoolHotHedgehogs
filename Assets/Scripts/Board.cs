@@ -7,7 +7,7 @@ using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
 
 
-namespace Completed
+namespace Assets.Scripts
 {
     public class Board
     {
@@ -47,7 +47,7 @@ namespace Completed
                     var upperWall = GetWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
                     var rightWall = GetWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
-                    var room = new Room(roomRows, roomColumns, offset, 
+                    var room = new Room(roomRows, roomColumns, offset, i + j,
                         bottomWall, upperWall, rightWall, leftWall);
 
                     Field[i, j] = room;
