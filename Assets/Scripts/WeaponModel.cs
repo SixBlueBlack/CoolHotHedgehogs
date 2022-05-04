@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class WeaponModel
 {
     public BulletModel BulletModel;
@@ -6,10 +8,13 @@ public class WeaponModel
 
     public float FireDelay { get; }
 
-    public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce)
+    public Sprite Sprite { get; }
+
+    public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Sprite sprite)
     {
         BulletModel = bulletModel;
         FireDelay = fireDelay;
         BulletForce = bulletForce;
+        Sprite = sprite;
     }
 }

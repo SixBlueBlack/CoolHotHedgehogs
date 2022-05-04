@@ -5,17 +5,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public BulletModel BulletModel;
-
+    public SpriteRenderer SpriteRenderer;
     public Rigidbody2D rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         BulletModel = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].BulletModel;
         rb.velocity = transform.right * BulletModel.Speed;
+        transform.localScale = BulletModel.Size;
+
+        SpriteRenderer.sprite = BulletModel.Sprite;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
