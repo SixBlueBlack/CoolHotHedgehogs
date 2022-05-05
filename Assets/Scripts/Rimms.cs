@@ -38,7 +38,7 @@ namespace Completed
                     vertices[(i, j)] = v;
                     notAdded.Add(v);
                 }
-            vertices[(0, 0)].Weight = 0;
+            //vertices[(0, 0)].Weight = 0;
 
             return vertices;
         }

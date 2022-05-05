@@ -2,40 +2,39 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int Index;
-
-    private static ItemModel itemModel;
-
-    public Sprite Sprite;
+    public ItemModel itemModel;
 
     private bool isCollided;
 
-    public GameObject Player;
+    private GameObject player;
 
     private OutlineScript outlineScript;
 
     void Start()
     {
-        itemModel = new ItemModel("Health Potion", "Just heal yourself", Sprite);
+        player = GameObject.FindGameObjectWithTag("Player");
         outlineScript = transform.GetComponent<OutlineScript>();
     }
 
     void Update()
     {
         if (!isCollided || !Input.GetKeyDown(KeyCode.E)) return;
-        Player.GetComponent<Items>().AddItem(Index, itemModel);
+        if (player.GetComponent<Items>().FindEmptySlot() == -1) return;
+        player.GetComponent<Items>().AddItem(itemModel);
         Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (!hitInfo.CompareTag("Player")) return;
+        if (!hitInfo.CompareTag("Player") || outlineScript is null) return;
         isCollided = true;
+        Debug.Log(outlineScript);
         outlineScript.IsOutlined = true;
     }
 
     void OnTriggerExit2D(Collider2D hitInfo)
     {
+        if (!hitInfo.CompareTag("Player")) return;
         isCollided = false;
         outlineScript.IsOutlined = false;
     }

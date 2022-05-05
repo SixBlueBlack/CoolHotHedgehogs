@@ -4,7 +4,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject InventoryPanel;
 
-    public bool IsInventoryOpened;
+    public static bool IsOpen;
 
     public GameObject DescriptionPanel;
 
@@ -19,14 +19,15 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.I) || PlayerScript.IsDead || PauseScript.IsPaused) return;
+        if (!Input.GetKeyDown(KeyCode.I) || Player.IsDead || PauseScript.IsPaused) return;
         UpdateUi();
-        InventoryPanel.SetActive(!IsInventoryOpened);
+        InventoryPanel.SetActive(!IsOpen);
         DescriptionPanel.SetActive(false);
-        IsInventoryOpened = !IsInventoryOpened;
-        //Time.timeScale = 0;
+        IsOpen = !IsOpen;
+        Time.timeScale = IsOpen ? 0 : 1;
     }
-    void UpdateUi()
+
+    public void UpdateUi()
     {
         for (var i = 0; i < Slots.Length; i++)
         {
