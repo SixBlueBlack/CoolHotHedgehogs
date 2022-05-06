@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int HealthPoints { get; set; }
+    public int CurrentHealth { get; set; }
+    public int MaxHealth { get; set; } = 100;
+    public HealthBar HealthBar;
     private float acceleration = 0.2f;
     private float HorizontalMove;
     private float VerticalMove;
@@ -13,18 +15,22 @@ public class Player : MonoBehaviour
     private int lastPose;
     public GameObject ItemPrefab;
     public Sprite Sprite;
+    public Canvas HealthBarCanvas;
 
 
     void Start()
     {
         var inst = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         inst.GetComponent<Item>().itemModel = new ItemModel("Health Potion", "Just heal yourself", Sprite);
-        HealthPoints = 100;
         rigidBodyComponent = GetComponent<Rigidbody2D>();
+        CurrentHealth = MaxHealth;
+        HealthBar.SetMaxHealth(MaxHealth);
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            TakeDamage(10);
         HorizontalMove = Input.GetAxisRaw("Horizontal") * acceleration;
         VerticalMove = Input.GetAxisRaw("Vertical") * acceleration;
         Animator.SetFloat("MoveHorizontally", Mathf.Abs(HorizontalMove * acceleration));
@@ -61,5 +67,16 @@ public class Player : MonoBehaviour
         var scale = a.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+        var canvasScale = HealthBarCanvas.transform.localScale;
+        canvasScale.x *= -1;
+        HealthBarCanvas.transform.localScale = canvasScale;
+    }
+
+    void TakeDamage(int damage)
+    {
+        CurrentHealth -= damage;
+        HealthBar.SetHealth(CurrentHealth);
+        if (CurrentHealth <= 0)
+            IsDead = true;
     }
 }
