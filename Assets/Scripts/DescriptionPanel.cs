@@ -37,6 +37,8 @@ public class DescriptionPanel : MonoBehaviour
     public void Use()
     {
         Panel.SetActive(false);
+        if (itemModel.Title == "Health Potion")
+            player.GetComponent<Player>().Heal(20);
         player.gameObject.GetComponent<Items>().DeleteItem(buttonIndex);
         inventory.UpdateUi();
     }

@@ -7,13 +7,13 @@ namespace Assets.Scripts
     {
         public float Speed { get; }
 
-        public float Damage { get; }
+        public int Damage { get; }
 
         public Vector2 Size { get; }
 
         public Sprite Sprite { get; }
 
-        public BulletModel(float speed, float damage, Vector2 size, Sprite sprite)
+        public BulletModel(float speed, int damage, Vector2 size, Sprite sprite)
         {
             Speed = speed;
             Damage = damage;

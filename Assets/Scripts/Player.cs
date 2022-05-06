@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -72,11 +73,16 @@ public class Player : MonoBehaviour
         HealthBarCanvas.transform.localScale = canvasScale;
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
         HealthBar.SetHealth(CurrentHealth);
         if (CurrentHealth <= 0)
             IsDead = true;
+    }
+
+    public void Heal(int value)
+    {
+        TakeDamage(Math.Max(-value, -(MaxHealth-CurrentHealth)));
     }
 }

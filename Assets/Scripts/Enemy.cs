@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -9,22 +7,34 @@ namespace Assets.Scripts
     public class Enemy : MonoBehaviour
     {
         public Rigidbody2D Physic;
-        public Transform Player;
+        private Transform player;
         public EnemyModel EnemyModel { get; set; }
+        public HealthBar HealthBar;
+        private float cooldown = 1;
+        private float cooldownTimer;
+        private bool isAttacking;
 
         // Start is called before the first frame update
         void Start()
         {
             Physic = GetComponent<Rigidbody2D>();
-            Player = GameObject.Find("Player").transform;
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            HealthBar.SetMaxHealth(EnemyModel.Health);
         }
 
         // Update is called once per frame
         void Update()
         {
-            var distToPlayer = Vector2.Distance(transform.position, Player.position);
+            var distToPlayer = Vector2.Distance(transform.position, player.position);
+            if (isAttacking)
+            {
+                cooldownTimer -= Time.deltaTime;
+                if (cooldownTimer > 0) return;
+                cooldownTimer = cooldown;
+                player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
+            }
 
-            if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(Player.position, transform.position);
+            if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(player.position, transform.position);
             else LoseInterest();
         }
 
@@ -47,9 +57,10 @@ namespace Assets.Scripts
             Physic.velocity = new Vector2(0, 0);
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
             EnemyModel.Health -= Math.Max(damage, 0);
+            HealthBar.SetHealth(EnemyModel.Health);
             if (EnemyModel.Health == 0) Die();
         }
 
@@ -57,6 +68,18 @@ namespace Assets.Scripts
         {
             //Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
+        }
+
+        void OnTriggerEnter2D(Collider2D hitInfo)
+        {
+            if (hitInfo.tag == "Player")
+                isAttacking = true;
+        }
+
+        void OnTriggerExit2D(Collider2D hitInfo)
+        {
+            if (hitInfo.tag == "Player")
+                isAttacking = false;
         }
     }
 }

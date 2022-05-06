@@ -10,8 +10,8 @@ namespace Assets.Scripts
     {
         public WeaponModel WeaponModel { get; }
 
-        public float Health { get; set; }
-        public float Damage { get; }
+        public int Health { get; set; }
+        public int Damage { get; }
         public float Speed { get; }
         public float DistanceForAgr { get; } = 10;
 
@@ -20,7 +20,7 @@ namespace Assets.Scripts
 
         //public GameObject DeathEffect { get; }
 
-        public EnemyModel(int row, int col, WeaponModel weaponModel, float hp, float damage, float speed) // Pass type of an enemy instead of params
+        public EnemyModel(int row, int col, WeaponModel weaponModel, int hp, int damage, float speed) // Pass type of an enemy instead of params
         {
             Health = hp;
             WeaponModel = weaponModel;
