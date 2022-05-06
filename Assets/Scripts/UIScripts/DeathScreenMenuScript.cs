@@ -7,10 +7,16 @@ public class DeathScreenMenuScript : MonoBehaviour
 
     void Update()
     {
+        ActivateDeathScreenMenu();
+    }
+
+    private void ActivateDeathScreenMenu()
+    {
         if (!Player.IsDead) return;
         DeathScreenMenu.SetActive(true);
         Time.timeScale = 0;
     }
+
     public void Retry()
     {
         DeathScreenMenu.SetActive(false);

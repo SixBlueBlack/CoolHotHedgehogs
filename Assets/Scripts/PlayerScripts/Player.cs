@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Player : MonoBehaviour
 {
@@ -7,12 +8,12 @@ public class Player : MonoBehaviour
     public int MaxHealth { get; set; } = 100;
     public HealthBar HealthBar;
     private float acceleration = 0.2f;
-    private float HorizontalMove;
-    private float VerticalMove;
+    private float horizontalMove;
+    private float verticalMove;
     private Rigidbody2D rigidBodyComponent;
     public Animator Animator;
     public static bool IsDead;
-    private bool IsRight = true;
+    private bool isRight = true;
     private int lastPose;
     public GameObject ItemPrefab;
     public Sprite Sprite;
@@ -30,41 +31,46 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            TakeDamage(10);
-        HorizontalMove = Input.GetAxisRaw("Horizontal") * acceleration;
-        VerticalMove = Input.GetAxisRaw("Vertical") * acceleration;
-        Animator.SetFloat("MoveHorizontally", Mathf.Abs(HorizontalMove * acceleration));
-        if (HorizontalMove != 0 && VerticalMove > 0)
-            lastPose = 3;
-        else if (VerticalMove > 0)
-            lastPose = 1;
-        else if (VerticalMove < 0)
-            lastPose = 2;
-        else if (HorizontalMove != 0)
-            lastPose = 0;
-        Animator.SetFloat("MoveUp", VerticalMove * acceleration);
+        Move();
+    }
 
+    private void Move()
+    {
+        horizontalMove = Input.GetAxisRaw("Horizontal") * acceleration;
+        verticalMove = Input.GetAxisRaw("Vertical") * acceleration;
+        Animator.SetFloat("MoveHorizontally", Mathf.Abs(horizontalMove * acceleration));
 
-        var targetVelocity = new Vector2(HorizontalMove * 10f, VerticalMove * 10f);
+        var targetVelocity = new Vector2(horizontalMove * 10f, verticalMove * 10f);
         rigidBodyComponent.velocity = targetVelocity;
 
-        Animator.SetInteger("Direction", lastPose);
-
-        if (HorizontalMove < 0 && IsRight)
+        if (horizontalMove < 0 && isRight)
         {
             Rotate();
         }
-        else if (HorizontalMove > 0 && !IsRight)
+        else if (horizontalMove > 0 && !isRight)
         {
             Rotate();
         }
     }
 
+    private void SetLastPose()
+    {
+        if (horizontalMove != 0 && verticalMove > 0)
+            lastPose = 3;
+        else if (verticalMove > 0)
+            lastPose = 1;
+        else if (verticalMove < 0)
+            lastPose = 2;
+        else if (horizontalMove != 0)
+            lastPose = 0;
+        Animator.SetFloat("MoveUp", verticalMove * acceleration);
+        Animator.SetInteger("Direction", lastPose);
+    }
+
     private void Rotate()
     {
         var a = transform;
-        IsRight = !IsRight;
+        isRight = !isRight;
         var scale = a.localScale;
         scale.x *= -1;
         transform.localScale = scale;

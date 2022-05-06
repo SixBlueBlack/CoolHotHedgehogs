@@ -23,6 +23,11 @@ namespace Assets.Scripts
 
         void Update()
         {
+            AddWeapon();
+        }
+
+        private void AddWeapon()
+        {
             if (!isCollided || !Input.GetKeyDown(KeyCode.E)) return;
             PlayerWeaponScript.Weapons.Add(weaponModel);
             Destroy(gameObject);

@@ -40,7 +40,7 @@ public class DescriptionPanel : MonoBehaviour
         if (itemModel.Title == "Health Potion")
             player.GetComponent<Player>().Heal(20);
         player.gameObject.GetComponent<Items>().DeleteItem(buttonIndex);
-        inventory.UpdateUi();
+        inventory.UpdateSlotsUi();
     }
 
     public void Drop()
@@ -49,7 +49,7 @@ public class DescriptionPanel : MonoBehaviour
         var item = Instantiate(ItemPrefab, player.position, Quaternion.identity);
         item.GetComponent<Item>().itemModel = itemModel;
         player.gameObject.GetComponent<Items>().DeleteItem(buttonIndex);
-        inventory.UpdateUi();
+        inventory.UpdateSlotsUi();
         Panel.SetActive(false);
     }
 }

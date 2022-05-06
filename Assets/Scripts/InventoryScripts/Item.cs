@@ -18,6 +18,11 @@ public class Item : MonoBehaviour
 
     void Update()
     {
+        PickUpItem();
+    }
+
+    private void PickUpItem()
+    {
         if (!isCollided || !Input.GetKeyDown(KeyCode.E)) return;
         if (player.GetComponent<Items>().FindEmptySlot() == -1) return;
         player.GetComponent<Items>().AddItem(itemModel);

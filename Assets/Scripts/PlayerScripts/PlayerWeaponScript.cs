@@ -31,17 +31,36 @@ namespace Assets.Scripts
         void Update()
         {
             RotateFirePosition();
+            ChangeWeapon();
+            ManageCoroutines();
+        }
+
+        private void ChangeWeapon()
+        {
+            ChangeWeaponByButton();
+            ChangeWeaponByScrollWheel();
+        }
+
+        private void ChangeWeaponByButton()
+        {
             if (Input.GetKeyDown(KeyCode.Alpha1))
                 CurrentWeaponIndex = 0;
             if (Input.GetKeyDown(KeyCode.Alpha2))
                 CurrentWeaponIndex = 1;
+        }
+
+        private void ChangeWeaponByScrollWheel()
+        {
             var mw = Input.GetAxis("Mouse ScrollWheel");
             if (mw > 0 && CurrentWeaponIndex < Weapons.Count - 1) CurrentWeaponIndex += 1;
             else if (mw > 0) CurrentWeaponIndex = 0;
 
             if (mw < 0 && CurrentWeaponIndex > 0) CurrentWeaponIndex -= 1;
             else if (mw < 0) CurrentWeaponIndex = Weapons.Count - 1;
+        }
 
+        private void ManageCoroutines()
+        {
             if (Input.GetButtonDown("Fire1"))
                 FireFrequency = StartCoroutine(FireDelay());
             if (Input.GetButtonUp("Fire1"))
@@ -66,12 +85,5 @@ namespace Assets.Scripts
                 yield return new WaitForSeconds(Weapons[CurrentWeaponIndex].FireDelay);
             }
         }
-
-        //void Shoot()
-        //{
-        //var bullet = Instantiate(Bullet, transform.position, transform.rotation);
-        //var rb = bullet.GetComponent<Rigidbody2D>();
-        //rb.AddForce(transform.up * bulletForce, ForceMode2D.Impulse);
-        //}
     }
 }

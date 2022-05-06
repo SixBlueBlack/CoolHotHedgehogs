@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
 
@@ -54,7 +50,7 @@ namespace Assets.Scripts
             for (var i = 0; i < Difficulty; i++)
             {
                 var ind = RandomGenerator.Range(0, availiableTiles.Count);
-                (var row, var col) = availiableTiles[ind];
+                var (row, col) = availiableTiles[ind];
                 availiableTiles.RemoveAt(ind);
 
                 Enemies[i] = new EnemyModel(row, col, null, 100, 20, 1.5f);

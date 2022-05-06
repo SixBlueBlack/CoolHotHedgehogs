@@ -14,6 +14,11 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
+            MoveCamera();
+        }
+
+        private void MoveCamera()
+        {
             var temp = transform.position;
             temp.x = player.position.x;
             temp.y = player.position.y;

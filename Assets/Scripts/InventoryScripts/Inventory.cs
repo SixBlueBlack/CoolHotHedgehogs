@@ -17,17 +17,24 @@ public class Inventory : MonoBehaviour
         Slots = InventorySlots.GetComponentsInChildren<InventorySlot>();
     }
 
-    void Update()
+    private void ManageInventoryUi()
     {
-        if (!Input.GetKeyDown(KeyCode.I) || Player.IsDead || PauseScript.IsPaused) return;
-        UpdateUi();
         InventoryPanel.SetActive(!IsOpen);
         DescriptionPanel.SetActive(false);
         IsOpen = !IsOpen;
         Time.timeScale = IsOpen ? 0 : 1;
     }
 
-    public void UpdateUi()
+    private static bool CheckOpenConditions() => !Input.GetKeyDown(KeyCode.I) || Player.IsDead || PauseScript.IsPaused;
+
+    void Update()
+    {
+        if (CheckOpenConditions()) return;
+        UpdateSlotsUi();
+        ManageInventoryUi();
+    }
+
+    public void UpdateSlotsUi()
     {
         for (var i = 0; i < Slots.Length; i++)
         {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -19,14 +17,9 @@ namespace Assets.Scripts
             SpriteRenderer.sprite = BulletModel.Sprite;
         }
 
-        void Update()
-        {
-
-        }
-
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if (hitInfo.name == "HorizontalWall(Clone)" || hitInfo.name == "VerticalWall(Clone)")
+            if (hitInfo.name == "UpperWall(Clone)" || hitInfo.name == "VerticalWall(Clone)" || hitInfo.name == "BottomWall(Clone)")
                 Destroy(gameObject);
             if (hitInfo.name == "Enemy(Clone)")
             {

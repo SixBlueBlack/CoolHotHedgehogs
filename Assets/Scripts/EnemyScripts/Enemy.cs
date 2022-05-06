@@ -25,20 +25,27 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            var distToPlayer = Vector2.Distance(transform.position, player.position);
-            if (isAttacking)
-            {
-                cooldownTimer -= Time.deltaTime;
-                if (cooldownTimer > 0) return;
-                cooldownTimer = cooldown;
-                player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
-            }
+            Attack();
+            Move();
+        }
 
+        private void Attack()
+        {
+            if (!isAttacking) return;
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer > 0) return;
+            cooldownTimer = cooldown;
+            player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
+        }
+
+        private void Move()
+        {
+            var distToPlayer = Vector2.Distance(transform.position, player.position);
             if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(player.position, transform.position);
             else LoseInterest();
         }
 
-        public void ShowAggression(Vector3 playerPos, Vector3 enemyPos)
+        private void ShowAggression(Vector3 playerPos, Vector3 enemyPos)
         {
             float xVelocity = 0;
             float yVelocity = 0;

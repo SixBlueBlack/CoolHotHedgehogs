@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +18,11 @@ namespace Assets.Scripts
 
         // Update is called once per frame
         void Update()
+        {
+            SetWeapon();
+        }
+
+        private void SetWeapon()
         {
             if (LastWeaponIndex != PlayerWeaponScript.CurrentWeaponIndex)
                 IconImage.sprite = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].Sprite;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
     public class Passage
     {
@@ -24,9 +18,7 @@ namespace Assets.Scripts
 
         public OuterWall GetAnotherWall(OuterWall wall)
         {
-            if (wall == StartWall)
-                return EndWall;
-            return StartWall;
+            return wall == StartWall ? EndWall : StartWall;
         }
     }
 }

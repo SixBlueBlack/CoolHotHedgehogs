@@ -9,6 +9,11 @@ public class PauseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckConditions();
+    }
+
+    private void CheckConditions()
+    {
         if (!Input.GetKeyDown(KeyCode.Escape) || Player.IsDead || Inventory.IsOpen) return;
         if (IsPaused)
             Resume();

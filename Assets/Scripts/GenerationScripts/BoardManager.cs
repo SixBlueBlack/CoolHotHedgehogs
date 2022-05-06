@@ -94,7 +94,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void SpawnEnemies(EnemyModel[] enemies, Vector3 offset)
+        private void SpawnEnemies(IEnumerable<EnemyModel> enemies, Vector3 offset)
         {
             foreach (var enemyModel in enemies)
             {

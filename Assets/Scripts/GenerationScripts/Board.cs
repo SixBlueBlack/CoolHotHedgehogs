@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
-using RandomGenerator = UnityEngine.Random;
 
 
 namespace Assets.Scripts
@@ -57,9 +52,7 @@ namespace Assets.Scripts
 
         private OuterWall GetWall(int length, Orientation.Position pos, Edge edge, Passage corridor)
         {
-            if (corridor == null)
-                return new OuterWall(length, pos, edge is {Actual : true }, PassageLength);
-            return new OuterWall(length, pos, corridor);
+            return corridor == null ? new OuterWall(length, pos, edge is {Actual : true }, PassageLength) : new OuterWall(length, pos, corridor);
         }
 
         private Vector3 UpdateOffset(Vector3 offset, int i, int j)
