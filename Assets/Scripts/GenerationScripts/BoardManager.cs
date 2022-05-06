@@ -60,7 +60,7 @@ namespace Assets.Scripts
                 else
                 {
                     Instantiate(verticalWallTIle, new Vector3(1, i, 0) + offset, Quaternion.identity);
-                    Instantiate(verticalWallTIle, new Vector3(0, i, 0) + offset, Quaternion.identity);
+                    Instantiate(verticalWallTIle, new Vector3(-1, i, 0) + offset, Quaternion.Euler(0, 0, 180));
                     Instantiate(floorTile, new Vector3(0, i, 0) + offset, Quaternion.identity);
                 }
         }
