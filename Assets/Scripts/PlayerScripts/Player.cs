@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        SetLastPose();
     }
 
     private void Move()
