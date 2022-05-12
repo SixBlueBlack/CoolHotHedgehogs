@@ -29,16 +29,34 @@ namespace Assets.Scripts
         public GameObject upperWallTile;
         public GameObject bottomWallTile;
         public GameObject verticalWallTIle;
-        public GameObject CornerTile;
+        public GameObject cornerTile;
 
         public GameObject EnemyPrefab;
 
-        private void GenerateCorners(Room room)
+        private void GenerateRoomCorners(Room room)
         {
-            Instantiate(CornerTile, room.Offset, Quaternion.identity);
-            Instantiate(CornerTile, new Vector3(0, room.Rows - 1, 0) + room.Offset, Quaternion.Euler(0, 0, 270));
-            Instantiate(CornerTile, new Vector3(room.Columns, room.Rows - 1, 0) + room.Offset, Quaternion.Euler(0, 0, 270));
-            Instantiate(CornerTile, new Vector3(room.Columns, 0, 0) + room.Offset, Quaternion.Euler(0, 0, 0));
+            Instantiate(cornerTile, room.Offset + new Vector3(-1, 0, 0), Quaternion.Euler(0, 0, 90));
+            Instantiate(cornerTile, new Vector3(-1, room.Rows - 1, 0) + room.Offset, Quaternion.Euler(0, 0, 180));
+            Instantiate(cornerTile, new Vector3(room.Columns, room.Rows - 1, 0) + room.Offset, Quaternion.Euler(0, 0, 270));
+            Instantiate(cornerTile, new Vector3(room.Columns, 0, 0) + room.Offset, Quaternion.Euler(0, 0, 0));
+        }
+
+        private void GenerateCorridorCorners(Passage corridor, Vector3 offset)
+        {
+            if (corridor.Direction == Orientation.Direction.Horizontal)
+            {
+                Instantiate(cornerTile, offset, Quaternion.identity);
+                Instantiate(cornerTile, new Vector3(0, 1, 0) + offset, Quaternion.Euler(0, 0, 270));
+                Instantiate(cornerTile, new Vector3(corridor.Length - 1, 0, 0) + offset, Quaternion.Euler(0, 0, 90));
+                Instantiate(cornerTile, new Vector3(corridor.Length - 1, 1, 0) + offset, Quaternion.Euler(0, 0, 180));
+            }
+            else
+            {
+                Instantiate(cornerTile, new Vector3(-1, 0, 0) + offset, Quaternion.Euler(0, 0, 180));
+                Instantiate(cornerTile, new Vector3(1, 0, 0) + offset, Quaternion.Euler(0, 0, 270));
+                Instantiate(cornerTile, new Vector3(-1, corridor.Length, 0) + offset, Quaternion.Euler(0, 0, 90));
+                Instantiate(cornerTile, new Vector3(1, corridor.Length, 0) + offset, Quaternion.identity);
+            }
         }
 
         private void GenerateRoomFloor(Room room)
@@ -50,17 +68,21 @@ namespace Assets.Scripts
 
         private void GenerateCorridor(Passage corridor, Vector3 offset)
         {
+            GenerateCorridorCorners(corridor, offset);
             for (var i = 0; i < corridor.Length; i++)
                 if (corridor.Direction == Orientation.Direction.Horizontal)
                 {
-                    Instantiate(upperWallTile, new Vector3(i, 1, 0) + offset, Quaternion.identity);
+                    Instantiate(upperWallTile, new Vector3(i, 1, 0) + offset, Quaternion.identity)
+                        .GetComponent<SpriteRenderer>().sortingOrder++;
                     Instantiate(bottomWallTile, new Vector3(i, 0, 0) + offset, Quaternion.identity);
                     Instantiate(floorTile, new Vector3(i, 0, 0) + offset, Quaternion.identity);
                 }
                 else
                 {
-                    Instantiate(verticalWallTIle, new Vector3(1, i, 0) + offset, Quaternion.identity);
-                    Instantiate(verticalWallTIle, new Vector3(-1, i, 0) + offset, Quaternion.Euler(0, 0, 180));
+                    Instantiate(verticalWallTIle, new Vector3(1, i, 0) + offset, Quaternion.identity)
+                        .GetComponent<SpriteRenderer>().sortingOrder--;
+                    Instantiate(verticalWallTIle, new Vector3(-1, i, 0) + offset, Quaternion.Euler(0, 0, 180)).
+                        GetComponent<SpriteRenderer>().sortingOrder--;
                     Instantiate(floorTile, new Vector3(0, i, 0) + offset, Quaternion.identity);
                 }
         }
@@ -89,6 +111,8 @@ namespace Assets.Scripts
                     Instantiate(bottomWallTile, wallVector + offset, Quaternion.identity);
                 else if (wall.Position == Orientation.Position.Upper)
                     Instantiate(upperWallTile, wallVector + offset, Quaternion.identity);
+                else if (wall.Position == Orientation.Position.Left)
+                    Instantiate(verticalWallTIle, wallVector + offset + new Vector3(-1, 0, 0), Quaternion.Euler(0, 0, 180));
                 else
                     Instantiate(verticalWallTIle, wallVector + offset, Quaternion.identity);
             }
@@ -106,7 +130,7 @@ namespace Assets.Scripts
 
         private void GenerateRoom(Room room)
         {
-            GenerateCorners(room);
+            GenerateRoomCorners(room);
 
             GenerateOuterWall(room.BottomWall, room.Offset);
             GenerateOuterWall(room.LeftWall, room.Offset + new Vector3(0, 0, 0));
