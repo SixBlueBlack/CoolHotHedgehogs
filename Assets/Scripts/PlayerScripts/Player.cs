@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public int MaxHealth { get; set; } = 100;
     public HealthBar HealthBar;
     private float acceleration = 0.2f;
+    private float speed = 2.5f;
     private float horizontalMove;
     private float verticalMove;
     private Rigidbody2D rigidBodyComponent;
@@ -41,17 +42,11 @@ public class Player : MonoBehaviour
         verticalMove = Input.GetAxisRaw("Vertical") * acceleration;
         Animator.SetFloat("MoveHorizontally", Mathf.Abs(horizontalMove * acceleration));
 
-        var targetVelocity = new Vector2(horizontalMove * 10f, verticalMove * 10f);
-        rigidBodyComponent.velocity = targetVelocity;
+        var targetVelocity = new Vector2(horizontalMove, verticalMove).normalized;
+        rigidBodyComponent.velocity = targetVelocity * speed;
 
-        if (horizontalMove < 0 && isRight)
-        {
+        if (horizontalMove < 0 && isRight || horizontalMove > 0 && !isRight)
             Rotate();
-        }
-        else if (horizontalMove > 0 && !isRight)
-        {
-            Rotate();
-        }
     }
 
     private void SetLastPose()
@@ -90,6 +85,6 @@ public class Player : MonoBehaviour
 
     public void Heal(int value)
     {
-        TakeDamage(Math.Max(-value, -(MaxHealth-CurrentHealth)));
+        TakeDamage(Math.Max(-value, -(MaxHealth - CurrentHealth)));
     }
 }

@@ -1799,7 +1799,9 @@ MonoBehaviour:
   bottomWallTile: {fileID: 4959904400377370409, guid: 4595cc594bf246240ac03f34eb903313, type: 3}
   verticalWallTIle: {fileID: 1795004034147117614, guid: 7f963ee9f29ef20479424a5e4682643a, type: 3}
   CornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
-  EnemyPrefab: {fileID: 2011540592088597783, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
+  EnemyPrefab: {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}
+  BulletSprites:
+  - {fileID: 21300000, guid: c8f34aee95b198141a59feaa61c8f177, type: 3}
 --- !u!4 &752127492
 Transform:
   m_ObjectHideFlags: 0

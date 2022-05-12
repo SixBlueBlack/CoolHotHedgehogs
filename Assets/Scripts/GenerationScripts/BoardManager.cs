@@ -32,6 +32,7 @@ namespace Assets.Scripts
         public GameObject CornerTile;
 
         public GameObject EnemyPrefab;
+        public Sprite[] BulletSprites;
 
         private void GenerateCorners(Room room)
         {
@@ -100,6 +101,8 @@ namespace Assets.Scripts
             {
                 var inst = Instantiate(EnemyPrefab, 
                     offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
+                enemyModel.WeaponModel =
+                    new WeaponModel(new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]), 1f, 20f, null);
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;
             }
         }

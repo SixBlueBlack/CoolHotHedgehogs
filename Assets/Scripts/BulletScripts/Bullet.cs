@@ -7,10 +7,10 @@ namespace Assets.Scripts
         public BulletModel BulletModel;
         public SpriteRenderer SpriteRenderer;
         public Rigidbody2D rb;
+        public bool IsEnemyBullet;
 
         void Start()
         {
-            BulletModel = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].BulletModel;
             rb.velocity = transform.right * BulletModel.Speed;
             transform.localScale = BulletModel.Size;
 
@@ -21,11 +21,22 @@ namespace Assets.Scripts
         {
             if (hitInfo.name == "UpperWall(Clone)" || hitInfo.name == "VerticalWall(Clone)" || hitInfo.name == "BottomWall(Clone)")
                 Destroy(gameObject);
-            if (hitInfo.name == "Enemy(Clone)")
+            switch (IsEnemyBullet)
             {
-                var enemy = hitInfo.GetComponent<Enemy>();
-                enemy.TakeDamage(BulletModel.Damage);
-                Destroy(gameObject);
+                case false when hitInfo.tag == "Enemy":
+                {
+                    var enemy = hitInfo.GetComponent<Enemy>();
+                    enemy.TakeDamage(BulletModel.Damage);
+                    Destroy(gameObject);
+                    break;
+                }
+                case true when hitInfo.tag == "Player":
+                {
+                    var player = hitInfo.GetComponent<Player>();
+                    player.TakeDamage(BulletModel.Damage);
+                    Destroy(gameObject);
+                    break;
+                }
             }
         }
     }
