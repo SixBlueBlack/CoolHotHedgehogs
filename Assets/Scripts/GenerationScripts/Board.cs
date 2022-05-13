@@ -50,9 +50,9 @@ namespace Assets.Scripts
             }
         }
 
-        private OuterWall GetWall(int length, Orientation.Position pos, Edge edge, Passage corridor)
+        private Wall GetWall(int length, Orientation.Position pos, Edge edge, Passage corridor)
         {
-            return corridor == null ? new OuterWall(length, pos, edge is {Actual : true }, PassageLength) : new OuterWall(length, pos, corridor);
+            return corridor == null ? new Wall(length, pos, edge is {Actual : true }, PassageLength) : new Wall(length, pos, corridor);
         }
 
         private Vector3 UpdateOffset(Vector3 offset, int i, int j)

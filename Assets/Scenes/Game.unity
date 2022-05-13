@@ -1798,7 +1798,7 @@ MonoBehaviour:
   upperWallTile: {fileID: 7322489105562290379, guid: 288f19ef742ee984a89e4d821ad41243, type: 3}
   bottomWallTile: {fileID: 4959904400377370409, guid: 4595cc594bf246240ac03f34eb903313, type: 3}
   verticalWallTIle: {fileID: 1795004034147117614, guid: 7f963ee9f29ef20479424a5e4682643a, type: 3}
-  CornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
+  cornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
   EnemyPrefab: {fileID: 2011540592088597783, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
 --- !u!4 &752127492
 Transform:

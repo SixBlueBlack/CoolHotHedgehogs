@@ -6,10 +6,10 @@ namespace Assets.Scripts
 {
     public class Room
     {
-        public OuterWall BottomWall { get; }
-        public OuterWall UpperWall { get; }
-        public OuterWall RightWall { get; }
-        public OuterWall LeftWall { get; }
+        public Wall BottomWall { get; }
+        public Wall UpperWall { get; }
+        public Wall RightWall { get; }
+        public Wall LeftWall { get; }
 
         public int Rows { get; }
         public int Columns { get; }
@@ -20,7 +20,7 @@ namespace Assets.Scripts
         public Vector3 Offset { get; set; }
 
         public Room(int rows, int columns, Vector3 offset, int difficulty,
-            OuterWall bottomWall, OuterWall upperWall, OuterWall rightWall, OuterWall leftWall)
+            Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall)
         {
             BottomWall = bottomWall;
             BottomWall.AttachedTo = this;

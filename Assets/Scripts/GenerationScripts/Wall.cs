@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class OuterWall
+    public class Wall
     {
         public int Length { get; }
         public Orientation.Position Position { get; }
@@ -11,7 +11,7 @@ namespace Assets.Scripts
         public Passage Corridor { get; }
         public Room AttachedTo { get; set; }
 
-        public OuterWall(int length, Orientation.Position position, bool hasPath, Range passageLength)
+        public Wall(int length, Orientation.Position position, bool hasPath, Range passageLength)
         {
             Length = length;
             HasPath = hasPath;
@@ -21,7 +21,7 @@ namespace Assets.Scripts
                 Corridor = new Passage(this, Orientation.ReverseDirection(Orientation.PositionToDirection(position)), passageLength);
         }
 
-        public OuterWall(int length, Orientation.Position position, Passage corridor)
+        public Wall(int length, Orientation.Position position, Passage corridor)
         {
             Length = length;
             HasPath = true;
@@ -47,7 +47,7 @@ namespace Assets.Scripts
                 var offset1 = AttachedTo.Offset.x;
                 var offset2 = other.AttachedTo.Offset.x;
                 var x = (int)(Math.Max(offset1, offset2) + 
-                    Math.Min(AttachedTo.Columns + offset1, other.AttachedTo.Columns + offset2)) / 2;
+                    Math.Min(AttachedTo.Columns + offset1, other.AttachedTo.Columns + offset2)) / 2; // Method
                 return new Vector3(x - AttachedTo.Offset.x, 0, 0);
             }
         }
