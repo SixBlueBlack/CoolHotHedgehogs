@@ -19,7 +19,7 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if (hitInfo.name == "UpperWall(Clone)" || hitInfo.name == "VerticalWall(Clone)" || hitInfo.name == "BottomWall(Clone)")
+            if (hitInfo.tag == "Wall")
                 Destroy(gameObject);
             switch (IsEnemyBullet)
             {

@@ -20,10 +20,9 @@ public class NonMovingEnemy : Enemy
 
     private void Rotate()
     {
-        var mousePosition = player.transform.position;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        var angle = Vector2.Angle(Vector2.right, mousePosition - transform.position);
-        transform.eulerAngles = new Vector3(0f, 0f, transform.position.y < mousePosition.y ? angle : -angle);
+        var playerPosition = player.position;
+        var angle = Vector2.Angle(Vector2.right, playerPosition - transform.position);
+        transform.eulerAngles = new Vector3(0f, 0f, transform.position.y < playerPosition.y ? angle : -angle);
     }
 
     void Shoot()
