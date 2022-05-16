@@ -1798,8 +1798,10 @@ MonoBehaviour:
   upperWallTile: {fileID: 7322489105562290379, guid: 288f19ef742ee984a89e4d821ad41243, type: 3}
   bottomWallTile: {fileID: 4959904400377370409, guid: 4595cc594bf246240ac03f34eb903313, type: 3}
   verticalWallTIle: {fileID: 1795004034147117614, guid: 7f963ee9f29ef20479424a5e4682643a, type: 3}
-  CornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
-  EnemyPrefab: {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}
+  cornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
+  EnemyPrefabs:
+  - {fileID: 7989081026838371829, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
+  - {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}
   BulletSprites:
   - {fileID: 21300000, guid: c8f34aee95b198141a59feaa61c8f177, type: 3}
 --- !u!4 &752127492
@@ -3249,7 +3251,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.015230715, y: -0.38298}
+  m_Offset: {x: 0.015230715, y: -0.31081456}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3260,7 +3262,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3015393, y: 0.28403997}
+  m_Size: {x: 0.3015393, y: 0.42837083}
   m_EdgeRadius: 0
 --- !u!114 &1130662049
 MonoBehaviour:
