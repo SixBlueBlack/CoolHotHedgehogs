@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
     public class EnemyModel
     {
-        public WeaponModel WeaponModel { get; }
+        public WeaponModel WeaponModel;
 
         public int Health { get; set; }
         public int Damage { get; }
         public float Speed { get; }
-        public float DistanceForAgr { get; } = 10;
+        public float DistanceForAgr => 10;
 
         public int Row { get; }
         public int Column { get; }

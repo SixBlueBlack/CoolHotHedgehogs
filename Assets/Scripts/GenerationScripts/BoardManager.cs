@@ -25,7 +25,14 @@ namespace Assets.Scripts
         public Range roomWallRange;
         public Range boardSizeRange;
 
-        public GameObject EnemyPrefab;
+        public GameObject floorTile;
+        public GameObject upperWallTile;
+        public GameObject bottomWallTile;
+        public GameObject verticalWallTIle;
+        public GameObject cornerTile;
+
+        public GameObject[] EnemyPrefabs;
+        public Sprite[] BulletSprites;
 
         public RoomGenerator RoomGeneratorScript;
         public DoorGenerator DoorGenerator;
@@ -48,8 +55,10 @@ namespace Assets.Scripts
         {
             foreach (var enemyModel in enemies)
             {
-                var inst = Instantiate(EnemyPrefab,
+                var inst = Instantiate(EnemyPrefabs[1], 
                     offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
+                enemyModel.WeaponModel =
+                    new WeaponModel(new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]), 1f, 20f, null);
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;
             }
         }
