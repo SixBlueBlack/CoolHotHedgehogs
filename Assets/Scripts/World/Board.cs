@@ -34,13 +34,13 @@ namespace Assets.Scripts
                     var v = vertices[(i, j)];
 
                     var leftWall = j == 0 ?
-                        GetWall(roomRows, Orientation.Position.Left, v.LeftEdge, null): 
-                        GetWall(roomRows, Orientation.Position.Left, v.LeftEdge, Field[i, j - 1].RightWall.Corridor);
+                        CreateWall(roomRows, Orientation.Position.Left, v.LeftEdge, null): 
+                        CreateWall(roomRows, Orientation.Position.Left, v.LeftEdge, Field[i, j - 1].RightWall.Corridor);
                     var bottomWall = i == 0 ?
-                        GetWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, null): 
-                        GetWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
-                    var upperWall = GetWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
-                    var rightWall = GetWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
+                        CreateWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, null): 
+                        CreateWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
+                    var upperWall = CreateWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
+                    var rightWall = CreateWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
                     var room = new Room(roomRows, roomColumns, offset, i + j,
                         bottomWall, upperWall, rightWall, leftWall);
@@ -50,9 +50,11 @@ namespace Assets.Scripts
             }
         }
 
-        private Wall GetWall(int length, Orientation.Position pos, Edge edge, Passage corridor)
+        private Wall CreateWall(int length, Orientation.Position pos, Edge edge, Passage corridor)
         {
-            return corridor == null ? new Wall(length, pos, edge is {Actual : true }, PassageLength) : new Wall(length, pos, corridor);
+            return corridor == null ?
+                new Wall(length, pos, edge is {Actual : true }, PassageLength) :
+                new Wall(length, pos, corridor);
         }
 
         private Vector3 UpdateOffset(Vector3 offset, int i, int j)

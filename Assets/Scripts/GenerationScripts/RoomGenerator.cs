@@ -45,8 +45,6 @@ namespace Assets.Scripts
             GenerateOuterWall(room.UpperWall, room.Offset + new Vector3(0, room.Rows - 1, 0));
 
             GenerateRoomFloor(room);
-
-            // SpawnEnemies(room.Enemies, room.Offset);
         }
     }
 }

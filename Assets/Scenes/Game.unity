@@ -1788,7 +1788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039247ae110644c4b95a8cfa4339f8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrefab: {fileID: 0}
+  BoardManager: {fileID: 0}
+  DoorTile: {fileID: 2166476719697740383, guid: 7d0fe51c025c72e45a42d64955061f27, type: 3}
 --- !u!4 &752127492
 Transform:
   m_ObjectHideFlags: 0
@@ -1820,20 +1821,16 @@ MonoBehaviour:
     maximum: 8
   roomWallRange:
     minimum: 9
-    maximum: 16
+    maximum: 10
   boardSizeRange:
     minimum: 5
     maximum: 5
-  floorTile: {fileID: 3590507212743726467, guid: 46e07dc78d8c58b479fa98d028002825, type: 3}
-  upperWallTile: {fileID: 7322489105562290379, guid: 288f19ef742ee984a89e4d821ad41243, type: 3}
-  bottomWallTile: {fileID: 4959904400377370409, guid: 4595cc594bf246240ac03f34eb903313, type: 3}
-  verticalWallTIle: {fileID: 1795004034147117614, guid: 7f963ee9f29ef20479424a5e4682643a, type: 3}
-  cornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
   EnemyPrefabs:
+  - {fileID: 7989081026838371829, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
   - {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}
-  BulletSprites: []
+  BulletSprites:
+  - {fileID: 21300000, guid: efec39be510e5474dafed73f757d234a, type: 3}
   RoomGeneratorScript: {fileID: 0}
-  DoorGenerator: {fileID: 0}
 --- !u!114 &752127494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,6 +1848,7 @@ MonoBehaviour:
   verticalWallTIle: {fileID: 1795004034147117614, guid: 7f963ee9f29ef20479424a5e4682643a, type: 3}
   floorTile: {fileID: 3590507212743726467, guid: 46e07dc78d8c58b479fa98d028002825, type: 3}
   CornerGeneratorScript: {fileID: 0}
+  DoorGenerator: {fileID: 0}
 --- !u!114 &752127495
 MonoBehaviour:
   m_ObjectHideFlags: 0

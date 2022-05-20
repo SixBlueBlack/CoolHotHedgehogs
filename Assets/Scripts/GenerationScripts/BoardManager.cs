@@ -25,28 +25,22 @@ namespace Assets.Scripts
         public Range roomWallRange;
         public Range boardSizeRange;
 
-        public GameObject floorTile;
-        public GameObject upperWallTile;
-        public GameObject bottomWallTile;
-        public GameObject verticalWallTIle;
-        public GameObject cornerTile;
-
         public GameObject[] EnemyPrefabs;
         public Sprite[] BulletSprites;
 
         public RoomGenerator RoomGeneratorScript;
-        public DoorGenerator DoorGenerator;
 
         public void Start()
         {
             RoomGeneratorScript = GetComponent<RoomGenerator>();
-            DoorGenerator = GetComponent<DoorGenerator>();
             var wallGeneratorScript = GetComponent<WallGenerator>();
             var cornerGeneratorScript = GetComponent<CornerGenerator>();
 
             RoomGeneratorScript.WallGeneratorScript = wallGeneratorScript;
             RoomGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
             wallGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
+            wallGeneratorScript.DoorGenerator = GetComponent<DoorGenerator>();
+            wallGeneratorScript.DoorGenerator.BoardManager = this;
 
             GenerateRooms(new Board(boardSizeRange, roomWallRange, passageLength));
         }
@@ -55,10 +49,14 @@ namespace Assets.Scripts
         {
             foreach (var enemyModel in enemies)
             {
-                var inst = Instantiate(EnemyPrefabs[1], 
+                var enemyIndex = RandomGenerator.Range(0, EnemyPrefabs.Length);
+                var enemyPrefab = EnemyPrefabs[enemyIndex];
+                var inst = Instantiate(enemyPrefab, 
                     offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
-                enemyModel.WeaponModel =
-                    new WeaponModel(new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]), 1f, 20f, null);
+
+                enemyModel.WeaponModel = new WeaponModel(
+                    new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]),
+                    1f, 20f, null);
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;
             }
         }

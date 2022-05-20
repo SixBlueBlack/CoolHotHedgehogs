@@ -9,18 +9,26 @@ namespace Assets.Scripts
 {
     public class DoorGenerator : MonoBehaviour
     {
-        public GameObject doorPrefab;
+        public BoardManager BoardManager;
+        public GameObject DoorTile;
 
         public void GenerateDoors(Passage corridor, Vector3 offset)
         {
-            Instantiate(doorPrefab, offset, Quaternion.identity)
-                .GetComponent<Door>().DoorModel = corridor.door1;
+            var angle = Quaternion.identity;
+            var position = offset + new Vector3(0, corridor.Length - 1, 0);
             if (corridor.Direction == Orientation.Direction.Horizontal)
-                Instantiate(doorPrefab, offset + new Vector3(corridor.Length, 0, 0), Quaternion.identity)
-                    .GetComponent<Door>().DoorModel = corridor.door2;
-            else
-                Instantiate(doorPrefab, offset + new Vector3(0, corridor.Length, 0), Quaternion.identity)
-                    .GetComponent<Door>().DoorModel = corridor.door2;
+            {
+                angle = Quaternion.Euler(new Vector3(0, 0, 270));
+                position = offset + new Vector3(corridor.Length - 1, 0, 0);
+            }
+
+            var door = Instantiate(DoorTile, offset, angle).GetComponent<Door>();
+            door.DoorModel = corridor.Door1;
+            door.EnemySpawner = BoardManager.SpawnEnemies;
+
+            door = Instantiate(DoorTile, position, angle).GetComponent<Door>();
+            door.DoorModel = corridor.Door2;
+            door.EnemySpawner = BoardManager.SpawnEnemies;
         }
     }
 }

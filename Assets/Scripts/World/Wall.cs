@@ -18,7 +18,8 @@ namespace Assets.Scripts
             Position = position;
 
             if (hasPath)
-                Corridor = new Passage(this, Orientation.ReverseDirection(Orientation.PositionToDirection(position)), passageLength);
+                Corridor = new Passage(this, Orientation.ReverseDirection(Orientation.PositionToDirection(position)),
+                    passageLength);
         }
 
         public Wall(int length, Orientation.Position position, Passage corridor)
@@ -28,10 +29,16 @@ namespace Assets.Scripts
             Position = position;
 
             Corridor = corridor;
-            Corridor.EndWall = this;
         }
 
-        public Vector3 GetPassageStart()
+        public void AttachRoom(Room room)
+        {
+            AttachedTo = room;
+            if (Corridor != null && Corridor.StartWall != this)
+                Corridor.AttachEndWall(this);
+        }
+
+        public Vector3 GetPassageStart() // Get it out of here!
         {
             var other = Corridor.GetAnotherWall(this);
             if (Corridor.Direction == Orientation.Direction.Horizontal)

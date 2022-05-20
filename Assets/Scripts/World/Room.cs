@@ -23,13 +23,13 @@ namespace Assets.Scripts
             Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall)
         {
             BottomWall = bottomWall;
-            BottomWall.AttachedTo = this;
+            BottomWall.AttachRoom(this);
             UpperWall = upperWall;
-            UpperWall.AttachedTo = this;
+            UpperWall.AttachRoom(this);
             RightWall = rightWall;
-            RightWall.AttachedTo = this;
+            RightWall.AttachRoom(this);
             LeftWall = leftWall;
-            LeftWall.AttachedTo = this;
+            LeftWall.AttachRoom(this);
 
             Offset = offset;
             Rows = rows;
@@ -42,16 +42,16 @@ namespace Assets.Scripts
 
         public void Fill()
         {
-            var availiableTiles = new List<(int, int)>();
+            var availableTiles = new List<(int, int)>();
             for (var i = 1; i < Rows - 1; i++)
                 for (var j = 1; j < Columns - 1; j++)
-                    availiableTiles.Add((i, j));
+                    availableTiles.Add((i, j));
 
             for (var i = 0; i < Difficulty; i++)
             {
-                var ind = RandomGenerator.Range(0, availiableTiles.Count);
-                var (row, col) = availiableTiles[ind];
-                availiableTiles.RemoveAt(ind);
+                var ind = RandomGenerator.Range(0, availableTiles.Count);
+                var (row, col) = availableTiles[ind];
+                availableTiles.RemoveAt(ind);
 
                 Enemies[i] = new EnemyModel(row, col, null, 100, 20, 1.5f);
             }

@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class NonMovingEnemy : Enemy
 {
-    // Start is called before the first frame update
     new void Start()
     {
         base.Start();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Rotate();

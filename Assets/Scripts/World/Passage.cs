@@ -4,11 +4,11 @@
     {
         public Orientation.Direction Direction { get; }
 
-        public Wall StartWall { get; }
+        public Wall StartWall { get; set; }
         public Wall EndWall { get; set; }
 
-        public DoorModel door1 { get; }
-        public DoorModel door2 { get; }
+        public DoorModel Door1 { get; set; }
+        public DoorModel Door2 { get; set; }
 
         public int Length { get; }
 
@@ -17,9 +17,13 @@
             StartWall = startWall;
             Direction = direction;
             Length = passageLength.Random;
+        }
 
-            door1 = new DoorModel(this);
-            door2 = new DoorModel(this);
+        public void AttachEndWall(Wall endWall)
+        {
+            EndWall = endWall;
+            Door1 = new DoorModel(this, StartWall.AttachedTo);
+            Door2 = new DoorModel(this, EndWall.AttachedTo);
         }
 
         public Wall GetAnotherWall(Wall wall)
@@ -29,7 +33,7 @@
 
         public DoorModel GetAnotherDoor(DoorModel door)
         {
-            return door == door1 ? door2 : door1;
+            return door == Door1 ? Door2 : Door1;
         }
     }
 }

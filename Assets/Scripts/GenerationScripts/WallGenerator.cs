@@ -15,10 +15,13 @@ namespace Assets.Scripts
         public GameObject floorTile;
 
         public CornerGenerator CornerGeneratorScript;
+        public DoorGenerator DoorGenerator;
 
         public void GenerateCorridor(Passage corridor, Vector3 offset)
         {
             CornerGeneratorScript.GenerateCorridorCorners(corridor, offset);
+            DoorGenerator.GenerateDoors(corridor, offset);
+
             for (var i = 0; i < corridor.Length; i++)
                 if (corridor.Direction == Orientation.Direction.Horizontal)
                 {
