@@ -1769,6 +1769,7 @@ GameObject:
   - component: {fileID: 752127491}
   - component: {fileID: 752127496}
   - component: {fileID: 752127495}
+  - component: {fileID: 752127497}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1864,6 +1865,7 @@ MonoBehaviour:
   floorTile: {fileID: 3590507212743726467, guid: 46e07dc78d8c58b479fa98d028002825, type: 3}
   WallGeneratorScript: {fileID: 0}
   CornerGeneratorScript: {fileID: 0}
+  DecorationGenerator: {fileID: 0}
 --- !u!114 &752127496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1877,6 +1879,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cornerTile: {fileID: 3469073991080766532, guid: 1d8ed0ac77585f5488a5b01bb9950a23, type: 3}
+--- !u!114 &752127497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752127490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14cd483838d4724f9ee55c556bb0118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TennisTablePrefab: {fileID: 8735358185864262047, guid: daf548991085bf94a9ab4c4868bfc6a4, type: 3}
 --- !u!1 &869945817
 GameObject:
   m_ObjectHideFlags: 0

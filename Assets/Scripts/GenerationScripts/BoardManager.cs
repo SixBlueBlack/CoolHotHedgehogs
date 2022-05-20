@@ -38,6 +38,8 @@ namespace Assets.Scripts
 
             RoomGeneratorScript.WallGeneratorScript = wallGeneratorScript;
             RoomGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
+            RoomGeneratorScript.DecorationGenerator = GetComponent<DecorationGenerator>();
+
             wallGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
             wallGeneratorScript.DoorGenerator = GetComponent<DoorGenerator>();
             wallGeneratorScript.DoorGenerator.BoardManager = this;

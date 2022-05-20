@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using RandomGenerator = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -13,6 +14,7 @@ namespace Assets.Scripts
 
         public WallGenerator WallGeneratorScript;
         public CornerGenerator CornerGeneratorScript;
+        public DecorationGenerator DecorationGenerator;
 
         public void GenerateRoomFloor(Room room)
         {
@@ -43,6 +45,8 @@ namespace Assets.Scripts
             GenerateOuterWall(room.LeftWall, room.Offset + new Vector3(0, 0, 0));
             GenerateOuterWall(room.RightWall, room.Offset + new Vector3(room.Columns, 0, 0));
             GenerateOuterWall(room.UpperWall, room.Offset + new Vector3(0, room.Rows - 1, 0));
+
+            DecorationGenerator.GenerateDecoration(room);
 
             GenerateRoomFloor(room);
         }

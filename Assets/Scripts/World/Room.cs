@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
 
@@ -6,6 +7,11 @@ namespace Assets.Scripts
 {
     public class Room
     {
+        public enum RoomType
+        {
+            Tennis
+        }
+
         public Wall BottomWall { get; }
         public Wall UpperWall { get; }
         public Wall RightWall { get; }
@@ -17,9 +23,11 @@ namespace Assets.Scripts
         public int Difficulty { get; }
         public EnemyModel[] Enemies { get; }
 
-        public Vector3 Offset { get; set; }
+        public RoomType Type { get; }
 
-        public Room(int rows, int columns, Vector3 offset, int difficulty,
+        public Vector3 Offset { get; }
+
+        public Room(int rows, int columns, Vector3 offset, int difficulty, RoomType type,
             Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall)
         {
             BottomWall = bottomWall;
@@ -36,8 +44,15 @@ namespace Assets.Scripts
             Columns = columns;
             Difficulty = difficulty;
             Enemies = new EnemyModel[Difficulty];
+            Type = type;
 
             Fill();
+        }
+
+        public static RoomType GetRandomRoomType()
+        {
+            var values = Enum.GetValues(typeof(RoomType));
+            return (RoomType)values.GetValue(RandomGenerator.Range(0, values.Length));
         }
 
         public void Fill()
