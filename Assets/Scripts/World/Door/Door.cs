@@ -11,14 +11,34 @@ namespace Assets.Scripts
     {
         public Action<IEnumerable<EnemyModel>, Vector3> EnemySpawner;
         public DoorModel DoorModel { get; set; }
+        private BoxCollider2D Collider;
 
-        private void OnTriggerExit2D(Collider2D hitInfo)
+        private void Start()
         {
-            if (hitInfo.CompareTag("Player") && !DoorModel.Disabled)
+            Collider = this.GetComponent<BoxCollider2D>();
+        }
+
+        private void OnCollisionEnter2D()
+        {
+            if (DoorModel.AttachedToRoom.AllEnemiesDead)
+                Collider.isTrigger = true;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!DoorModel.AttachedToRoom.AllEnemiesDead)
+                Collider.isTrigger = false;
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player") && !DoorModel.Disabled)
             {
-                DoorModel.Open = true;
+                DoorModel.Passed = true;
+                Collider.isTrigger = false;
+
                 var anotherDoor = DoorModel.AttachedToPassage.GetAnotherDoor(DoorModel);
-                if (anotherDoor.Open)
+                if (anotherDoor.Passed)
                 {
                     EnemySpawner(DoorModel.AttachedToRoom.Enemies, DoorModel.AttachedToRoom.Offset);
                     DoorModel.Disabled = true;

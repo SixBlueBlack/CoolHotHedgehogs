@@ -38,7 +38,7 @@ namespace Assets.Scripts
 
             RoomGeneratorScript.WallGeneratorScript = wallGeneratorScript;
             RoomGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
-            RoomGeneratorScript.DecorationGenerator = GetComponent<DecorationGenerator>();
+            RoomGeneratorScript.DecorationGenerator = GetComponent<DecorationGenerator>(); // Transfer this to the start of RoomGen
 
             wallGeneratorScript.CornerGeneratorScript = cornerGeneratorScript;
             wallGeneratorScript.DoorGenerator = GetComponent<DoorGenerator>();
@@ -56,6 +56,7 @@ namespace Assets.Scripts
                 var inst = Instantiate(enemyPrefab, 
                     offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
 
+                enemyModel.IsSpawned = true;
                 enemyModel.WeaponModel = new WeaponModel(
                     new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]),
                     1f, 20f, null);

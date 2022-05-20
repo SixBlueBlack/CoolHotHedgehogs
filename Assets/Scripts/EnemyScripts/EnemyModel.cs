@@ -7,7 +7,9 @@
         public int Health { get; set; }
         public int Damage { get; }
         public float Speed { get; }
-        public float DistanceForAgr => 10;
+        public bool IsDead { get => Health <= 0; }
+        public bool IsSpawned { get; set; } = false;
+        public float DistanceForAgr = 10;
 
         public int Row { get; }
         public int Column { get; }

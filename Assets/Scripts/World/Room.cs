@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts
 
         public int Difficulty { get; }
         public EnemyModel[] Enemies { get; }
+        public bool AllEnemiesDead { get => Enemies.All(enemy => enemy.IsDead || !enemy.IsSpawned); }
 
         public RoomType Type { get; }
 
