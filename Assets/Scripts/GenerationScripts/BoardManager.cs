@@ -28,7 +28,7 @@ namespace Assets.Scripts
         public GameObject[] EnemyPrefabs;
         public Sprite[] BulletSprites;
 
-        public RoomGenerator RoomGeneratorScript;
+        internal RoomGenerator RoomGeneratorScript;
 
         public void Start()
         {
