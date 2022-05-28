@@ -1893,7 +1893,21 @@ MonoBehaviour:
   TennisTablePrefabs:
   - {fileID: 8735358185864262047, guid: daf548991085bf94a9ab4c4868bfc6a4, type: 3}
   - {fileID: 6303278354503184767, guid: e1a864efe52d6b240a87e71001a669ef, type: 3}
-  PlantPrefabs: []
+  PlantPrefabs:
+  - {fileID: 996826457439509030, guid: a65d1d44afb75784cbc8e4e35dcf6cec, type: 3}
+  - {fileID: 4802617533356955925, guid: efc53d8ae9b944f4bb07e13f81658de2, type: 3}
+  VendingMachinePrefabs:
+  - {fileID: 5818690331926167471, guid: 64864a24b69a4f74b969fbd576c14d61, type: 3}
+  - {fileID: 2311117797046709648, guid: 86cd6d21743d26c4dbec3965ad8c94e2, type: 3}
+  - {fileID: 3990382774489636830, guid: ae93e8c02d3424b489a984cf2c64ed80, type: 3}
+  - {fileID: 5740027778239080688, guid: 58e4b57240668aa4b9bc6637da22b91a, type: 3}
+  OtherPrefabs:
+  - {fileID: 8253173743680237879, guid: ef404b92fc49dec4cbb61040817267a0, type: 3}
+  - {fileID: 25657863308807765, guid: b5f101b3cd65b5247920e7c70ef6e0fd, type: 3}
+  - {fileID: 7659986132494719867, guid: c16656d8d12ccb6499ad0b80d87c9bf9, type: 3}
+  OnWallPrefabs:
+  - {fileID: 5967681458727241950, guid: 95b8c3681077f0346a035355c9f1831c, type: 3}
+  - {fileID: 3594099316230655298, guid: 922c11680e4ee7c46977ab8851beaab1, type: 3}
 --- !u!1 &869945817
 GameObject:
   m_ObjectHideFlags: 0

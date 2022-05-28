@@ -52,14 +52,17 @@ TagManager:
   - name: Wall
     uniqueID: 4023213051
     locked: 0
+  - name: DecorationUnderPlayer
+    uniqueID: 1838846097
+    locked: 0
   - name: Enemy
     uniqueID: 3758944313
     locked: 0
-  - name: Decoration
-    uniqueID: 1838846097
-    locked: 0
   - name: Player
     uniqueID: 2858505819
+    locked: 0
+  - name: DecorationAbovePlayer
+    uniqueID: 805648993
     locked: 0
   - name: BottomWall
     uniqueID: 956974959
