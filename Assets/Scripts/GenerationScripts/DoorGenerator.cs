@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -14,20 +9,22 @@ namespace Assets.Scripts
 
         public void GenerateDoors(Passage corridor, Vector3 offset)
         {
-            var angle = Quaternion.identity;
+            var isVertical = true;
             var position = offset + new Vector3(0, corridor.Length - 1, 0);
             if (corridor.Direction == Orientation.Direction.Horizontal)
             {
-                angle = Quaternion.Euler(new Vector3(0, 0, 270));
+                isVertical = false;
                 position = offset + new Vector3(corridor.Length - 1, 0, 0);
             }
 
-            var door = Instantiate(DoorTile, offset, angle).GetComponent<Door>();
+            var door = Instantiate(DoorTile, offset, Quaternion.identity).GetComponent<Door>();
             door.DoorModel = corridor.Door1;
+            door.DoorModel.IsVertical = isVertical;
             door.EnemySpawner = BoardManager.SpawnEnemies;
 
-            door = Instantiate(DoorTile, position, angle).GetComponent<Door>();
+            door = Instantiate(DoorTile, position, Quaternion.identity).GetComponent<Door>();
             door.DoorModel = corridor.Door2;
+            door.DoorModel.IsVertical = isVertical;
             door.EnemySpawner = BoardManager.SpawnEnemies;
         }
     }

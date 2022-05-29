@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
     public class DoorModel
     {
         public bool Passed { get; set; } = false;
         public bool Disabled { get; set; } = false;
+        public bool IsVertical { get; set; }
         public Passage AttachedToPassage { get; set; }
         public Room AttachedToRoom { get; set; }
 
