@@ -7,6 +7,7 @@ namespace Assets.Scripts
     {
         public int Length { get; }
         public Orientation.Position Position { get; }
+        public Orientation.Direction Direction { get; }
         public bool HasPath { get; }
         public Passage Corridor { get; }
         public Room AttachedTo { get; set; }
@@ -16,6 +17,7 @@ namespace Assets.Scripts
             Length = length;
             HasPath = hasPath;
             Position = position;
+            Direction = Orientation.PositionToDirection(position);
 
             if (hasPath)
                 Corridor = new Passage(this, Orientation.ReverseDirection(Orientation.PositionToDirection(position)),
@@ -38,7 +40,7 @@ namespace Assets.Scripts
                 Corridor.AttachEndWall(this);
         }
 
-        public Vector3 GetPassageStart() // Get it out of here!
+        public Vector3 GetPassageStart()
         {
             var other = Corridor.GetAnotherWall(this);
             if (Corridor.Direction == Orientation.Direction.Horizontal)
@@ -57,6 +59,16 @@ namespace Assets.Scripts
                     Math.Min(AttachedTo.Columns + offset1, other.AttachedTo.Columns + offset2)) / 2; // Method
                 return new Vector3(x - AttachedTo.Offset.x, 0, 0);
             }
+        }
+
+        public int[] GetTwoPointsNotTouchingPassage(int start, int end)
+        {
+            if (HasPath)
+                if (Direction == Orientation.Direction.Horizontal)
+                    return Utils.RandomRangeWithRestrictions(start, end, new int[1] { (int)GetPassageStart().x });
+                else
+                    return Utils.RandomRangeWithRestrictions(start, end, new int[1] { (int)GetPassageStart().y });
+            return Utils.RandomRangeWithRestrictions(start, end, new int[1] { (start + end) / 2 });
         }
     }
 }
