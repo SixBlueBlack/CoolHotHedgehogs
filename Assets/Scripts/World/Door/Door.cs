@@ -13,7 +13,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            Collider = this.GetComponent<BoxCollider2D>();
+            Collider = GetComponent<BoxCollider2D>();
             Animator.SetBool("IsVertical", DoorModel.IsVertical);
         }
 

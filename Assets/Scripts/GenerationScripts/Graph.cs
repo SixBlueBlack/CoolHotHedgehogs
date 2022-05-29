@@ -15,7 +15,7 @@ namespace Assets.Scripts
         public Edge LeftEdge { get; set; }
         public Edge[] Edges
         {
-            get { return new Edge[4] { UpperEdge, BottomEdge, RightEdge, LeftEdge }; }
+            get { return new[] { UpperEdge, BottomEdge, RightEdge, LeftEdge }; }
         }
 
         public Edge CheapestConnection { get; set; } = null;
