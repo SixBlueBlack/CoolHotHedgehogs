@@ -79,9 +79,14 @@ namespace Assets.Scripts
         {
             for (var i = 0; i < Difficulty; i++)
             {
-                var ind = RandomGenerator.Range(0, availableTiles.Count);
-                var (col, row) = availableTiles[ind];
-                availableTiles.RemoveAt(ind);
+                var row = RandomGenerator.Range(2, Rows - 2);
+                var col = RandomGenerator.Range(2, Columns - 2);
+                while (!availableTiles.Contains((col, row)))
+                {
+                    row = RandomGenerator.Range(2, Rows - 2);
+                    col = RandomGenerator.Range(2, Columns - 2);
+                }
+                availableTiles.Remove((col, row));
 
                 Enemies[i] = new EnemyModel(row, col, null, 100, 20, 1.5f);
             }
