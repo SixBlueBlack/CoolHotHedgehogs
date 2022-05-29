@@ -18,6 +18,7 @@ namespace Assets.Scripts
             VendingMachine,
             TennisTable,
             Desk,
+            BlackBoard,
             Other
         }
 

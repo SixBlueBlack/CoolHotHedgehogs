@@ -22,7 +22,7 @@ namespace Assets.Scripts
 
         public List<Decoration> Decorations { get; } = new List<Decoration>();
 
-        public RoomType.TypeName TypeName { get; set; } = RoomType.GetRandomRoomType();
+        public RoomType.TypeName TypeName { get; set; } = Utils.GetRandomFromEnum<RoomType.TypeName>();
         public RoomType Type { get; }
 
         public Vector3 Offset { get; }
@@ -46,7 +46,8 @@ namespace Assets.Scripts
             Enemies = new EnemyModel[Difficulty];
 
             if (TypeName == RoomType.TypeName.Classroom)
-                Type = new Classroom();
+                Type = new Classroom(this, Utils.GetRandomFromEnum<Classroom.AllColors>(),
+                    Utils.GetRandomFromEnum<Orientation.Position>());
             if (TypeName == RoomType.TypeName.Tennis)
                 Type = new Tennis(this);
         }
@@ -70,6 +71,7 @@ namespace Assets.Scripts
                     availableTiles.Add((i, j));
 
             FillWithGeneralDecors(availableTiles);
+            Type.Fill(availableTiles);
             FillWithEnemies(availableTiles);
         }
 

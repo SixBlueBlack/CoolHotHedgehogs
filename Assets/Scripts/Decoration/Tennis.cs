@@ -9,10 +9,13 @@ namespace Assets.Scripts
 {
     public class Tennis : RoomType
     {
-        public Tennis(Room room)
+        public Tennis(Room room) : base(room) { }
+
+        public override void Fill(List<(int, int)> availableTiles)
         {
-            Decorations.Add(new Decoration(new Vector3(room.Columns / 2, room.Rows / 2, 0) + room.Offset,
+            Decorations.Add(new Decoration(new Vector3(Room.Columns / 2, Room.Rows / 2, 0) + Room.Offset,
                 Decoration.DecorationType.TennisTable));
+            availableTiles.Remove((Room.Columns / 2, Room.Rows / 2));
         }
     }
 }

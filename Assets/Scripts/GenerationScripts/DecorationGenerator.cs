@@ -15,6 +15,16 @@ namespace Assets.Scripts
 
         public GameObject[] TennisTablePrefabs;
 
+        public GameObject[] UpBrownDeskPrefabs;
+        public GameObject[] DownBrownDeskPrefabs;
+        public GameObject[] LeftBrownDeskPrefabs;
+        public GameObject[] RightBrownDeskPrefabs;
+        public GameObject[] UpGreenDeskPrefabs;
+        public GameObject[] DownGreenDeskPrefabs;
+        public GameObject[] LeftGreenDeskPrefabs;
+        public GameObject[] RightGreenDeskPrefabs;
+        public GameObject BlackboardPrefab;
+
         public GameObject[] PlantPrefabs;
         public GameObject[] VendingMachinePrefabs;
         public GameObject[] OtherPrefabs;
@@ -24,6 +34,8 @@ namespace Assets.Scripts
         {
             if (room.TypeName == RoomType.TypeName.Tennis)
                 GenerateTennisSet((Tennis)room.Type);
+            if (room.TypeName == RoomType.TypeName.Classroom)
+                GenerateClassroom((Classroom)room.Type);
             GenerateGeneralDecoration(room);
         }
 
@@ -76,6 +88,56 @@ namespace Assets.Scripts
             foreach (var decor in tennisSet.Decorations)
                 Instantiate(TennisTablePrefabs[RandomGenerator.Range(0, TennisTablePrefabs.Length)],
                     decor.Coordinate, Quaternion.identity);
+        }
+
+        private void GenerateClassroom(Classroom classroom)
+        {
+            var prefabSet = UpBrownDeskPrefabs;
+            if (classroom.Color == Classroom.AllColors.Brown)
+            {
+                switch (classroom.Position)
+                {
+                    case Orientation.Position.Up:
+                        prefabSet = UpBrownDeskPrefabs;
+                        break;
+                    case Orientation.Position.Down:
+                        prefabSet = DownBrownDeskPrefabs;
+                        break;
+                    case Orientation.Position.Left:
+                        prefabSet = LeftBrownDeskPrefabs;
+                        break;
+                    case Orientation.Position.Right:
+                        prefabSet = RightBrownDeskPrefabs;
+                        break;
+                }
+            }
+            if (classroom.Color == Classroom.AllColors.Green)
+            {
+                switch (classroom.Position)
+                {
+                    case Orientation.Position.Up:
+                        prefabSet = UpGreenDeskPrefabs;
+                        break;
+                    case Orientation.Position.Down:
+                        prefabSet = DownGreenDeskPrefabs;
+                        break;
+                    case Orientation.Position.Left:
+                        prefabSet = LeftGreenDeskPrefabs;
+                        break;
+                    case Orientation.Position.Right:
+                        prefabSet = RightGreenDeskPrefabs;
+                        break;
+                }
+            }
+
+            foreach (var decor in classroom.Decorations)
+            {
+                if (decor.Type == Decoration.DecorationType.Desk)
+                    Instantiate(prefabSet[RandomGenerator.Range(0, prefabSet.Length)], decor.Coordinate,
+                        Quaternion.identity);
+                if (decor.Type == Decoration.DecorationType.BlackBoard)
+                    Instantiate(BlackboardPrefab, decor.Coordinate, Quaternion.identity);
+            }
         }
     }
 }

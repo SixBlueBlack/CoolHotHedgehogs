@@ -38,9 +38,9 @@ namespace Assets.Scripts
                         CreateWall(roomRows, Orientation.Position.Left, v.LeftEdge, null): 
                         CreateWall(roomRows, Orientation.Position.Left, v.LeftEdge, Field[i, j - 1].RightWall.Corridor);
                     var bottomWall = i == 0 ?
-                        CreateWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, null): 
-                        CreateWall(roomColumns, Orientation.Position.Bottom, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
-                    var upperWall = CreateWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
+                        CreateWall(roomColumns, Orientation.Position.Down, v.BottomEdge, null): 
+                        CreateWall(roomColumns, Orientation.Position.Down, v.BottomEdge, Field[i - 1, j].UpperWall.Corridor);
+                    var upperWall = CreateWall(roomColumns, Orientation.Position.Up, v.UpperEdge, null);
                     var rightWall = CreateWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
                     var room = new Room(roomRows, roomColumns, offset, i + j,

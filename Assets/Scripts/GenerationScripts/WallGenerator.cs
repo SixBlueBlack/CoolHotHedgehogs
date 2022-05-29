@@ -51,9 +51,9 @@ namespace Assets.Scripts
                 if (wall.HasPath && wallVector == passageStartVector)
                     continue;
 
-                if (wall.Position == Orientation.Position.Bottom)
+                if (wall.Position == Orientation.Position.Down)
                     Instantiate(bottomWallTile, wallVector + offset, Quaternion.identity);
-                else if (wall.Position == Orientation.Position.Upper)
+                else if (wall.Position == Orientation.Position.Up)
                     Instantiate(upperWallTile, wallVector + offset, Quaternion.identity);
                 else if (wall.Position == Orientation.Position.Left)
                     Instantiate(verticalWallTIle, wallVector + offset + new Vector3(-1, 0, 0), Quaternion.Euler(0, 0, 180));

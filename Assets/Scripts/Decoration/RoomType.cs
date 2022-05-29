@@ -7,9 +7,10 @@ using RandomGenerator = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
-    public class RoomType
+    public abstract class RoomType
     {
-        public List<Decoration> Decorations { get; set; } = new List<Decoration>();
+        public List<Decoration> Decorations { get; }
+        public Room Room { get; }
 
         public enum TypeName
         {
@@ -17,10 +18,12 @@ namespace Assets.Scripts
             Classroom
         }
 
-        public static TypeName GetRandomRoomType()
+        public RoomType(Room room)
         {
-            var values = Enum.GetValues(typeof(TypeName));
-            return (TypeName)values.GetValue(RandomGenerator.Range(0, values.Length));
+            Room = room;
+            Decorations = new List<Decoration>();
         }
+
+        public abstract void Fill(List<(int, int)> availableTiles);
     }
 }

@@ -19,5 +19,11 @@ namespace Assets.Scripts
             }
             return intervals;
         }
+
+        public static T GetRandomFromEnum<T>()
+        {
+            var values = Enum.GetValues(typeof(T));
+            return (T)values.GetValue(RandomGenerator.Range(0, values.Length));
+        }
     }
 }
