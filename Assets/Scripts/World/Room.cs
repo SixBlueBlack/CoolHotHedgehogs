@@ -8,11 +8,6 @@ namespace Assets.Scripts
 {
     public class Room
     {
-        public enum RoomType
-        {
-            Tennis
-        }
-
         public Wall BottomWall { get; }
         public Wall UpperWall { get; }
         public Wall RightWall { get; }
@@ -27,11 +22,12 @@ namespace Assets.Scripts
 
         public List<Decoration> Decorations { get; } = new List<Decoration>();
 
+        public RoomType.TypeName TypeName { get; set; } = RoomType.GetRandomRoomType();
         public RoomType Type { get; }
 
         public Vector3 Offset { get; }
 
-        public Room(int rows, int columns, Vector3 offset, int difficulty, RoomType type,
+        public Room(int rows, int columns, Vector3 offset, int difficulty,
             Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall)
         {
             BottomWall = bottomWall;
@@ -48,7 +44,11 @@ namespace Assets.Scripts
             Columns = columns;
             Difficulty = difficulty;
             Enemies = new EnemyModel[Difficulty];
-            Type = type;
+
+            if (TypeName == RoomType.TypeName.Classroom)
+                Type = new Classroom();
+            if (TypeName == RoomType.TypeName.Tennis)
+                Type = new Tennis(this);
         }
 
         public List<Decoration> GetAllDecorationsOfType(Decoration.DecorationType type)
@@ -60,12 +60,6 @@ namespace Assets.Scripts
                     result.Add(decor);
             }
             return result;
-        }
-
-        public static RoomType GetRandomRoomType()
-        {
-            var values = Enum.GetValues(typeof(RoomType));
-            return (RoomType)values.GetValue(RandomGenerator.Range(0, values.Length));
         }
 
         public void Fill()

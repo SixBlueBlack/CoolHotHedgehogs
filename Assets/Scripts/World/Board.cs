@@ -43,7 +43,7 @@ namespace Assets.Scripts
                     var upperWall = CreateWall(roomColumns, Orientation.Position.Upper, v.UpperEdge, null);
                     var rightWall = CreateWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
-                    var room = new Room(roomRows, roomColumns, offset, i + j, Room.GetRandomRoomType(),
+                    var room = new Room(roomRows, roomColumns, offset, i + j,
                         bottomWall, upperWall, rightWall, leftWall);
 
                     Field[i, j] = room;

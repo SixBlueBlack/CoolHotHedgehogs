@@ -11,7 +11,6 @@ namespace Assets.Scripts
     public class DecorationGenerator : MonoBehaviour
     {
         private double VendingMachinesThreshold { get; set; } = 0.3;
-        private double TennisSetThreshold { get; set; } = 0.2;
         private double OtherDecorThreshold { get; set; } = 0.5;
 
         public GameObject[] TennisTablePrefabs;
@@ -23,8 +22,8 @@ namespace Assets.Scripts
 
         public void GenerateDecoration(Room room)
         {
-            if (room.Type == Room.RoomType.Tennis)
-                GenerateTennisSet(room);
+            if (room.TypeName == RoomType.TypeName.Tennis)
+                GenerateTennisSet((Tennis)room.Type);
             GenerateGeneralDecoration(room);
         }
 
@@ -72,12 +71,11 @@ namespace Assets.Scripts
                         decor.Coordinate, Quaternion.identity);
         }
 
-        private void GenerateTennisSet(Room room)
+        private void GenerateTennisSet(Tennis tennisSet)
         {
-            var ind = RandomGenerator.Range(0, TennisTablePrefabs.Length);
-            if (RandomGenerator.value >= TennisSetThreshold)
-                Instantiate(TennisTablePrefabs[ind],
-                    new Vector3(room.Columns / 2, room.Rows / 2, 0) + room.Offset, Quaternion.identity);
+            foreach (var decor in tennisSet.Decorations)
+                Instantiate(TennisTablePrefabs[RandomGenerator.Range(0, TennisTablePrefabs.Length)],
+                    decor.Coordinate, Quaternion.identity);
         }
     }
 }

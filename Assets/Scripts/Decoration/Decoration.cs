@@ -17,6 +17,7 @@ namespace Assets.Scripts
             Plant,
             VendingMachine,
             TennisTable,
+            Desk,
             Other
         }
 
