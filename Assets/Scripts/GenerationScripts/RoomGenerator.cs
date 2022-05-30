@@ -6,7 +6,7 @@ namespace Assets.Scripts
     {
         public GameObject floorTile;
 
-        public WallGenerator WallGeneratorScript;
+        public WallGenerator WallGeneratorScript; // Internal
         public CornerGenerator CornerGeneratorScript;
         public DecorationGenerator DecorationGenerator;
 

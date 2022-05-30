@@ -4,8 +4,8 @@
     {
         public enum Position
         {
-            Upper,
-            Bottom,
+            Up,
+            Down,
             Right,
             Left
         }
@@ -17,7 +17,7 @@
 
         public static Direction PositionToDirection(Position pos)
         {
-            return pos == Position.Bottom || pos == Position.Upper ? Direction.Horizontal : Direction.Vertical;
+            return pos == Position.Down || pos == Position.Up ? Direction.Horizontal : Direction.Vertical;
         }
 
         public static Direction ReverseDirection(Direction dir)
