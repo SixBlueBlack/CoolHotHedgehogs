@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -36,12 +32,10 @@ namespace Assets.Scripts
                 }
             }
 
-            if (Position == Orientation.Position.Up)
-            {
-                Decorations.Add(new Decoration(Room.Offset + new Vector3(Room.Columns / 4 + 2, (float)(Room.Rows / 5 + 5.5)),
-                    Decoration.DecorationType.BlackBoard));
-                availableTiles.Remove((Room.Columns / 4 + 2, Room.Rows / 5 + 5));
-            }
+            if (Position != Orientation.Position.Up) return;
+            Decorations.Add(new Decoration(Room.Offset + new Vector3(Room.Columns / 4 + 2, (float)(Room.Rows / 5 + 5.5)),
+                Decoration.DecorationType.BlackBoard));
+            availableTiles.Remove((Room.Columns / 4 + 2, Room.Rows / 5 + 5));
         }
     }
 }

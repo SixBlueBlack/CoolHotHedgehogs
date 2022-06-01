@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
@@ -18,7 +17,7 @@ namespace Assets.Scripts
 
         public int Difficulty { get; }
         public EnemyModel[] Enemies { get; }
-        public bool AllEnemiesDead { get => Enemies.All(enemy => enemy.IsDead || !enemy.IsSpawned); }
+        public bool AllEnemiesDead => Enemies.All(enemy => enemy.IsDead || !enemy.IsSpawned);
 
         public List<Decoration> Decorations { get; } = new List<Decoration>();
 
@@ -45,22 +44,18 @@ namespace Assets.Scripts
             Difficulty = difficulty;
             Enemies = new EnemyModel[Difficulty];
 
-            if (TypeName == RoomType.TypeName.Classroom)
-                Type = new Classroom(this, Utils.GetRandomFromEnum<Classroom.AllColors>(),
-                    Utils.GetRandomFromEnum<Orientation.Position>());
-            if (TypeName == RoomType.TypeName.Tennis)
-                Type = new Tennis(this);
+            Type = TypeName switch
+            {
+                RoomType.TypeName.Classroom => new Classroom(this, Utils.GetRandomFromEnum<Classroom.AllColors>(),
+                    Utils.GetRandomFromEnum<Orientation.Position>()),
+                RoomType.TypeName.Tennis => new Tennis(this),
+                _ => Type
+            };
         }
 
         public List<Decoration> GetAllDecorationsOfType(Decoration.DecorationType type)
         {
-            var result = new List<Decoration>();
-            foreach (var decor in Decorations)
-            {
-                if (decor.Type == type)
-                    result.Add(decor);
-            }
-            return result;
+            return Decorations.Where(decor => decor.Type == type).ToList();
         }
 
         public void Fill()
@@ -75,7 +70,7 @@ namespace Assets.Scripts
             FillWithEnemies(availableTiles);
         }
 
-        private void FillWithEnemies(List<(int, int)> availableTiles)
+        private void FillWithEnemies(ICollection<(int, int)> availableTiles)
         {
             for (var i = 0; i < Difficulty; i++)
             {
@@ -92,7 +87,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void FillWithOtherDecors(List<(int, int)> availableTiles)
+        private void FillWithOtherDecors(ICollection<(int, int)> availableTiles)
         {
             var leftYIntervals = LeftWall.GetTwoPointsNotTouchingPassage(1, Rows - 3);
             var leftY = leftYIntervals[RandomGenerator.Range(0, 2)];
@@ -110,7 +105,7 @@ namespace Assets.Scripts
             availableTiles.Remove((bottomX, 0));
         }
 
-        private void FillWithPlants(List<(int, int)> availableTiles)
+        private void FillWithPlants(ICollection<(int, int)> availableTiles)
         {
             Decorations.Add(new Decoration(Offset,
                 Decoration.DecorationType.Plant, true));
@@ -126,18 +121,18 @@ namespace Assets.Scripts
             availableTiles.Remove((Columns - 1, Rows - 1));
         }
 
-        private void FillWithVendingMachines(List<(int, int)> availiableTiles)
+        private void FillWithVendingMachines(ICollection<(int, int)> availableTiles)
         {
             var xs = UpperWall.GetTwoPointsNotTouchingPassage(1, Columns - 2);
             Decorations.Add(new Decoration(Offset + new Vector3(xs[0], (float)(Rows - 1.5), 0),
                 Decoration.DecorationType.VendingMachine));
             Decorations.Add(new Decoration(Offset + new Vector3(xs[1], (float)(Rows - 1.5), 0),
                 Decoration.DecorationType.VendingMachine));
-            availiableTiles.Remove((xs[0], Rows - 1));
-            availiableTiles.Remove((xs[1], Rows - 1));
+            availableTiles.Remove((xs[0], Rows - 1));
+            availableTiles.Remove((xs[1], Rows - 1));
         }
 
-        private void FillWithGeneralDecors(List<(int, int)> availableTiles)
+        private void FillWithGeneralDecors(ICollection<(int, int)> availableTiles)
         {
             FillWithPlants(availableTiles);
             FillWithVendingMachines(availableTiles);

@@ -10,14 +10,17 @@ namespace Assets.Scripts
 
         public float FireDelay { get; }
 
-        public Sprite Sprite { get; }
+        public Weapon.TypeName WeaponType { get; set; }
 
-        public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Sprite sprite)
+        public Weapon Weapon { get; set; }
+
+        public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Weapon.TypeName weaponType, Weapon weapon)
         {
             BulletModel = bulletModel;
             FireDelay = fireDelay;
             BulletForce = bulletForce;
-            Sprite = sprite;
+            WeaponType = weaponType;
+            Weapon = weapon;
         }
     }
 }

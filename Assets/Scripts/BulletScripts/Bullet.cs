@@ -5,16 +5,12 @@ namespace Assets.Scripts
     public class Bullet : MonoBehaviour
     {
         public BulletModel BulletModel;
-        public SpriteRenderer SpriteRenderer;
         public Rigidbody2D rb;
         public bool IsEnemyBullet;
 
         void Start()
         {
             rb.velocity = transform.right * BulletModel.Speed;
-            transform.localScale = BulletModel.Size;
-
-            SpriteRenderer.sprite = BulletModel.Sprite;
         }
 
         private void OnTriggerEnter2D(Collider2D hitInfo)

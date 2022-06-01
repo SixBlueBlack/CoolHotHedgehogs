@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         public int minimum;
         public int maximum;
-        public int Random { get => RandomGenerator.Range(minimum, maximum); }
+        public int Random => RandomGenerator.Range(minimum, maximum);
 
         public Range(int min, int max)
         {
@@ -26,7 +26,7 @@ namespace Assets.Scripts
         public Range boardSizeRange;
 
         public GameObject[] EnemyPrefabs;
-        public Sprite[] BulletSprites;
+        public GameObject[] WeaponPrefabs;
 
         internal RoomGenerator RoomGeneratorScript;
 
@@ -53,16 +53,36 @@ namespace Assets.Scripts
             {
                 var enemyIndex = RandomGenerator.Range(0, EnemyPrefabs.Length);
                 var enemyPrefab = EnemyPrefabs[enemyIndex];
-                var inst = Instantiate(enemyPrefab, 
+                var inst = Instantiate(enemyPrefab,
                     offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
 
                 enemyModel.IsSpawned = true;
-                enemyModel.WeaponModel = new WeaponModel(
-                    new BulletModel(10, 20, new Vector2(1.7f, 1.7f), BulletSprites[0]),
-                    1f, 20f, null);
+                enemyModel.WeaponModel = new WeaponModel(new BulletModel(10, 20), 1f, 20f, Weapon.TypeName.Rifle, null);
+                //var weaponInst = Instantiate(WeaponPrefabs[0])
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;
             }
         }
+
+        //public static void AddWeaponScripts(GameObject[] newWeaponObjects, List<WeaponModel> newWeaponModels, bool isPresent = true)
+        //{
+        //    if (!isPresent)
+        //        foreach (var weaponModel in newWeaponModels)
+        //            WeaponModels.Add(weaponModel);
+
+        //    for (var i = 0; i < newWeaponModels.Count; i++)
+        //    {
+        //        var inst = Instantiate(newWeaponObjects[i]);
+        //        inst.transform.SetParent(FindObjectOfType<PlayerWeaponScript>().transform);
+        //        Weapon weapon = newWeaponModels[i].WeaponType switch
+        //        {
+        //            Weapon.TypeName.Rifle => inst.GetComponent<RifleWeapon>(),
+        //            Weapon.TypeName.Shotgun => inst.GetComponent<ShotgunWeapon>(),
+        //            _ => null
+        //        };
+        //        weapon!.weaponModel = WeaponModels[i];
+        //        WeaponModels[WeaponModels.Count - newWeaponModels.Count + i].Weapon = weapon;
+        //    }
+        //}
 
         private void GenerateRooms(Board board)
         {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RandomGenerator = UnityEngine.Random;
+﻿using System.Collections.Generic;
 
 namespace Assets.Scripts
 {
@@ -18,7 +13,7 @@ namespace Assets.Scripts
             Classroom
         }
 
-        public RoomType(Room room)
+        protected RoomType(Room room)
         {
             Room = room;
             Decorations = new List<Decoration>();

@@ -12,15 +12,29 @@ namespace Assets.Scripts
         public HealthBar HealthBar;
         internal float cooldown = 1;
         internal float cooldownTimer;
-        public GameObject Bullet;
+        public GameObject WeaponObject;
 
         public void Start()
         {
+            if (WeaponObject != null)
+            {
+                var inst = Instantiate(WeaponObject);
+                inst.transform.SetParent(transform);
+                Weapon weapon = EnemyModel.WeaponModel.WeaponType switch
+                {
+                    Weapon.TypeName.Rifle => inst.GetComponent<RifleWeapon>(),
+                    Weapon.TypeName.Shotgun => inst.GetComponent<ShotgunWeapon>(),
+                    _ => null
+                };
+                weapon!.weaponModel = EnemyModel.WeaponModel;
+                EnemyModel.WeaponModel.Weapon = weapon;
+            }
+
             Physic = GetComponent<Rigidbody2D>();
             player = GameObject.FindGameObjectWithTag("Player").transform;
             HealthBar.SetMaxHealth(EnemyModel.Health);
         }
-        
+
         public void TakeDamage(int damage)
         {
             EnemyModel.Health = Math.Max(EnemyModel.Health - damage, 0);
@@ -30,7 +44,6 @@ namespace Assets.Scripts
 
         public void Die()
         {
-            //Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

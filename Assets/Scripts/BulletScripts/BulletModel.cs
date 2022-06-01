@@ -1,6 +1,3 @@
-using UnityEngine;
-
-
 namespace Assets.Scripts
 {
     public class BulletModel
@@ -9,16 +6,10 @@ namespace Assets.Scripts
 
         public int Damage { get; }
 
-        public Vector2 Size { get; }
-
-        public Sprite Sprite { get; }
-
-        public BulletModel(float speed, int damage, Vector2 size, Sprite sprite)
+        public BulletModel(float speed, int damage)
         {
             Speed = speed;
             Damage = damage;
-            Size = size;
-            Sprite = sprite;
         }
     }
 }

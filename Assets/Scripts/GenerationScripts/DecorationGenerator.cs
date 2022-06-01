@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
 using RandomGenerator = UnityEngine.Random;
 
@@ -69,18 +65,16 @@ namespace Assets.Scripts
 
         private void GenerateVendingMachines(Room room)
         {
-            foreach (var vend in room.GetAllDecorationsOfType(Decoration.DecorationType.VendingMachine))
-                if (RandomGenerator.value >= VendingMachinesThreshold)
-                    Instantiate(VendingMachinePrefabs[RandomGenerator.Range(0, VendingMachinePrefabs.Length)],
-                        vend.Coordinate, Quaternion.identity);
+            foreach (var vend in room.GetAllDecorationsOfType(Decoration.DecorationType.VendingMachine).Where(vend => RandomGenerator.value >= VendingMachinesThreshold))
+                Instantiate(VendingMachinePrefabs[RandomGenerator.Range(0, VendingMachinePrefabs.Length)],
+                    vend.Coordinate, Quaternion.identity);
         }
 
         private void GenerateOtherDecorations(Room room)
         {
-            foreach (var decor in room.GetAllDecorationsOfType(Decoration.DecorationType.Other))
-                if (RandomGenerator.value >= OtherDecorThreshold)
-                    Instantiate(OtherPrefabs[RandomGenerator.Range(0, OtherPrefabs.Length)],
-                        decor.Coordinate, Quaternion.identity);
+            foreach (var decor in room.GetAllDecorationsOfType(Decoration.DecorationType.Other).Where(decor => RandomGenerator.value >= OtherDecorThreshold))
+                Instantiate(OtherPrefabs[RandomGenerator.Range(0, OtherPrefabs.Length)],
+                    decor.Coordinate, Quaternion.identity);
         }
 
         private void GenerateTennisSet(Tennis tennisSet)
@@ -93,42 +87,26 @@ namespace Assets.Scripts
         private void GenerateClassroom(Classroom classroom)
         {
             var prefabSet = UpBrownDeskPrefabs;
-            if (classroom.Color == Classroom.AllColors.Brown)
+            prefabSet = classroom.Color switch
             {
-                switch (classroom.Position)
+                Classroom.AllColors.Brown => classroom.Position switch
                 {
-                    case Orientation.Position.Up:
-                        prefabSet = UpBrownDeskPrefabs;
-                        break;
-                    case Orientation.Position.Down:
-                        prefabSet = DownBrownDeskPrefabs;
-                        break;
-                    case Orientation.Position.Left:
-                        prefabSet = LeftBrownDeskPrefabs;
-                        break;
-                    case Orientation.Position.Right:
-                        prefabSet = RightBrownDeskPrefabs;
-                        break;
-                }
-            }
-            if (classroom.Color == Classroom.AllColors.Green)
-            {
-                switch (classroom.Position)
+                    Orientation.Position.Up => UpBrownDeskPrefabs,
+                    Orientation.Position.Down => DownBrownDeskPrefabs,
+                    Orientation.Position.Left => LeftBrownDeskPrefabs,
+                    Orientation.Position.Right => RightBrownDeskPrefabs,
+                    _ => prefabSet
+                },
+                Classroom.AllColors.Green => classroom.Position switch
                 {
-                    case Orientation.Position.Up:
-                        prefabSet = UpGreenDeskPrefabs;
-                        break;
-                    case Orientation.Position.Down:
-                        prefabSet = DownGreenDeskPrefabs;
-                        break;
-                    case Orientation.Position.Left:
-                        prefabSet = LeftGreenDeskPrefabs;
-                        break;
-                    case Orientation.Position.Right:
-                        prefabSet = RightGreenDeskPrefabs;
-                        break;
-                }
-            }
+                    Orientation.Position.Up => UpGreenDeskPrefabs,
+                    Orientation.Position.Down => DownGreenDeskPrefabs,
+                    Orientation.Position.Left => LeftGreenDeskPrefabs,
+                    Orientation.Position.Right => RightGreenDeskPrefabs,
+                    _ => prefabSet
+                },
+                _ => prefabSet
+            };
 
             foreach (var decor in classroom.Decorations)
             {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -6,10 +7,6 @@ namespace Assets.Scripts
     {
         private WeaponModel weaponModel;
 
-        public Sprite BulletSprite;
-
-        public Sprite WeaponsSprite;
-
         private bool isCollided;
 
         private OutlineScript outlineScript;
@@ -17,7 +14,7 @@ namespace Assets.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            weaponModel = new WeaponModel(new BulletModel(7, 35, new Vector2(0.05f, 0.05f), BulletSprite), 1f, 20f, WeaponsSprite);
+            weaponModel = new WeaponModel(new BulletModel(7, 35), 1f, 20f, Weapon.TypeName.Rifle, null);
             outlineScript = transform.GetComponent<OutlineScript>();
         }
 
@@ -29,7 +26,8 @@ namespace Assets.Scripts
         private void AddWeapon()
         {
             if (!isCollided || !Input.GetKeyDown(KeyCode.E)) return;
-            PlayerWeaponScript.Weapons.Add(weaponModel);
+            gameObject.GetComponent<SpriteRenderer>().sprite = null;
+            PlayerWeaponScript.AddWeaponScripts(new[] {gameObject}, new List<WeaponModel> {weaponModel}, false);
             Destroy(gameObject);
         }
 

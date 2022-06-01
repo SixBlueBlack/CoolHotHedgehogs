@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
 
@@ -23,15 +21,17 @@ public class NonMovingEnemy : Enemy
         transform.eulerAngles = new Vector3(0f, 0f, transform.position.y < playerPosition.y ? angle : -angle);
     }
 
-    void Shoot()
+    private bool CanAttack()
     {
         cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer > 0) return;
+        if (cooldownTimer > 0) return false;
         cooldownTimer = EnemyModel.WeaponModel.FireDelay;
-        var bullet = Instantiate(Bullet, transform.position, transform.rotation);
-        var rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.up * EnemyModel.WeaponModel.BulletForce, ForceMode2D.Impulse);
-        bullet.GetComponent<Bullet>().BulletModel = EnemyModel.WeaponModel.BulletModel;
-        bullet.GetComponent<Bullet>().IsEnemyBullet = true;
+        return true;
+    }
+
+    void Shoot()
+    {
+        if (!CanAttack()) return;
+        EnemyModel.WeaponModel.Weapon.Shoot(transform.position, transform.rotation, true);
     }
 }

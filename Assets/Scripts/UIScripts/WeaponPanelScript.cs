@@ -13,7 +13,6 @@ namespace Assets.Scripts
         void Start()
         {
             LastWeaponIndex = 0;
-
         }
 
         // Update is called once per frame
@@ -25,7 +24,7 @@ namespace Assets.Scripts
         private void SetWeapon()
         {
             if (LastWeaponIndex != PlayerWeaponScript.CurrentWeaponIndex)
-                IconImage.sprite = PlayerWeaponScript.Weapons[PlayerWeaponScript.CurrentWeaponIndex].Sprite;
+                IconImage.sprite = PlayerWeaponScript.WeaponModels[PlayerWeaponScript.CurrentWeaponIndex].Weapon.WeaponSprite;
             LastWeaponIndex = PlayerWeaponScript.CurrentWeaponIndex;
         }
     }
