@@ -54,7 +54,7 @@ namespace Assets.Scripts
 
         private void GeneratePlants(Room room)
         {
-            foreach (var plant in room.GetAllDecorationsOfType(Decoration.DecorationType.Plant))
+            foreach (var plant in room.GetDecorationsOfType(Decoration.DecorationType.Plant))
             {
                 var inst = Instantiate(PlantPrefabs[RandomGenerator.Range(0, PlantPrefabs.Length)],
                     plant.Coordinate, Quaternion.identity);
@@ -65,14 +65,15 @@ namespace Assets.Scripts
 
         private void GenerateVendingMachines(Room room)
         {
-            foreach (var vend in room.GetAllDecorationsOfType(Decoration.DecorationType.VendingMachine).Where(vend => RandomGenerator.value >= VendingMachinesThreshold))
+            foreach (var vend in room.GetDecorationsOfType(Decoration.DecorationType.VendingMachine).Where(vend => RandomGenerator.value >= VendingMachinesThreshold))
                 Instantiate(VendingMachinePrefabs[RandomGenerator.Range(0, VendingMachinePrefabs.Length)],
                     vend.Coordinate, Quaternion.identity);
         }
 
         private void GenerateOtherDecorations(Room room)
         {
-            foreach (var decor in room.GetAllDecorationsOfType(Decoration.DecorationType.Other).Where(decor => RandomGenerator.value >= OtherDecorThreshold))
+            foreach (var decor in room.GetDecorationsOfType(Decoration.DecorationType.Other)
+                .Where(decor => RandomGenerator.value >= OtherDecorThreshold))
                 Instantiate(OtherPrefabs[RandomGenerator.Range(0, OtherPrefabs.Length)],
                     decor.Coordinate, Quaternion.identity);
         }

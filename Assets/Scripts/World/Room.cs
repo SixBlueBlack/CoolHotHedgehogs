@@ -56,7 +56,7 @@ namespace Assets.Scripts
             };
         }
 
-        public List<Decoration> GetAllDecorationsOfType(Decoration.DecorationType type)
+        public List<Decoration> GetDecorationsOfType(Decoration.DecorationType type)
         {
             return Decorations.Where(decor => decor.Type == type).ToList();
         }

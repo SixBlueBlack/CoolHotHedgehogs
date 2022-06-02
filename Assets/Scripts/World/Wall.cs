@@ -29,6 +29,7 @@ namespace Assets.Scripts
             Length = length;
             HasPath = true;
             Position = position;
+            Direction = Orientation.PositionToDirection(position);
 
             Corridor = corridor;
         }
