@@ -16,7 +16,8 @@
             Warrior,
             Tower,
             Boss,
-            SmallBoss
+            SmallBoss,
+            Shotgun
         }
         public EnemyType Type { get; }
 
@@ -47,7 +48,7 @@
             if (type == EnemyType.Boss)
             {
                 Health = 300;
-                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                WeaponModel = new WeaponModel(new BulletModel(10, 10), 1f, 20f, Weapon.TypeName.Circle);
                 Damage = 20;
                 Speed = 0.7f;
             }
@@ -55,6 +56,13 @@
             {
                 Health = 100;
                 WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                Damage = 20;
+                Speed = 1f;
+            }
+            if (type == EnemyType.Shotgun)
+            {
+                Health = 100;
+                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Shotgun);
                 Damage = 20;
                 Speed = 1f;
             }

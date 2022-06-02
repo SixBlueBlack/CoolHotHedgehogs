@@ -374,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Physic: {fileID: 6256023630562060739}
   HealthBar: {fileID: 6256023631113957472}
-  WeaponObject: {fileID: 8865272394331292698, guid: 5bf0b3b2db89ae949b0219b98d926c0c, type: 3}
+  WeaponObject: {fileID: 6809455878803427153, guid: 7ae245d90182cc64f86a1168e683f76e, type: 3}
 --- !u!1 &6256023630968217700
 GameObject:
   m_ObjectHideFlags: 0

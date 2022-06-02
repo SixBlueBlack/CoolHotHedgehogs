@@ -18,8 +18,10 @@ namespace Assets.Scripts
         {
             WeaponModels = new List<WeaponModel>
             {
-                new WeaponModel(new BulletModel(5, 20), 0.5f, 20f, Weapon.TypeName.Rifle, null),
-                new WeaponModel(new BulletModel(3, 50), 1f, 20f, Weapon.TypeName.Rifle, null)
+                new WeaponModel(new BulletModel(5, 20), 0.5f, 20f, Weapon.TypeName.Rifle),
+                new WeaponModel(new BulletModel(3, 50), 1f, 20f, Weapon.TypeName.Rifle),
+                new WeaponModel(new BulletModel(5, 15), 1.1f, 20f, Weapon.TypeName.Shotgun),
+                new WeaponModel(new BulletModel(2, 30), 0.75f, 20f, Weapon.TypeName.Circle)
             };
 
             CurrentWeaponIndex = 0;

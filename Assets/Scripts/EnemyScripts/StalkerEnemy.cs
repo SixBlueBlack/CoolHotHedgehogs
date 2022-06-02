@@ -5,11 +5,6 @@ public class StalkerEnemy : Enemy
 {
     internal float toPlayerDistThreshold = 0.7f;
 
-    new void Start()
-    {
-        base.Start();
-    }
-
     public virtual void Update()
     {
         var distToPlayer = Vector2.Distance(transform.position, Player.position);

@@ -1826,11 +1826,10 @@ MonoBehaviour:
   boardSizeRange:
     minimum: 2
     maximum: 2
-  TowerEnemyPrefab: {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}
+  TowerEnemyPrefab: {fileID: 2759532504430765681, guid: 8314457a6e2fbf64289faaf571d801d1, type: 3}
   WarriorEnemyPrefab: {fileID: 7989081026838371829, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
   BossEnemyPrefab: {fileID: 6256023630562060750, guid: a2dcdb89256a582419ef785714928784, type: 3}
   SmallBossEnemyPrefab: {fileID: 3681170239784161058, guid: 0e098bb9d602f234e87ef75d864119e3, type: 3}
-  WeaponPrefabs: []
 --- !u!114 &752127494
 MonoBehaviour:
   m_ObjectHideFlags: 0

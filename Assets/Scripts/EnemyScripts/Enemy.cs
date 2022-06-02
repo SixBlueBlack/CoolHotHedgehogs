@@ -25,6 +25,7 @@ namespace Assets.Scripts
                 {
                     Weapon.TypeName.Rifle => inst.GetComponent<RifleWeapon>(),
                     Weapon.TypeName.Shotgun => inst.GetComponent<ShotgunWeapon>(),
+                    Weapon.TypeName.Circle => inst.GetComponent<CircleWeapon>(),
                     _ => null
                 };
                 weapon!.weaponModel = EnemyModel.WeaponModel;
