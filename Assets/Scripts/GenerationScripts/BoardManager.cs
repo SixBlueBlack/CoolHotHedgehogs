@@ -25,7 +25,8 @@ namespace Assets.Scripts
         public Range roomWallRange;
         public Range boardSizeRange;
 
-        public GameObject[] EnemyPrefabs;
+        public GameObject TowerEnemyPrefab;
+        public GameObject WarriorEnemyPrefab;
         public GameObject[] WeaponPrefabs;
 
         internal RoomGenerator RoomGeneratorScript;
@@ -51,10 +52,14 @@ namespace Assets.Scripts
         {
             foreach (var enemyModel in enemies)
             {
-                var enemyIndex = RandomGenerator.Range(0, EnemyPrefabs.Length);
-                var enemyPrefab = EnemyPrefabs[enemyIndex];
-                var inst = Instantiate(enemyPrefab,
-                    offset + new Vector3(enemyModel.Column, enemyModel.Row, 0), Quaternion.identity);
+                var enemyPrefab = enemyModel.Type switch
+                {
+                    EnemyModel.EnemyType.Tower => TowerEnemyPrefab,
+                    EnemyModel.EnemyType.Warrior => WarriorEnemyPrefab,
+                    _ => throw new NotImplementedException()
+                };
+                var inst = Instantiate(enemyPrefab, offset + new Vector3(enemyModel.Column, enemyModel.Row, 0),
+                    Quaternion.identity);
 
                 enemyModel.IsSpawned = true;
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;

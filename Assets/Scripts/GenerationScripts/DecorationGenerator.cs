@@ -86,8 +86,7 @@ namespace Assets.Scripts
 
         private void GenerateClassroom(Classroom classroom)
         {
-            var prefabSet = UpBrownDeskPrefabs;
-            prefabSet = classroom.Color switch
+            var prefabSet = classroom.Color switch
             {
                 Classroom.AllColors.Brown => classroom.Position switch
                 {
@@ -95,7 +94,7 @@ namespace Assets.Scripts
                     Orientation.Position.Down => DownBrownDeskPrefabs,
                     Orientation.Position.Left => LeftBrownDeskPrefabs,
                     Orientation.Position.Right => RightBrownDeskPrefabs,
-                    _ => prefabSet
+                    _ => throw new System.NotImplementedException()
                 },
                 Classroom.AllColors.Green => classroom.Position switch
                 {
@@ -103,9 +102,9 @@ namespace Assets.Scripts
                     Orientation.Position.Down => DownGreenDeskPrefabs,
                     Orientation.Position.Left => LeftGreenDeskPrefabs,
                     Orientation.Position.Right => RightGreenDeskPrefabs,
-                    _ => prefabSet
+                    _ => throw new System.NotImplementedException()
                 },
-                _ => prefabSet
+                _ => throw new System.NotImplementedException()
             };
 
             foreach (var decor in classroom.Decorations)

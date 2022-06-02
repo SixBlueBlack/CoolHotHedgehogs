@@ -98,9 +98,7 @@ namespace Assets.Scripts
                 }
                 availableTiles.Remove((col, row));
 
-                Enemies[i] = new EnemyModel(row, col, 
-                    new WeaponModel(new BulletModel(10, 20), 1f, 20f, Weapon.TypeName.Rifle, null),
-                    100, 20, 1.5f);
+                Enemies[i] = new EnemyModel(row, col, Utils.GetRandomFromEnum<EnemyModel.EnemyType>());
             }
         }
 
