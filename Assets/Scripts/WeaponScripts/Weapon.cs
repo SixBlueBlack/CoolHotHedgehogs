@@ -11,7 +11,8 @@ public class Weapon : MonoBehaviour
     public enum TypeName
     {
         Shotgun,
-        Rifle
+        Rifle,
+        Circle
     }
 
     public virtual void Shoot(Vector3 position, Quaternion rotation, bool isEnemyBullet = false) { }
