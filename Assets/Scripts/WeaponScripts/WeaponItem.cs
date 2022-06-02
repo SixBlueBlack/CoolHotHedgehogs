@@ -14,7 +14,7 @@ namespace Assets.Scripts
         // Start is called before the first frame update
         void Start()
         {
-            weaponModel = new WeaponModel(new BulletModel(7, 35), 1f, 20f, Weapon.TypeName.Rifle, null);
+            weaponModel = new WeaponModel(new BulletModel(7, 35), 1f, 20f, Weapon.TypeName.Rifle);
             outlineScript = transform.GetComponent<OutlineScript>();
         }
 

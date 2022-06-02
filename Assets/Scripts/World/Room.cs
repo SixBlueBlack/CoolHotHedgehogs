@@ -82,7 +82,13 @@ namespace Assets.Scripts
 
         private void FillWithBoss(ICollection<(int, int)> availableTiles)
         {
+            var row = Rows / 2;
+            var col = Columns / 2;
 
+            availableTiles.Remove((row, col));
+
+            // Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Boss);
+            Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Tower);
         }
 
         private void FillWithEnemies(ICollection<(int, int)> availableTiles)

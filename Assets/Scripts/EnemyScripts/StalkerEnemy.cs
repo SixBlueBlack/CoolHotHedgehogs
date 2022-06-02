@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class StalkerEnemy : Enemy
 {
-
-    // Start is called before the first frame update
     new void Start()
     {
         base.Start();

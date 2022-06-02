@@ -27,6 +27,7 @@ namespace Assets.Scripts
 
         public GameObject TowerEnemyPrefab;
         public GameObject WarriorEnemyPrefab;
+        public GameObject BossEnemyPrefab;
         public GameObject[] WeaponPrefabs;
 
         internal RoomGenerator RoomGeneratorScript;
@@ -56,6 +57,7 @@ namespace Assets.Scripts
                 {
                     EnemyModel.EnemyType.Tower => TowerEnemyPrefab,
                     EnemyModel.EnemyType.Warrior => WarriorEnemyPrefab,
+                    // EnemyModel.EnemyType.Boss => BossEnemyPrefab,
                     _ => throw new NotImplementedException()
                 };
                 var inst = Instantiate(enemyPrefab, offset + new Vector3(enemyModel.Column, enemyModel.Row, 0),

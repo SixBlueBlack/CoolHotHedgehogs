@@ -12,15 +12,14 @@ namespace Assets.Scripts
 
         public Weapon.TypeName WeaponType { get; set; }
 
-        public Weapon Weapon { get; set; }
+        public Weapon Weapon { get; set; } = null;
 
-        public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Weapon.TypeName weaponType, Weapon weapon)
+        public WeaponModel(BulletModel bulletModel, float fireDelay, float bulletForce, Weapon.TypeName weaponType)
         {
             BulletModel = bulletModel;
             FireDelay = fireDelay;
             BulletForce = bulletForce;
             WeaponType = weaponType;
-            Weapon = weapon;
         }
     }
 }
