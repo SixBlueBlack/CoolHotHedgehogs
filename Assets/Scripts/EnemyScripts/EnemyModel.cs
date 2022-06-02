@@ -14,7 +14,7 @@
         public int Row { get; }
         public int Column { get; }
 
-        public EnemyModel(int row, int col, WeaponModel weaponModel, int hp, int damage, float speed) // Pass type of an enemy instead of params
+        public EnemyModel(int row, int col, WeaponModel weaponModel, int hp, int damage, float speed)
         {
             Health = hp;
             WeaponModel = weaponModel;

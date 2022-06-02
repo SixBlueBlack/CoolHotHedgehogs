@@ -1824,8 +1824,8 @@ MonoBehaviour:
     minimum: 9
     maximum: 10
   boardSizeRange:
-    minimum: 5
-    maximum: 5
+    minimum: 2
+    maximum: 2
   EnemyPrefabs:
   - {fileID: 7989081026838371829, guid: 127ec40ca40aaac4587d027bb0c1d20a, type: 3}
   - {fileID: 2759532504430765681, guid: 24e0240f28e04db4596b1375041e5209, type: 3}

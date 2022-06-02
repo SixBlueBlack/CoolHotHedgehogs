@@ -22,12 +22,13 @@ namespace Assets.Scripts
         public List<Decoration> Decorations { get; } = new List<Decoration>();
 
         public RoomType.TypeName TypeName { get; set; } = Utils.GetRandomFromEnum<RoomType.TypeName>();
+        public bool WithBoss { get; set; }
         public RoomType Type { get; }
 
         public Vector3 Offset { get; }
 
         public Room(int rows, int columns, Vector3 offset, int difficulty,
-            Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall)
+            Wall bottomWall, Wall upperWall, Wall rightWall, Wall leftWall, bool withBoss=false)
         {
             BottomWall = bottomWall;
             BottomWall.AttachRoom(this);
@@ -42,7 +43,9 @@ namespace Assets.Scripts
             Rows = rows;
             Columns = columns;
             Difficulty = difficulty;
-            Enemies = new EnemyModel[Difficulty];
+            Enemies = withBoss ? new EnemyModel[1] : new EnemyModel[Difficulty];
+
+            WithBoss = withBoss;
 
             Type = TypeName switch
             {
@@ -66,8 +69,20 @@ namespace Assets.Scripts
                     availableTiles.Add((i, j));
 
             FillWithGeneralDecors(availableTiles);
-            Type.Fill(availableTiles);
-            FillWithEnemies(availableTiles);
+
+            if (WithBoss)
+                FillWithBoss(availableTiles);
+            else
+            {
+                if (Type != null)
+                    Type.Fill(availableTiles);
+                FillWithEnemies(availableTiles);
+            }
+        }
+
+        private void FillWithBoss(ICollection<(int, int)> availableTiles)
+        {
+
         }
 
         private void FillWithEnemies(ICollection<(int, int)> availableTiles)
@@ -83,7 +98,9 @@ namespace Assets.Scripts
                 }
                 availableTiles.Remove((col, row));
 
-                Enemies[i] = new EnemyModel(row, col, null, 100, 20, 1.5f);
+                Enemies[i] = new EnemyModel(row, col, 
+                    new WeaponModel(new BulletModel(10, 20), 1f, 20f, Weapon.TypeName.Rifle, null),
+                    100, 20, 1.5f);
             }
         }
 

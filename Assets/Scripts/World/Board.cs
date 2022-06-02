@@ -44,7 +44,7 @@ namespace Assets.Scripts
                     var rightWall = CreateWall(roomRows, Orientation.Position.Right, v.RightEdge, null);
 
                     var room = new Room(roomRows, roomColumns, offset, i + j,
-                        bottomWall, upperWall, rightWall, leftWall);
+                        bottomWall, upperWall, rightWall, leftWall, i + j == Rows + Columns - 2);
 
                     Field[i, j] = room;
                 }
