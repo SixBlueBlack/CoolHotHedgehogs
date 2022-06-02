@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int CurrentHealth { get; set; }
-    public int MaxHealth { get; set; } = 100;
+    public int MaxHealth { get; set; } = 1000;
     public HealthBar HealthBar;
     private float acceleration = 0.2f;
     private float speed = 2.5f;

@@ -28,6 +28,7 @@ namespace Assets.Scripts
         public GameObject TowerEnemyPrefab;
         public GameObject WarriorEnemyPrefab;
         public GameObject BossEnemyPrefab;
+        public GameObject SmallBossEnemyPrefab;
         public GameObject[] WeaponPrefabs;
 
         internal RoomGenerator RoomGeneratorScript;
@@ -58,10 +59,14 @@ namespace Assets.Scripts
                     EnemyModel.EnemyType.Tower => TowerEnemyPrefab,
                     EnemyModel.EnemyType.Warrior => WarriorEnemyPrefab,
                     EnemyModel.EnemyType.Boss => BossEnemyPrefab,
+                    EnemyModel.EnemyType.SmallBoss => SmallBossEnemyPrefab,
                     _ => throw new NotImplementedException()
                 };
                 var inst = Instantiate(enemyPrefab, offset + new Vector3(enemyModel.Column, enemyModel.Row, 0),
                     Quaternion.identity);
+
+                if (enemyModel.Type == EnemyModel.EnemyType.Boss || enemyModel.Type == EnemyModel.EnemyType.SmallBoss)
+                    inst.GetComponent<Boss>().EnemySpawner = SpawnEnemies;
 
                 enemyModel.IsSpawned = true;
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;

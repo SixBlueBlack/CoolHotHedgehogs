@@ -40,7 +40,13 @@ namespace Assets.Scripts
 
             var anotherDoor = DoorModel.AttachedToPassage.GetAnotherDoor(DoorModel);
             if (!anotherDoor.Passed) return;
-            EnemySpawner(DoorModel.AttachedToRoom.Enemies, DoorModel.AttachedToRoom.Offset);
+
+            if (DoorModel.AttachedToRoom.WithBoss)
+                EnemySpawner(DoorModel.AttachedToRoom.GetEnemiesOfType(EnemyModel.EnemyType.Boss),
+                    DoorModel.AttachedToRoom.Offset);
+            else
+                EnemySpawner(DoorModel.AttachedToRoom.Enemies, DoorModel.AttachedToRoom.Offset);
+
             DoorModel.Disabled = true;
             Animator.SetBool("IsClosed", true);
             anotherDoor.Disabled = true;

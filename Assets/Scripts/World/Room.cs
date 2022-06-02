@@ -43,7 +43,7 @@ namespace Assets.Scripts
             Rows = rows;
             Columns = columns;
             Difficulty = difficulty;
-            Enemies = withBoss ? new EnemyModel[1] : new EnemyModel[Difficulty];
+            Enemies = withBoss ? new EnemyModel[7] : new EnemyModel[Difficulty];
 
             WithBoss = withBoss;
 
@@ -80,6 +80,23 @@ namespace Assets.Scripts
             }
         }
 
+        public List<EnemyModel> GetEnemiesOfType(EnemyModel.EnemyType type, int? limit=null)
+        {
+            if (limit == null)
+                limit = Enemies.Length;
+
+            var res = new List<EnemyModel>();
+            foreach (var enemyModel in Enemies)
+                if (enemyModel.Type == type)
+                {
+                    res.Add(enemyModel);
+                    if (limit == res.Count)
+                        return res;
+                }
+
+            return res;
+        }
+
         private void FillWithBoss(ICollection<(int, int)> availableTiles)
         {
             var row = Rows / 2;
@@ -87,7 +104,11 @@ namespace Assets.Scripts
 
             availableTiles.Remove((row, col));
 
-            Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Boss);
+            Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Boss, this);
+            for (var i = 1; i <= 2; i++)
+                Enemies[i] = new EnemyModel(0, 0, EnemyModel.EnemyType.SmallBoss, this);
+            for (var i = 3; i < Enemies.Length; i++)
+                Enemies[i] = new EnemyModel(0, 0, EnemyModel.EnemyType.Warrior, this);
         }
 
         private void FillWithEnemies(ICollection<(int, int)> availableTiles)
@@ -104,7 +125,7 @@ namespace Assets.Scripts
                 availableTiles.Remove((col, row));
 
                 Enemies[i] = new EnemyModel(row, col, Utils.GetRandomFromEnum<EnemyModel.EnemyType>(
-                    new HashSet<EnemyModel.EnemyType>() { EnemyModel.EnemyType.Boss }));
+                    new HashSet<EnemyModel.EnemyType>() { EnemyModel.EnemyType.Boss, EnemyModel.EnemyType.SmallBoss }), this);
             }
         }
 

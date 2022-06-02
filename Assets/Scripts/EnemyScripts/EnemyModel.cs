@@ -9,24 +9,26 @@
         public float Speed { get; }
         public bool IsDead => Health <= 0;
         public bool IsSpawned { get; set; } = false;
+        public Room AttachedToRoom { get; }
         public float DistanceForAgr = 10;
 
         public enum EnemyType { 
             Warrior,
             Tower,
-            Boss
+            Boss,
+            SmallBoss
         }
         public EnemyType Type { get; }
 
         public int Row { get; }
         public int Column { get; }
 
-        public EnemyModel(int row, int col, EnemyType type)
+        public EnemyModel(int row, int col, EnemyType type, Room inRoom)
         {
-
             Row = row;
             Column = col;
             Type = type;
+            AttachedToRoom = inRoom;
 
             if (type == EnemyType.Tower)
             {
@@ -45,6 +47,13 @@
             if (type == EnemyType.Boss)
             {
                 Health = 300;
+                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                Damage = 20;
+                Speed = 0.7f;
+            }
+            if (type == EnemyType.SmallBoss)
+            {
+                Health = 100;
                 WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
                 Damage = 20;
                 Speed = 1f;

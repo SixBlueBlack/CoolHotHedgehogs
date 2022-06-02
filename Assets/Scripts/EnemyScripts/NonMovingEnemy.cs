@@ -16,16 +16,16 @@ public class NonMovingEnemy : Enemy
 
     private void Rotate()
     {
-        var playerPosition = player.position;
+        var playerPosition = Player.position;
         var angle = Vector2.Angle(Vector2.right, playerPosition - transform.position);
         transform.eulerAngles = new Vector3(0f, 0f, transform.position.y < playerPosition.y ? angle : -angle);
     }
 
     private bool CanAttack()
     {
-        cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer > 0) return false;
-        cooldownTimer = EnemyModel.WeaponModel.FireDelay;
+        CooldownTimer -= Time.deltaTime;
+        if (CooldownTimer > 0) return false;
+        CooldownTimer = EnemyModel.WeaponModel.FireDelay;
         return true;
     }
 

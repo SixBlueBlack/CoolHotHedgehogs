@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
     class Boss : StalkerEnemy
     {
+        public Action<IEnumerable<EnemyModel>, Vector3> EnemySpawner;
+
         new void Start()
         {
             toPlayerDistThreshold = 1.5f;
@@ -12,6 +16,7 @@ namespace Assets.Scripts
 
         public override void Die()
         {
+            EnemySpawner(EnemyModel.AttachedToRoom.GetEnemiesOfType(EnemyModel.EnemyType.SmallBoss), transform.position);
             base.Die();
         }
 
@@ -23,9 +28,9 @@ namespace Assets.Scripts
 
         private bool CanAttack()
         {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer > 0) return false;
-            cooldownTimer = EnemyModel.WeaponModel.FireDelay;
+            CooldownTimer -= Time.deltaTime;
+            if (CooldownTimer > 0) return false;
+            CooldownTimer = EnemyModel.WeaponModel.FireDelay;
             return true;
         }
 
@@ -33,7 +38,7 @@ namespace Assets.Scripts
         {
             if (!CanAttack()) return;
 
-            var playerPosition = player.position;
+            var playerPosition = Player.position;
             var angle = Vector2.Angle(Vector2.right, playerPosition - transform.position);
 
             EnemyModel.WeaponModel.Weapon.Shoot(transform.position,

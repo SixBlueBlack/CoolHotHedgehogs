@@ -7,12 +7,13 @@ namespace Assets.Scripts
     public class Enemy : MonoBehaviour
     {
         public Rigidbody2D Physic;
-        internal Transform player;
-        public EnemyModel EnemyModel { get; set; }
         public HealthBar HealthBar;
-        internal float cooldown = 1;
-        internal float cooldownTimer = 1;
         public GameObject WeaponObject;
+
+        internal Transform Player { get; set; }
+        public EnemyModel EnemyModel { get; set; }
+        internal float Cooldown { get; set; } = 1;
+        internal float CooldownTimer { get; set; } = 1;
 
         public void Start()
         {
@@ -31,7 +32,7 @@ namespace Assets.Scripts
             }
 
             Physic = GetComponent<Rigidbody2D>();
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            Player = GameObject.FindGameObjectWithTag("Player").transform;
             HealthBar.SetMaxHealth(EnemyModel.Health);
         }
 
@@ -47,9 +48,6 @@ namespace Assets.Scripts
             Destroy(gameObject);
         }
 
-        public virtual void Shoot()
-        {
-
-        }
+        public virtual void Shoot() { }
     }
 }

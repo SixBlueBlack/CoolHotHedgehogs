@@ -12,7 +12,7 @@ public class StalkerEnemy : Enemy
 
     public virtual void Update()
     {
-        var distToPlayer = Vector2.Distance(transform.position, player.position);
+        var distToPlayer = Vector2.Distance(transform.position, Player.position);
         if (distToPlayer <= toPlayerDistThreshold)
             Attack();
         Move(distToPlayer);
@@ -20,15 +20,15 @@ public class StalkerEnemy : Enemy
 
     private void Attack()
     {
-        cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer > 0) return;
-        cooldownTimer = cooldown;
-        player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
+        CooldownTimer -= Time.deltaTime;
+        if (CooldownTimer > 0) return;
+        CooldownTimer = Cooldown;
+        Player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
     }
 
     private void Move(float distToPlayer)
     {
-        if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(player.position, transform.position);
+        if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(Player.position, transform.position);
         else LoseInterest();
     }
 
