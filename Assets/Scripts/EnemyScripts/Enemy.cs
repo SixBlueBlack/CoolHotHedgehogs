@@ -11,7 +11,7 @@ namespace Assets.Scripts
         public EnemyModel EnemyModel { get; set; }
         public HealthBar HealthBar;
         internal float cooldown = 1;
-        internal float cooldownTimer;
+        internal float cooldownTimer = 1;
         public GameObject WeaponObject;
 
         public void Start()
@@ -42,9 +42,14 @@ namespace Assets.Scripts
             if (EnemyModel.Health == 0) Die();
         }
 
-        public void Die()
+        public virtual void Die()
         {
             Destroy(gameObject);
+        }
+
+        public virtual void Shoot()
+        {
+
         }
     }
 }

@@ -87,8 +87,7 @@ namespace Assets.Scripts
 
             availableTiles.Remove((row, col));
 
-            // Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Boss);
-            Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Tower);
+            Enemies[0] = new EnemyModel(row, col, EnemyModel.EnemyType.Boss);
         }
 
         private void FillWithEnemies(ICollection<(int, int)> availableTiles)
@@ -104,7 +103,8 @@ namespace Assets.Scripts
                 }
                 availableTiles.Remove((col, row));
 
-                Enemies[i] = new EnemyModel(row, col, Utils.GetRandomFromEnum<EnemyModel.EnemyType>());
+                Enemies[i] = new EnemyModel(row, col, Utils.GetRandomFromEnum<EnemyModel.EnemyType>(
+                    new HashSet<EnemyModel.EnemyType>() { EnemyModel.EnemyType.Boss }));
             }
         }
 

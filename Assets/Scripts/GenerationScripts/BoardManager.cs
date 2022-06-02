@@ -57,7 +57,7 @@ namespace Assets.Scripts
                 {
                     EnemyModel.EnemyType.Tower => TowerEnemyPrefab,
                     EnemyModel.EnemyType.Warrior => WarriorEnemyPrefab,
-                    // EnemyModel.EnemyType.Boss => BossEnemyPrefab,
+                    EnemyModel.EnemyType.Boss => BossEnemyPrefab,
                     _ => throw new NotImplementedException()
                 };
                 var inst = Instantiate(enemyPrefab, offset + new Vector3(enemyModel.Column, enemyModel.Row, 0),

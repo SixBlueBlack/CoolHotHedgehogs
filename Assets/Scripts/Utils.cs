@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RandomGenerator = UnityEngine.Random;
 
 namespace Assets.Scripts
@@ -16,10 +17,17 @@ namespace Assets.Scripts
             return intervals;
         }
 
-        public static T GetRandomFromEnum<T>()
+        public static T GetRandomFromEnum<T>(HashSet<T> forbidden=null)
         {
+            if (forbidden == null)
+                forbidden = new HashSet<T>();
+
             var values = Enum.GetValues(typeof(T));
-            return (T)values.GetValue(RandomGenerator.Range(0, values.Length));
+
+            var res = (T)values.GetValue(RandomGenerator.Range(0, values.Length));
+            while (forbidden.Contains(res))
+                res = (T)values.GetValue(RandomGenerator.Range(0, values.Length));
+            return res;
         }
     }
 }

@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class StalkerEnemy : Enemy
 {
+    internal float toPlayerDistThreshold = 0.7f;
+
     new void Start()
     {
         base.Start();
     }
 
-    void Update()
+    public virtual void Update()
     {
         var distToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distToPlayer <= 0.7f)
+        if (distToPlayer <= toPlayerDistThreshold)
             Attack();
         Move(distToPlayer);
     }
@@ -44,7 +46,7 @@ public class StalkerEnemy : Enemy
         Physic.velocity = new Vector2(xVelocity, yVelocity);
     }
 
-    public void LoseInterest()
+    private void LoseInterest()
     {
         Physic.velocity = new Vector2(0, 0);
     }

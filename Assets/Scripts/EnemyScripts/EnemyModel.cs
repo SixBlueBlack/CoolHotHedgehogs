@@ -14,7 +14,7 @@
         public enum EnemyType { 
             Warrior,
             Tower,
-            // Boss
+            Boss
         }
         public EnemyType Type { get; }
 
@@ -42,13 +42,13 @@
                 Damage = 20;
                 Speed = 1.5f;
             }
-            //if (type == EnemyType.Boss)
-            //{
-            //    Health = 1000;
-            //    WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
-            //    Damage = 20;
-            //    Speed = 1.5f;
-            //}
+            if (type == EnemyType.Boss)
+            {
+                Health = 300;
+                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                Damage = 20;
+                Speed = 1f;
+            }
         }
     }
 }

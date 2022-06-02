@@ -29,7 +29,7 @@ public class NonMovingEnemy : Enemy
         return true;
     }
 
-    void Shoot()
+    public override void Shoot()
     {
         if (!CanAttack()) return;
         EnemyModel.WeaponModel.Weapon.Shoot(transform.position, transform.rotation, true);
