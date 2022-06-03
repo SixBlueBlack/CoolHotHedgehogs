@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 4477098392736414165}
   - component: {fileID: 1013827432341816086}
   m_Layer: 0
-  m_Name: NonMovingShotgunEnemy
+  m_Name: MovingShotgunEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ SpriteRenderer:
   m_SortingLayerID: -536022983
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37bad70b234cd094cacb574ec2d44bf8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06fa17cc1410cbe4abd98108adc12d57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -275,7 +275,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2322385691221110516}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -287,8 +287,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7793630758417752154
+  m_Constraints: 4
+--- !u!114 &2367322657716547707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2322385691221110516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b68391f0f6ac734db07edac525a3f12, type: 3}
+  m_Script: {fileID: 11500000, guid: 39f7461fc9f25764d9d6e6e75cea42ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Physic: {fileID: 756792957032944741}

@@ -11,6 +11,11 @@ namespace Assets.Scripts
         void Start()
         {
             rb.velocity = transform.right * BulletModel.Speed;
+            if (IsEnemyBullet)
+            {
+                GetComponentInChildren<OutlineScript>().IsOutlined = true;
+            }
+            
         }
 
         private void OnTriggerEnter2D(Collider2D hitInfo)

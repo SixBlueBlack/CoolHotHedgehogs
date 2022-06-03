@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 626136067276793266}
   - component: {fileID: 5140372847699330985}
   - component: {fileID: 1279313421603371409}
+  - component: {fileID: -6475407304787950633}
   m_Layer: 0
   m_Name: CircleBullet
   m_TagString: Untagged
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c108e1f7890212542afd116ad38301b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.48, y: 0.26}
+    oldSize: {x: 0.24, y: 0.13}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -146,3 +147,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 626136067276793266}
   IsEnemyBullet: 0
+--- !u!114 &-6475407304787950633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543155947640066580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c154938e680ae47b1dc3238a23aee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 0.78431374, g: 0.11764706, b: 0.11764706, a: 1}
+  OutlineSize: 3
+  IsOutlined: 0

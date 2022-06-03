@@ -30,6 +30,7 @@ namespace Assets.Scripts
         public GameObject BossEnemyPrefab;
         public GameObject SmallBossEnemyPrefab;
         public GameObject ShotgunEnemyPrefab;
+        public GameObject HealerEnemyPrefab;
 
         internal RoomGenerator RoomGeneratorScript;
 
@@ -61,6 +62,7 @@ namespace Assets.Scripts
                     EnemyModel.EnemyType.Boss => BossEnemyPrefab,
                     EnemyModel.EnemyType.SmallBoss => SmallBossEnemyPrefab,
                     EnemyModel.EnemyType.Shotgun => ShotgunEnemyPrefab,
+                    EnemyModel.EnemyType.Healer => HealerEnemyPrefab,
                     _ => throw new NotImplementedException()
                 };
                 var inst = Instantiate(enemyPrefab, offset + new Vector3(enemyModel.Column, enemyModel.Row, 0),
@@ -71,6 +73,7 @@ namespace Assets.Scripts
 
                 enemyModel.IsSpawned = true;
                 inst.GetComponent<Enemy>().EnemyModel = enemyModel;
+                inst.GetComponent<Enemy>().EnemyModel.Enemy = inst.GetComponent<Enemy>();
             }
         }
 
