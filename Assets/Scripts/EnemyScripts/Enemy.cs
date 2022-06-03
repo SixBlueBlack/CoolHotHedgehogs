@@ -60,6 +60,8 @@ namespace Assets.Scripts
                 var inst = Instantiate(DropItem, transform.position, Quaternion.identity);
                 inst.GetComponent<Item>().itemModel = new ItemModel("Health Potion", "Just heal yourself", DropItem.GetComponent<SpriteRenderer>().sprite);
             }
+            if (EnemyModel.AttachedToRoom.WithBoss && EnemyModel.AttachedToRoom.AllEnemiesDead)
+                global::Player.IsWin = true;
             Destroy(gameObject);
             isDestroyed = true;
         }

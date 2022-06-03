@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBodyComponent;
     public Animator Animator;
     public static bool IsDead;
+    public static bool IsWin;
     private bool isRight = true;
     private int lastPose;
     public GameObject ItemPrefab;

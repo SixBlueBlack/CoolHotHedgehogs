@@ -74,16 +74,14 @@ namespace Assets.Scripts
                 FillWithBoss(availableTiles);
             else
             {
-                if (Type != null)
-                    Type.Fill(availableTiles);
+                Type?.Fill(availableTiles);
                 FillWithEnemies(availableTiles);
             }
         }
 
         public List<EnemyModel> GetEnemiesOfType(EnemyModel.EnemyType type, int? limit=null)
         {
-            if (limit == null)
-                limit = Enemies.Length;
+            limit ??= Enemies.Length;
 
             var res = new List<EnemyModel>();
             foreach (var enemyModel in Enemies)

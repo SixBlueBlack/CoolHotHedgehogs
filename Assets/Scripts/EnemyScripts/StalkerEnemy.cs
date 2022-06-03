@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StalkerEnemy : Enemy
 {
-    internal float toPlayerDistThreshold = 0.7f;
+    internal float toPlayerDistThreshold = 1f;
 
     public virtual void Update()
     {
