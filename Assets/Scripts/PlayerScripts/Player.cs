@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
 
     public void Heal(int value)
     {
-        TakeDamage(Math.Max(-value, -(MaxHealth - CurrentHealth)));
+        CurrentHealth = Math.Max(CurrentHealth + value, MaxHealth);
+        HealthBar.SetHealth(CurrentHealth);
     }
 }
