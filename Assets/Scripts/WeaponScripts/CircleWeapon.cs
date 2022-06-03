@@ -5,6 +5,8 @@ public class CircleWeapon : Weapon
 {
     public override void Shoot(Vector3 position, Quaternion rotation, bool isEnemyBullet = false)
     {
+        ShootingSound.Play();
+
         for (var i = 0; i < 6; i++)
         {
             var bullet = Instantiate(Bullet, position, Quaternion.Euler(0, 0, 60 * i));
