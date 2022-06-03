@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int CurrentHealth { get; set; }
-    public int MaxHealth { get; set; } = 1000;
+    public int MaxHealth { get; set; } = 100;
     public HealthBar HealthBar;
     private float acceleration = 0.2f;
     private float speed = 2.5f;
@@ -19,12 +19,21 @@ public class Player : MonoBehaviour
     public Sprite Sprite;
     public Canvas HealthBarCanvas;
 
+    private AudioSource DamageAudio { get; set; }
+    private AudioSource DeathAudio { get; set; }
+
 
     void Start()
     {
         var inst = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
         inst.GetComponent<Item>().itemModel = new ItemModel("Health Potion", "Just heal yourself", Sprite);
+        
         rigidBodyComponent = GetComponent<Rigidbody2D>();
+
+        var audios = GetComponents<AudioSource>();
+        DamageAudio = audios[0];
+        DeathAudio = audios[1];
+
         CurrentHealth = MaxHealth;
         HealthBar.SetMaxHealth(MaxHealth);
     }
@@ -79,7 +88,14 @@ public class Player : MonoBehaviour
         CurrentHealth -= damage;
         HealthBar.SetHealth(CurrentHealth);
         if (CurrentHealth <= 0)
+        {
             IsDead = true;
+            DamageAudio.Stop();
+            DeathAudio.Play();
+        }
+
+        else if (!DamageAudio.isPlaying)
+            DamageAudio.Play();
     }
 
     public void Heal(int value)

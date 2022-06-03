@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
-
+using System.Linq;
+using RandomGenerator = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -9,6 +10,7 @@ namespace Assets.Scripts
         public Rigidbody2D Physic;
         public HealthBar HealthBar;
         public GameObject WeaponObject;
+        public AudioSource[] DamageAudios { get; set; }
 
         internal Transform Player { get; set; }
         public EnemyModel EnemyModel { get; set; }
@@ -32,6 +34,7 @@ namespace Assets.Scripts
                 EnemyModel.WeaponModel.Weapon = weapon;
             }
 
+            DamageAudios = GetComponents<AudioSource>();
             Physic = GetComponent<Rigidbody2D>();
             Player = GameObject.FindGameObjectWithTag("Player").transform;
             HealthBar.SetMaxHealth(EnemyModel.Health);
@@ -39,6 +42,9 @@ namespace Assets.Scripts
 
         public void TakeDamage(int damage)
         {
+            if (!DamageAudios.Any(audio => audio.isPlaying))
+                DamageAudios[RandomGenerator.Range(0, DamageAudios.Length)].Play();
+
             EnemyModel.Health = Math.Max(EnemyModel.Health - damage, 0);
             HealthBar.SetHealth(EnemyModel.Health);
             if (EnemyModel.Health == 0) Die();
