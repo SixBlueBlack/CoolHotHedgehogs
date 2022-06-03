@@ -20,24 +20,21 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D hitInfo)
         {
-            if (hitInfo.tag == "Wall")
+            if (hitInfo.CompareTag("Wall"))
                 Destroy(gameObject);
-            switch (IsEnemyBullet)
+
+            if (!IsEnemyBullet && hitInfo.CompareTag("Enemy"))
             {
-                case false when hitInfo.tag == "Enemy":
-                {
-                    var enemy = hitInfo.GetComponent<Enemy>();
-                    enemy.TakeDamage(BulletModel.Damage);
-                    Destroy(gameObject);
-                    break;
-                }
-                case true when hitInfo.tag == "Player":
-                {
-                    var player = hitInfo.GetComponent<Player>();
-                    player.TakeDamage(BulletModel.Damage);
-                    Destroy(gameObject);
-                    break;
-                }
+                var enemy = hitInfo.GetComponent<Enemy>();
+                enemy.TakeDamage(BulletModel.Damage);
+                Destroy(gameObject);
+            }
+
+            if (IsEnemyBullet && hitInfo.CompareTag("Player") && hitInfo == hitInfo.GetComponents<Collider2D>()[0])
+            {
+                var player = hitInfo.GetComponent<Player>();
+                player.TakeDamage(BulletModel.Damage);
+                Destroy(gameObject);
             }
         }
     }
