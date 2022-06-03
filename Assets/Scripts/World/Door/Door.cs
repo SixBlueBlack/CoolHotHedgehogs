@@ -30,6 +30,8 @@ namespace Assets.Scripts
 
         private void OnCollisionEnter2D()
         {
+            if (Collider.isTrigger)
+                return;
             if (!DoorModel.AttachedToRoom.AllEnemiesDead)
                 return;
 
@@ -40,9 +42,8 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (DoorModel.AttachedToRoom.AllEnemiesDead) 
+            if (DoorModel.AttachedToRoom.AllEnemiesDead || Collider.isTrigger) 
                 return;
-
             Collider.isTrigger = false;
             Animator.SetBool("IsClosed", true);
             Audio.Play();

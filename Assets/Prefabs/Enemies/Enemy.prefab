@@ -405,6 +405,7 @@ MonoBehaviour:
   Physic: {fileID: 7989081026838371832}
   HealthBar: {fileID: 7989081026299511899}
   WeaponObject: {fileID: 0}
+  DropItem: {fileID: 1207911673822084776, guid: 84619aaae94c8f44f9add28c7ca5cc73, type: 3}
 --- !u!82 &-2489226275631410520
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
-
+using System.Linq;
 
 namespace Assets.Scripts
 {
@@ -17,7 +17,7 @@ namespace Assets.Scripts
         internal float Cooldown { get; set; } = 1;
         internal float CooldownTimer { get; set; } = 1;
         public GameObject DropItem;
-        private bool isDestroyed { get; set; }
+        private bool IsDestroyed { get; set; }
 
         public void Start()
         {
@@ -44,8 +44,8 @@ namespace Assets.Scripts
 
         public void TakeDamage(int damage)
         {
-            if (!DamageAudios.Any(audio => audio.isPlaying))
-                DamageAudios[RandomGenerator.Range(0, DamageAudios.Length)].Play();
+            if (DamageAudios.Length != 0 && !DamageAudios.Any(audio => audio.isPlaying))
+                DamageAudios[Random.Range(0, DamageAudios.Length)].Play();
 
             EnemyModel.Health = Math.Max(EnemyModel.Health - damage, 0);
             HealthBar.SetHealth(EnemyModel.Health);
@@ -59,14 +59,14 @@ namespace Assets.Scripts
 
         public virtual void Die()
         {
-            if (isDestroyed) return;
+            if (IsDestroyed) return;
             if (Random.value >= 0.25)
             {
                 var inst = Instantiate(DropItem, transform.position, Quaternion.identity);
                 inst.GetComponent<Item>().itemModel = new ItemModel("Health Potion", "Just heal yourself", DropItem.GetComponent<SpriteRenderer>().sprite);
             }
             Destroy(gameObject);
-            isDestroyed = true;
+            IsDestroyed = true;
         }
 
         public virtual void Shoot() { }

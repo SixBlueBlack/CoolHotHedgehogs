@@ -164,10 +164,10 @@ GameObject:
   - component: {fileID: 4967705690480506625}
   - component: {fileID: 7455266531913817636}
   - component: {fileID: 756792957032944741}
-  - component: {fileID: 7793630758417752154}
   - component: {fileID: 8854623558655313738}
   - component: {fileID: 4477098392736414165}
   - component: {fileID: 1013827432341816086}
+  - component: {fileID: 2367322657716547707}
   m_Layer: 0
   m_Name: MovingShotgunEnemy
   m_TagString: Enemy
@@ -288,21 +288,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2367322657716547707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2322385691221110516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f7461fc9f25764d9d6e6e75cea42ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Physic: {fileID: 756792957032944741}
-  HealthBar: {fileID: 4437296396335244766}
-  WeaponObject: {fileID: 6438951277525894272, guid: 0731ffbdb28b89b46b7d4a691a99421e, type: 3}
 --- !u!82 &8854623558655313738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -591,6 +576,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2367322657716547707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322385691221110516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f7461fc9f25764d9d6e6e75cea42ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Physic: {fileID: 756792957032944741}
+  HealthBar: {fileID: 4437296396335244766}
+  WeaponObject: {fileID: 6438951277525894272, guid: 0731ffbdb28b89b46b7d4a691a99421e, type: 3}
+  DropItem: {fileID: 1207911673822084776, guid: 84619aaae94c8f44f9add28c7ca5cc73, type: 3}
 --- !u!1 &2457490838385068496
 GameObject:
   m_ObjectHideFlags: 0
