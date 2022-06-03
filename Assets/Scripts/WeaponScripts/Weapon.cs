@@ -22,5 +22,8 @@ public class Weapon : MonoBehaviour
         ShootingSound = GetComponent<AudioSource>();
     }
 
-    public virtual void Shoot(Vector3 position, Quaternion rotation, bool isEnemyBullet = false) { }
+    public virtual void Shoot(Vector3 position, Quaternion rotation, bool isEnemyBullet = false) 
+    {
+        ShootingSound.Play();
+    }
 }

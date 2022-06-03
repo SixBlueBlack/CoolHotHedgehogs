@@ -11,10 +11,13 @@ namespace Assets.Scripts
         private BoxCollider2D Collider;
         public Animator Animator;
 
+        private AudioSource Audio { get; set; }
+
         private void Start()
         {
             Collider = GetComponent<BoxCollider2D>();
             Animator.SetBool("IsVertical", DoorModel.IsVertical);
+            Audio = GetComponent<AudioSource>();
         }
 
         private void OnCollisionEnter2D()
@@ -22,7 +25,7 @@ namespace Assets.Scripts
             if (!DoorModel.AttachedToRoom.AllEnemiesDead) return;
             Collider.isTrigger = true;
             Animator.SetBool("IsClosed", false);
-
+            Audio.Play();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -30,6 +33,7 @@ namespace Assets.Scripts
             if (DoorModel.AttachedToRoom.AllEnemiesDead) return;
             Collider.isTrigger = false;
             Animator.SetBool("IsClosed", true);
+            Audio.Play();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -49,6 +53,7 @@ namespace Assets.Scripts
 
             DoorModel.Disabled = true;
             Animator.SetBool("IsClosed", true);
+            Audio.Play();
             anotherDoor.Disabled = true;
         }
     }

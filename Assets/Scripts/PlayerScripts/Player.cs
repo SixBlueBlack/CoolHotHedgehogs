@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         {
             IsDead = true;
             DamageAudio.Stop();
-            DeathAudio.Play();
+            DeathAudio.PlayDelayed(1);
         }
 
         else if (!DamageAudio.isPlaying)
