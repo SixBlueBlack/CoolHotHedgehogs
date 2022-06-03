@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private AudioSource DamageAudio { get; set; }
     private AudioSource DeathAudio { get; set; }
 
-
     void Start()
     {
         var inst = Instantiate(ItemPrefab, transform.position, Quaternion.identity);
