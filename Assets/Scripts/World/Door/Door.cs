@@ -11,35 +11,56 @@ namespace Assets.Scripts
         private BoxCollider2D Collider;
         public Animator Animator;
 
-        private void Start()
+        private AudioSource Audio { get; set; }
+
+        public void FitModel()
         {
             Collider = GetComponent<BoxCollider2D>();
-            Animator.SetBool("IsVertical", DoorModel.IsVertical);
+            Audio = GetComponent<AudioSource>();
+
+            Animator.SetBool("IsVertical", DoorModel.Direction == Orientation.Direction.Vertical);
+            if (DoorModel.Direction == Orientation.Direction.Horizontal)
+            {
+                var colliders = GetComponents<BoxCollider2D>();
+                colliders[1].enabled = true;
+                colliders[2].enabled = false;
+                colliders[3].enabled = false;
+            }
         }
 
         private void OnCollisionEnter2D()
         {
-            if (!DoorModel.AttachedToRoom.AllEnemiesDead) return;
-            Collider.isTrigger = true;
-            Animator.SetBool("IsClosed", false);
+            if (Collider.isTrigger)
+                return;
+            if (!DoorModel.AttachedToRoom.AllEnemiesDead)
+                return;
 
+            Collider.isTrigger = true;
+            Audio.Play();
+            Animator.SetBool("IsClosed", false);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (DoorModel.AttachedToRoom.AllEnemiesDead) return;
+            if (DoorModel.AttachedToRoom.AllEnemiesDead || Collider.isTrigger) 
+                return;
             Collider.isTrigger = false;
             Animator.SetBool("IsClosed", true);
+            Audio.Play();
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Player") || DoorModel.Disabled) return;
+            if (!collision.CompareTag("Player") || DoorModel.Disabled)
+                return;
+
             DoorModel.Passed = true;
-            Collider.isTrigger = false;
 
             var anotherDoor = DoorModel.AttachedToPassage.GetAnotherDoor(DoorModel);
-            if (!anotherDoor.Passed) return;
+            if (!anotherDoor.Passed)
+                return;
+
+            Collider.isTrigger = false;
 
             if (DoorModel.AttachedToRoom.WithBoss)
                 EnemySpawner(DoorModel.AttachedToRoom.GetEnemiesOfType(EnemyModel.EnemyType.Boss),
@@ -49,6 +70,7 @@ namespace Assets.Scripts
 
             DoorModel.Disabled = true;
             Animator.SetBool("IsClosed", true);
+            Audio.Play();
             anotherDoor.Disabled = true;
         }
     }

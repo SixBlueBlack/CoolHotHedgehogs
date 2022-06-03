@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
-
+using System.Linq;
 
 namespace Assets.Scripts
 {
@@ -10,13 +10,14 @@ namespace Assets.Scripts
         public Rigidbody2D Physic;
         public HealthBar HealthBar;
         public GameObject WeaponObject;
+        public AudioSource[] DamageAudios { get; set; }
 
         internal Transform Player { get; set; }
         public EnemyModel EnemyModel { get; set; }
         internal float Cooldown { get; set; } = 1;
         internal float CooldownTimer { get; set; } = 1;
         public GameObject DropItem;
-        private bool isDestroyed { get; set; }
+        private bool IsDestroyed { get; set; }
 
         public void Start()
         {
@@ -35,6 +36,7 @@ namespace Assets.Scripts
                 EnemyModel.WeaponModel.Weapon = weapon;
             }
 
+            DamageAudios = GetComponents<AudioSource>();
             Physic = GetComponent<Rigidbody2D>();
             Player = GameObject.FindGameObjectWithTag("Player").transform;
             HealthBar.SetMaxHealth(EnemyModel.Health);
@@ -42,6 +44,9 @@ namespace Assets.Scripts
 
         public void TakeDamage(int damage)
         {
+            if (DamageAudios.Length != 0 && !DamageAudios.Any(audio => audio.isPlaying))
+                DamageAudios[Random.Range(0, DamageAudios.Length)].Play();
+
             EnemyModel.Health = Math.Max(EnemyModel.Health - damage, 0);
             HealthBar.SetHealth(EnemyModel.Health);
             if (EnemyModel.Health == 0) Die();
@@ -54,7 +59,7 @@ namespace Assets.Scripts
 
         public virtual void Die()
         {
-            if (isDestroyed) return;
+            if (IsDestroyed) return;
             if (Random.value >= 0.25)
             {
                 var inst = Instantiate(DropItem, transform.position, Quaternion.identity);
@@ -63,7 +68,7 @@ namespace Assets.Scripts
             if (EnemyModel.AttachedToRoom.WithBoss && EnemyModel.AttachedToRoom.AllEnemiesDead)
                 global::Player.IsWin = true;
             Destroy(gameObject);
-            isDestroyed = true;
+            IsDestroyed = true;
         }
 
         public virtual void Shoot() { }

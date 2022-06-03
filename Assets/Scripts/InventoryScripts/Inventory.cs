@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static bool IsOpen { get; set; }
+
     public GameObject InventoryPanel;
-
-    public static bool IsOpen;
-
     public GameObject DescriptionPanel;
-
     public Transform InventorySlots;
-
     private InventorySlot[] Slots;
 
     void Start()

@@ -5,6 +5,8 @@ public class RifleWeapon : Weapon
 {
     public override void Shoot(Vector3 position, Quaternion rotation, bool isEnemyBullet = false)
     {
+        ShootingSound.Play();
+
         var bullet = Instantiate(Bullet, position, rotation);
         var rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * weaponModel.BulletForce, ForceMode2D.Impulse);

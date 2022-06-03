@@ -86,6 +86,9 @@ namespace Assets.Scripts
 
         private void SetIsAttackingBool()
         {
+            if (Inventory.IsOpen)
+                return;
+
             if (Input.GetButtonDown("Fire1"))
                 isAttacking = true;
             if (Input.GetButtonUp("Fire1"))
