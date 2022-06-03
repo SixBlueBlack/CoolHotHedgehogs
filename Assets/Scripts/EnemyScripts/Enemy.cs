@@ -44,7 +44,7 @@ namespace Assets.Scripts
 
         public void TakeDamage(int damage)
         {
-            if (DamageAudios.Length != 0 && !DamageAudios.Any(audio => audio.isPlaying))
+            if (transform != null && DamageAudios.Length != 0 && !DamageAudios.Any(audio => audio.isPlaying))
                 DamageAudios[Random.Range(0, DamageAudios.Length)].Play();
 
             EnemyModel.Health = Math.Max(EnemyModel.Health - damage, 0);
