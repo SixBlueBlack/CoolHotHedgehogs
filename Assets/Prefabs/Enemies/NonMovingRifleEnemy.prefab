@@ -330,7 +330,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.05, y: 0.82}
+    oldSize: {x: 5.25, y: 4.1}
     newSize: {x: 5.64, y: 5.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -359,7 +359,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7663324103807215839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +375,7 @@ MonoBehaviour:
   Physic: {fileID: 932731541608799456}
   HealthBar: {fileID: 4315962309315702107}
   WeaponObject: {fileID: 8865272394331292698, guid: 5bf0b3b2db89ae949b0219b98d926c0c, type: 3}
+  DropItem: {fileID: 1207911673822084776, guid: 84619aaae94c8f44f9add28c7ca5cc73, type: 3}
 --- !u!1 &6183351706313780039
 GameObject:
   m_ObjectHideFlags: 0

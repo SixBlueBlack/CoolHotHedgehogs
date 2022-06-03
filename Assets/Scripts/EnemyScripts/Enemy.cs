@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 
 namespace Assets.Scripts
@@ -14,6 +15,8 @@ namespace Assets.Scripts
         public EnemyModel EnemyModel { get; set; }
         internal float Cooldown { get; set; } = 1;
         internal float CooldownTimer { get; set; } = 1;
+        public GameObject DropItem;
+        private bool isDestroyed { get; set; }
 
         public void Start()
         {
@@ -44,11 +47,25 @@ namespace Assets.Scripts
             if (EnemyModel.Health == 0) Die();
         }
 
+        public void Heal(int value)
+        {
+            TakeDamage(Math.Max(-value, -((int)HealthBar.Slider.maxValue - EnemyModel.Health)));
+        }
+
         public virtual void Die()
         {
+            if (isDestroyed) return;
+            if (Random.value >= 0.25)
+            {
+                var inst = Instantiate(DropItem, transform.position, Quaternion.identity);
+                inst.GetComponent<Item>().itemModel = new ItemModel("Health Potion", "Just heal yourself", DropItem.GetComponent<SpriteRenderer>().sprite);
+            }
             Destroy(gameObject);
+            isDestroyed = true;
         }
 
         public virtual void Shoot() { }
+
+        public virtual void Move(float distToPlayer) { }
     }
 }

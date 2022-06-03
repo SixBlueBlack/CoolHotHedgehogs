@@ -1,4 +1,6 @@
-﻿namespace Assets.Scripts
+﻿using UnityEngine;
+
+namespace Assets.Scripts
 {
     public class EnemyModel
     {
@@ -11,13 +13,16 @@
         public bool IsSpawned { get; set; } = false;
         public Room AttachedToRoom { get; }
         public float DistanceForAgr = 10;
+        public Enemy Enemy { get; set; } = null;
 
-        public enum EnemyType { 
+        public enum EnemyType
+        {
             Warrior,
             Tower,
             Boss,
             SmallBoss,
-            Shotgun
+            Shotgun,
+            Healer
         }
         public EnemyType Type { get; }
 
@@ -34,7 +39,7 @@
             if (type == EnemyType.Tower)
             {
                 Health = 100;
-                WeaponModel = new WeaponModel(new BulletModel(10, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                WeaponModel = new WeaponModel(new BulletModel(5, 20), 1f, 20f, Weapon.TypeName.Rifle);
                 Damage = 0;
                 Speed = 0;
             }
@@ -48,21 +53,28 @@
             if (type == EnemyType.Boss)
             {
                 Health = 300;
-                WeaponModel = new WeaponModel(new BulletModel(10, 10), 1f, 20f, Weapon.TypeName.Circle);
+                WeaponModel = new WeaponModel(new BulletModel(2, 15), 0.75f, 20f, Weapon.TypeName.Circle);
                 Damage = 20;
                 Speed = 0.7f;
             }
             if (type == EnemyType.SmallBoss)
             {
                 Health = 100;
-                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Rifle);
+                WeaponModel = new WeaponModel(new BulletModel(5, 20), 1f, 20f, Weapon.TypeName.Rifle);
                 Damage = 20;
                 Speed = 1f;
             }
             if (type == EnemyType.Shotgun)
             {
                 Health = 100;
-                WeaponModel = new WeaponModel(new BulletModel(20, 20), 1f, 20f, Weapon.TypeName.Shotgun);
+                WeaponModel = new WeaponModel(new BulletModel(3, 15), 1.1f, 20f, Weapon.TypeName.Shotgun);
+                Damage = 20;
+                Speed = 1f;
+            }
+            if (type == EnemyType.Healer)
+            {
+                Health = 75;
+                WeaponModel = null;
                 Damage = 20;
                 Speed = 1f;
             }

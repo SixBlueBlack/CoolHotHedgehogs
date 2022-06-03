@@ -375,6 +375,7 @@ MonoBehaviour:
   Physic: {fileID: 6256023630562060739}
   HealthBar: {fileID: 6256023631113957472}
   WeaponObject: {fileID: 6809455878803427153, guid: 7ae245d90182cc64f86a1168e683f76e, type: 3}
+  DropItem: {fileID: 1207911673822084776, guid: 84619aaae94c8f44f9add28c7ca5cc73, type: 3}
 --- !u!1 &6256023630968217700
 GameObject:
   m_ObjectHideFlags: 0

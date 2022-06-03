@@ -1,29 +1,26 @@
-using Assets.Scripts;
 using UnityEngine;
 
-public class StalkerEnemy : Enemy
+public class MovingShootingEnemy : NonMovingEnemy
 {
-    internal float toPlayerDistThreshold = 0.7f;
+    private readonly float toPlayerDistThreshold = 5f;
+    new void Start()
+    {
+        base.Start();
+    }
 
-    public virtual void Update()
+    public override void Update()
     {
         var distToPlayer = Vector2.Distance(transform.position, Player.position);
         if (distToPlayer <= toPlayerDistThreshold)
-            Attack();
-        Move(distToPlayer);
+            Shoot();
+        else
+            Move(distToPlayer);
     }
 
-    private void Attack()
-    {
-        CooldownTimer -= Time.deltaTime;
-        if (CooldownTimer > 0) return;
-        CooldownTimer = Cooldown;
-        Player.GetComponent<Player>().TakeDamage(EnemyModel.Damage);
-    }
 
     public override void Move(float distToPlayer)
     {
-        if (distToPlayer < EnemyModel.DistanceForAgr) ShowAggression(Player.position, transform.position);
+        if (distToPlayer > toPlayerDistThreshold) ShowAggression(Player.position, transform.position);
         else LoseInterest();
     }
 
@@ -40,7 +37,6 @@ public class StalkerEnemy : Enemy
 
         Physic.velocity = new Vector2(xVelocity, yVelocity);
     }
-
     private void LoseInterest()
     {
         Physic.velocity = new Vector2(0, 0);

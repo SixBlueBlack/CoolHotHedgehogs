@@ -8,17 +8,9 @@ public class NonMovingEnemy : Enemy
         base.Start();
     }
 
-    void Update()
+    public virtual void Update()
     {
-        Rotate();
         Shoot();
-    }
-
-    private void Rotate()
-    {
-        var playerPosition = Player.position;
-        var angle = Vector2.Angle(Vector2.right, playerPosition - transform.position);
-        transform.eulerAngles = new Vector3(0f, 0f, transform.position.y < playerPosition.y ? angle : -angle);
     }
 
     private bool CanAttack()
@@ -32,6 +24,10 @@ public class NonMovingEnemy : Enemy
     public override void Shoot()
     {
         if (!CanAttack()) return;
-        EnemyModel.WeaponModel.Weapon.Shoot(transform.position, transform.rotation, true);
+        var playerPosition = Player.position;
+        var angle = Vector2.Angle(Vector2.right, playerPosition - transform.position);
+
+        EnemyModel.WeaponModel.Weapon.Shoot(transform.position,
+            Quaternion.Euler(new Vector3(0f, 0f, transform.position.y < playerPosition.y ? angle : -angle)), true);
     }
 }
